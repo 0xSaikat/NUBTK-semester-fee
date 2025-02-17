@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE Payment Portal - NUBTK</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            background: #000000; 
+            color: #00ff9d;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(rgba(0, 255, 157, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px; 
+        }
+
+         /* Splash Screen */
+     .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0d1117;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .splash-screen h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 5px #2ea043, 0 0 10px #2ea043, 0 0 20px #2ea043;
+            margin: 0;
+            animation: flicker 1.5s infinite alternate;
+            font-family: 'Roboto Mono', monospace;
+            color: #2ea043;
+        }
+
+        .splash-screen .terminal {
+            font-size: 1.2rem;
+            color: #c9d1d9;
+            margin-top: 20px;
+            text-align: center;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .splash-screen .terminal::before {
+            content: "> ";
+            color: #2ea043;
+        }
+
+        .splash-screen .logo {
+            max-width: 200px;
+            height: auto;
+            animation: flicker 1.5s infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.7); 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ff9d, transparent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        .terminal-prompt::before {
+            content: '> ';
+            color: #00ff9d;
+            font-weight: bold;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 2rem auto;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem 3.5rem;
+            font-size: 1.2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ff9d;
+            border-radius: 5px; 
+            color: #00ff9d;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3); 
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.5);
+            border-color: #00ff9d;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ff9d;
+            width: 20px;
+            height: 20px;
+        }
+
+        .file-status {
+            text-align: center;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            border-radius: 5px;
+            animation: fadeIn 0.5s ease-out;
+            font-family: 'Courier New', monospace;
+        }
+
+        .file-status.success {
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid #00ff9d;
+            box-shadow: 0 0 10px rgba(0, 255, 157, 0.3); 
+        }
+
+        .file-status.error {
+            background: rgba(255, 99, 132, 0.1);
+            border: 1px solid #ff6384;
+            box-shadow: 0 0 10px rgba(255, 99, 132, 0.3); 
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease-out;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.2); 
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+            font-family: 'Courier New', monospace;
+        }
+
+        .results-table th {
+            background: rgba(0, 255, 157, 0.1);
+            color: #00ff9d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .results-table tr:hover {
+            background: rgba(0, 255, 157, 0.05);
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            gap: 1rem;
+        }
+
+        .chart-container {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            padding: 1rem;
+            height: 300px;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.2); 
+        }
+
+        .sponsor-section {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: rgba(0, 255, 157, 0.05);
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            animation: glowPulse 3s infinite;
+            font-family: 'Courier New', monospace;
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 5px rgba(0, 255, 157, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(0, 255, 157, 0.5); }
+            100% { box-shadow: 0 0 5px rgba(0, 255, 157, 0.3); }
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: #00ff9d;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 1rem;
+            border: 1px dashed rgba(0, 255, 157, 0.3);
+            border-radius: 5px;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .stats-container { flex-direction: column; }
+            .results-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Splash Screen -->
+<div class="splash-screen" id="splash">
+    <img src="cover.png" alt="HackBit Logo" class="logo">
+    <div class="terminal" id="terminalText">Initializing...</div>
+</div>
+
+    <div class="container">
+        <div class="header">
+            <h1>NUBTK CSE Payment Portal</h1>
+            <p class="terminal-prompt">Department of Computer Science & Engineering <span class="terminal-cursor"></span></p>
+        </div>
+
+        <div class="search-container">
+            <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" 
+                   class="search-bar" 
+                   placeholder="Enter Student ID..."
+                   id="searchInput">
+        </div>
+
+        <div id="fileStatus" class="file-status"></div>
+        
+        <div class="stats-container">
+            <div class="chart-container">
+                <canvas id="paymentsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="duesChart"></canvas>
+            </div>
+        </div>
+
+        <div id="results"></div>
+
+        <div class="sponsor-section">
+            <h3 class="terminal-prompt">Sponsored by</h3>
+            <br>
+            <!-- HackBit Logo -->
+            <img src="hackbit.png" alt="HackBit Logo" style="max-width: 200px; height: auto;">
+            <p>Waving the Internet Securely!</p>
+            <br>
+            <p><a href="https://www.hackbit.org" target="_blank" style="color: #00ff9d; text-decoration: none;">www.hackbit.org</a></p>
+        </div>
+        
+    </div>
+
+    <script>
+            // Splash Screen Terminal Animation
+    const terminalLines = [
+            "Loading assets...",
+            "Initializing modules...",
+            "Fetching data...",
+            "System check...",
+            "Department of Computer Science & Engineering....",
+            "Welcome to NUBTK CSE Payment Portal."
+        ];
+        let terminalIndex = 0;
+
+        const terminalText = document.getElementById('terminalText');
+        const splash = document.getElementById('splash');
+
+        const animateTerminal = () => {
+            if (terminalIndex < terminalLines.length) {
+                terminalText.textContent = terminalLines[terminalIndex++];
+                setTimeout(animateTerminal, 1000);
+            } else {
+                splash.style.display = 'none';
+            }
+        };
+
+        animateTerminal();
+        let paymentData = [];
+        let charts = {};
+    
+        async function loadPaymentData() {
+            try {
+                const response = await fetch('payment.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load data');
+                }
+    
+                paymentData = await response.json();
+    
+                
+                updateSummaryStats();
+                document.getElementById('fileStatus').innerHTML = 'Data loaded successfully';
+                document.getElementById('fileStatus').className = 'file-status success';
+            } catch (error) {
+                console.error('Error loading ', error);
+                document.getElementById('fileStatus').innerHTML = 'Error loading data file';
+                document.getElementById('fileStatus').className = 'file-status error';
+            }
+        }
+    
+        function updateSummaryStats() {
+            const totalDues = paymentData.reduce((sum, student) => sum + student.dues, 0);
+            const totalReceived = paymentData.reduce((sum, student) => sum + student.receivedAmount, 0);
+    
+            
+            updateCharts(totalDues, totalReceived);
+        }
+    
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('bn-BD', {
+                style: 'currency',
+                currency: 'BDT',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+    
+        function searchStudent() {
+            const input = document.getElementById("searchInput").value.trim().toUpperCase();
+    
+            const filteredData = paymentData.filter(student => {
+                const studentId = student.id.toString().toUpperCase();
+                const studentName = student.name.toString().toUpperCase();
+                return studentId.includes(input) || studentName.includes(input);
+            });
+    
+            let html = '';
+            if (filteredData.length > 0) {
+                html = `<table class="results-table">
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Total Payable</th>
+                        <th>Received</th>
+                        <th>Dues</th>
+                        <th>Scholar %</th>
+                        <th>Credits</th>
+                        <th>Status</th>
+                    </tr>`;
+    
+                filteredData.forEach(student => {
+                    const dueStatus = student.dues <= 0 ? 
+                        '<span style="color: #00ff00">Paid</span>' : 
+                        `<span style="color: #ff6384">Due: ${formatCurrency(student.dues)}</span>`;
+                    
+                    html += `
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${formatCurrency(student.totalPayable)}</td>
+                        <td>${formatCurrency(student.receivedAmount)}</td>
+                        <td>${formatCurrency(student.dues)}</td>
+                        <td>${student.scholarshipPercentage}%</td>
+                        <td>${student.creditsTaken}</td>
+                        <td>${dueStatus}</td>
+                    </tr>`;
+                });
+    
+                html += '</table>';
+            } else if (input) {
+                html = '<p class="no-results">No matching records found <span class="terminal-cursor"></span></p>';
+            }
+    
+            document.getElementById("results").innerHTML = html;
+        }
+    
+        function updateCharts(totalDues, totalReceived) {
+            
+            Chart.defaults.color = '#00ff9d';
+            Chart.defaults.borderColor = 'rgba(0, 255, 157, 0.1)';
+            
+            
+            const ctx1 = document.getElementById('paymentsChart').getContext('2d');
+            if (charts.payments) charts.payments.destroy();
+    
+            const recentPayments = paymentData.slice(0, 5);
+            charts.payments = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: recentPayments.map(student => student.id),
+                    datasets: [{
+                        label: 'Total Received',
+                        data: recentPayments.map(student => student.receivedAmount),
+                        backgroundColor: 'rgba(0, 255, 157, 0.2)',
+                        borderColor: '#00ff9d',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Recent Payments Overview',
+                            color: '#00ff9d',
+                            font: {
+                                family: 'Courier New, monospace',
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            });
+    
+            
+            const ctx2 = document.getElementById('duesChart').getContext('2d');
+            if (charts.dues) charts.dues.destroy();
+    
+            charts.dues = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Paid', 'Dues'],
+                    datasets: [{
+                        data: [totalReceived, totalDues],
+                        backgroundColor: [
+                            'rgba(0, 255, 157, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            '#00ff9d',
+                            '#ff6384'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Overall Payment Status',
+                            color: '#00ff9d',
+                            font: {
+                                family: 'Courier New, monospace',
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+       
+        window.onload = function() {
+            loadPaymentData();
+            document.getElementById("searchInput").addEventListener("input", searchStudent);
+        };
+    </script>
+    
+</body>
+</html>
