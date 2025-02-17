@@ -261,6 +261,12 @@
             margin-left: 2px;
         }
 
+        .results-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
         @keyframes blink {
             from, to { opacity: 0; }
             50% { opacity: 1; }
@@ -398,53 +404,70 @@
         }
     
         function searchStudent() {
-            const input = document.getElementById("searchInput").value.trim().toUpperCase();
-    
-            const filteredData = paymentData.filter(student => {
-                const studentId = student.id.toString().toUpperCase();
-                const studentName = student.name.toString().toUpperCase();
-                return studentId.includes(input) || studentName.includes(input);
-            });
-    
-            let html = '';
-            if (filteredData.length > 0) {
-                html = `<table class="results-table">
-                    <tr>
-                        <th>Student ID</th>
-                        <th>Name</th>
-                        <th>Total Payable</th>
-                        <th>Received</th>
-                        <th>Dues</th>
-                        <th>Scholar %</th>
-                        <th>Credits</th>
-                        <th>Status</th>
-                    </tr>`;
-    
-                filteredData.forEach(student => {
-                    const dueStatus = student.dues <= 0 ? 
-                        '<span style="color: #00ff00">Paid</span>' : 
-                        `<span style="color: #ff6384">Due: ${formatCurrency(student.dues)}</span>`;
-                    
-                    html += `
-                    <tr>
-                        <td>${student.id}</td>
-                        <td>${student.name}</td>
-                        <td>${formatCurrency(student.totalPayable)}</td>
-                        <td>${formatCurrency(student.receivedAmount)}</td>
-                        <td>${formatCurrency(student.dues)}</td>
-                        <td>${student.scholarshipPercentage}%</td>
-                        <td>${student.creditsTaken}</td>
-                        <td>${dueStatus}</td>
-                    </tr>`;
-                });
-    
-                html += '</table>';
-            } else if (input) {
-                html = '<p class="no-results">No matching records found <span class="terminal-cursor"></span></p>';
-            }
-    
-            document.getElementById("results").innerHTML = html;
-        }
+    const input = document.getElementById("searchInput").value.trim().toUpperCase();
+
+    const filteredData = paymentData.filter(student => {
+        const studentId = student.id.toString().toUpperCase();
+        const studentName = student.name.toString().toUpperCase();
+        return studentId.includes(input) || studentName.includes(input);
+    });
+
+    let html = '';
+    if (filteredData.length > 0) {
+        html = `<table class="results-table">
+            <tr>
+                <th>Student ID</th>
+                <th>Student Full Name</th>
+                <th>Total Received</th>
+                <th>Scholar %</th>
+                <th>Credit Taken</th>
+                <th>Reg Fee</th>
+                <th>Tuition Fee</th>
+                <th>Scholarship</th>
+                <th>Others</th>
+                <th>Net Payable</th>
+                <th>Previous Dues</th>
+                <th>Total Payable</th>
+                <th>Received Amount</th>
+                <th>Status</th>
+            </tr>`;
+
+        filteredData.forEach(student => {
+            const dueStatus = student.dues <= 0 ? 
+                '<span style="color: #00ff00">Paid</span>' : 
+                `<span style="color: #ff6384">Due: ${formatCurrency(student.dues)}</span>`;
+            
+            
+            const scholarshipStyle = student.scholarship < 0 ? 'style="color: #ff6384"' : '';
+            const othersStyle = student.others < 0 ? 'style="color: #ff6384"' : '';
+            const previousDuesStyle = student.previousDues < 0 ? 'style="color: #ff6384"' : '';
+            
+            html += `
+            <tr>
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td>${formatCurrency(student.totalReceived)}</td>
+                <td>${student.scholarshipPercentage}%</td>
+                <td>${student.creditsTaken}</td>
+                <td>${formatCurrency(student.regFee)}</td>
+                <td>${formatCurrency(student.tuitionFee)}</td>
+                <td ${scholarshipStyle}>${formatCurrency(student.scholarship)}</td>
+                <td ${othersStyle}>${formatCurrency(student.others)}</td>
+                <td>${formatCurrency(student.netPayable)}</td>
+                <td ${previousDuesStyle}>${formatCurrency(student.previousDues)}</td>
+                <td>${formatCurrency(student.totalPayable)}</td>
+                <td>${formatCurrency(student.receivedAmount)}</td>
+                <td>${dueStatus}</td>
+            </tr>`;
+        });
+
+        html += '</table>';
+    } else if (input) {
+        html = '<p class="no-results">No matching records found <span class="terminal-cursor"></span></p>';
+    }
+
+    document.getElementById("results").innerHTML = html;
+}
     
         function updateCharts(totalDues, totalReceived) {
             
