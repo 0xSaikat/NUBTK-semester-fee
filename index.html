@@ -298,6 +298,21 @@
             .stats-container { flex-direction: column; }
             .results-table { display: block; overflow-x: auto; }
         }
+        .refresh-indicator {
+    text-align: right;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    color: rgba(0, 255, 157, 0.7);
+    display: flex;
+    justify-content: space-between;
+    animation: fadeIn 0.5s;
+}
+
+.refresh-indicator::before {
+    content: '⟳';
+    margin-right: 5px;
+}
+
     </style>
 </head>
 <body>
@@ -361,6 +376,9 @@
             "Welcome to NUBTK CSE Payment Portal."
         ];
         let terminalIndex = 0;
+        let lastModified = '';
+        let searchInterval;
+        let chartRefreshInterval;
 
         const terminalText = document.getElementById('terminalText');
         const splash = document.getElementById('splash');
@@ -379,25 +397,97 @@
         let charts = {};
     
         async function loadPaymentData() {
-            try {
-                const response = await fetch('payment.json');
-                if (!response.ok) {
-                    throw new Error('Failed to load data');
-                }
-    
-                paymentData = await response.json();
-    
-                
-                updateSummaryStats();
-                document.getElementById('fileStatus').innerHTML = 'Data loaded successfully';
-                document.getElementById('fileStatus').className = 'file-status success';
-            } catch (error) {
-                console.error('Error loading ', error);
-                document.getElementById('fileStatus').innerHTML = 'Error loading data file';
-                document.getElementById('fileStatus').className = 'file-status error';
-            }
+    try {
+        const response = await fetch('payment.json');
+        if (!response.ok) {
+            throw new Error('Failed to load data');
         }
+        
+        // Get the last modified timestamp
+        const currentLastModified = response.headers.get('last-modified');
+        
+        // If the file hasn't changed, don't update data (for search result updates)
+        if (currentLastModified === lastModified && paymentData.length > 0) {
+            return false;
+        }
+        
+        lastModified = currentLastModified;
+        paymentData = await response.json();
+        
+        updateSummaryStats();
+        document.getElementById('fileStatus').innerHTML = 'Data loaded successfully';
+        document.getElementById('fileStatus').className = 'file-status success';
+        
+        return true;
+    } catch (error) {
+        console.error('Error loading data:', error);
+        document.getElementById('fileStatus').innerHTML = 'Error loading data file';
+        document.getElementById('fileStatus').className = 'file-status error';
+        return false;
+    }
+}
+
+async function checkForDataUpdates() {
+    const dataChanged = await loadPaymentData();
+    if (dataChanged && document.getElementById("searchInput").value.trim()) {
+        searchStudent();
+    }
+}
+
+// Function to set up all refresh intervals
+function setupAutoRefresh() {
+    // Clear any existing intervals
+    if (searchInterval) clearInterval(searchInterval);
+    if (chartRefreshInterval) clearInterval(chartRefreshInterval);
     
+    // Set up 30-second interval for search result updates
+    searchInterval = setInterval(checkForDataUpdates, 30 * 1000);
+    
+    // Set up 30-minute interval for chart refresh
+    chartRefreshInterval = setInterval(() => {
+        loadPaymentData().then(() => {
+            updateSummaryStats();
+            console.log('Charts refreshed at', new Date().toLocaleTimeString());
+        });
+    }, 30 * 60 * 1000);
+}
+
+// Add visual indicator for refresh
+function addRefreshIndicator() {
+    const statsContainer = document.querySelector('.stats-container');
+    const indicator = document.createElement('div');
+    indicator.className = 'refresh-indicator';
+    indicator.innerHTML = `
+        <span class="last-refresh">Last refresh: ${new Date().toLocaleTimeString()}</span>
+        <span class="next-refresh-time"></span>
+    `;
+    statsContainer.parentNode.insertBefore(indicator, statsContainer);
+    
+    // Update the refresh indicator
+    function updateRefreshIndicator() {
+        const lastRefreshEl = document.querySelector('.last-refresh');
+        const nextRefreshEl = document.querySelector('.next-refresh-time');
+        
+        if (lastRefreshEl) {
+            lastRefreshEl.textContent = `Last refresh: ${new Date().toLocaleTimeString()}`;
+        }
+        
+        if (nextRefreshEl) {
+            const nextChartRefresh = new Date(Date.now() + 30 * 60 * 1000);
+            nextRefreshEl.textContent = `Next chart refresh: ${nextChartRefresh.toLocaleTimeString()}`;
+        }
+    }
+    
+    // Update indicator when charts refresh
+    const originalUpdateSummaryStats = updateSummaryStats;
+    updateSummaryStats = function() {
+        originalUpdateSummaryStats();
+        updateRefreshIndicator();
+    };
+    
+    updateRefreshIndicator();
+}
+
         function updateSummaryStats() {
             const totalDues = paymentData.reduce((sum, student) => sum + student.dues, 0);
             const totalReceived = paymentData.reduce((sum, student) => sum + student.receivedAmount, 0);
@@ -561,9 +651,12 @@
     
        
         window.onload = function() {
-            loadPaymentData();
-            document.getElementById("searchInput").addEventListener("input", searchStudent);
-        };
+    loadPaymentData().then(() => {
+        document.getElementById("searchInput").addEventListener("input", searchStudent);
+        addRefreshIndicator();
+        setupAutoRefresh();
+    });
+};
     </script>
     
 </body>
