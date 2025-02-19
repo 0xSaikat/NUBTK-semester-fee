@@ -313,6 +313,23 @@
     margin-right: 5px;
 }
 
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide from debugger */
+body:hover:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
     </style>
 </head>
 <body>
@@ -403,10 +420,10 @@
             throw new Error('Failed to load data');
         }
         
-        // Get the last modified timestamp
+        
         const currentLastModified = response.headers.get('last-modified');
         
-        // If the file hasn't changed, don't update data (for search result updates)
+        
         if (currentLastModified === lastModified && paymentData.length > 0) {
             return false;
         }
@@ -434,16 +451,16 @@ async function checkForDataUpdates() {
     }
 }
 
-// Function to set up all refresh intervals
+
 function setupAutoRefresh() {
-    // Clear any existing intervals
+    
     if (searchInterval) clearInterval(searchInterval);
     if (chartRefreshInterval) clearInterval(chartRefreshInterval);
     
-    // Set up 30-second interval for search result updates
+    
     searchInterval = setInterval(checkForDataUpdates, 30 * 1000);
     
-    // Set up 30-minute interval for chart refresh
+    
     chartRefreshInterval = setInterval(() => {
         loadPaymentData().then(() => {
             updateSummaryStats();
@@ -452,7 +469,7 @@ function setupAutoRefresh() {
     }, 30 * 60 * 1000);
 }
 
-// Add visual indicator for refresh
+
 function addRefreshIndicator() {
     const statsContainer = document.querySelector('.stats-container');
     const indicator = document.createElement('div');
@@ -463,7 +480,7 @@ function addRefreshIndicator() {
     `;
     statsContainer.parentNode.insertBefore(indicator, statsContainer);
     
-    // Update the refresh indicator
+    
     function updateRefreshIndicator() {
         const lastRefreshEl = document.querySelector('.last-refresh');
         const nextRefreshEl = document.querySelector('.next-refresh-time');
@@ -478,7 +495,7 @@ function addRefreshIndicator() {
         }
     }
     
-    // Update indicator when charts refresh
+    
     const originalUpdateSummaryStats = updateSummaryStats;
     updateSummaryStats = function() {
         originalUpdateSummaryStats();
@@ -657,6 +674,77 @@ function addRefreshIndicator() {
         setupAutoRefresh();
     });
 };
+
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    alert('Right-click functionality is disabled on this site.');
+    return false;
+}, false);
+
+
+document.addEventListener('keydown', function(e) {
+    
+    if (e.ctrlKey && e.keyCode === 85) {
+        e.preventDefault();
+        return false;
+    }
+    
+    
+    if ((e.ctrlKey && e.shiftKey && e.keyCode === 73) || e.keyCode === 123) {
+        e.preventDefault();
+        return false;
+    }
+    
+    
+    if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+        e.preventDefault();
+        return false;
+    }
+    
+    
+    if (e.ctrlKey && e.keyCode === 83) {
+        e.preventDefault();
+        return false;
+    }
+}, false);
+
+
+let devToolsDetector = function() {
+    const threshold = 160;
+    const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+    const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+    
+    if (widthThreshold || heightThreshold) {
+        document.body.innerHTML = '<div style="text-align:center;padding:50px;"><h1 style="color:#00ff9d;">Access Denied</h1><p>Developer tools are not allowed on this site.</p></div>';
+    }
+};
+
+window.addEventListener('resize', devToolsDetector);
+setInterval(devToolsDetector, 1000);
+
+(function() {
+    
+    var _0x5a2b = ['search', 'loadPaymentData', 'formatCurrency'];
+    window._initialize = function() {
+        console.log('NUBTK System initialized');
+    };
+    setTimeout(window._initialize, 1000);
+})();
+
+
+Object.defineProperty(document, 'documentElement', {
+    get: function() {
+        if (new Error().stack.includes('debugger')) {
+            window.location.href = '/access-denied';
+        }
+        return document.createElement('html');
+    }
+});
+
+
+console.log('%cWARNING!', 'color: red; font-size: 30px; font-weight: bold;');
+console.log('%cThis is a secure area. Unauthorized access attempts will be logged.', 'font-size: 16px;');
+
     </script>
     
 </body>
