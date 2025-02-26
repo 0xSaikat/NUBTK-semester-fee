@@ -665,11 +665,22 @@ function addRefreshIndicator() {
                 }
             });
         }
-    
-       
-        window.onload = function() {
+        function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(this, args);
+        }, wait);
+    };
+}
+
+
+window.onload = function() {
     loadPaymentData().then(() => {
-        document.getElementById("searchInput").addEventListener("input", searchStudent);
+       
+        const debouncedSearch = debounce(searchStudent, 300);
+        document.getElementById("searchInput").addEventListener("input", debouncedSearch);
         addRefreshIndicator();
         setupAutoRefresh();
     });
