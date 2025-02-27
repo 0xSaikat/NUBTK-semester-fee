@@ -246,6 +246,37 @@
             box-shadow: 0 0 15px rgba(0, 255, 157, 0.2); 
         }
 
+        .ads-container {
+    margin: 2rem 0;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.banner-link {
+    display: block;
+    max-width: 728px;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+    transition: all 0.3s ease;
+}
+
+.banner-link:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.4);
+    transform: translateY(-2px);
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid rgba(0, 255, 157, 0.3);
+    border-radius: 5px;
+}
+
         .sponsor-section {
             margin-top: 4rem;
             padding: 2rem;
@@ -357,6 +388,12 @@ body:hover:before {
                    id="searchInput">
         </div>
 
+        <div class="ads-container">
+            <a href="https://hackbit.com" target="_blank" rel="noopener noreferrer" class="banner-link">
+                <img src="ads.png" alt="Advertisement Banner" class="banner-img">
+            </a>
+        </div>
+
         <div id="fileStatus" class="file-status"></div>
         
         <div class="stats-container">
@@ -373,7 +410,7 @@ body:hover:before {
         <div class="sponsor-section">
             <h3 class="terminal-prompt">Sponsored by</h3>
             <br>
-            <!-- HackBit Logo -->
+            
             <img src="hackbit.png" alt="HackBit Logo" style="max-width: 200px; height: auto;">
             <p>Waving the Internet Securely!</p>
             <br>
