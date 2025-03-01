@@ -779,7 +779,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.warn("Default profile image not found! Using the placeholder in code.");
         };
-        img.src = 'assets/default-profile.png';
+        img.src = 'df.png';
     }
 
     
