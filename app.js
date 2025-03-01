@@ -45,10 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const terminalLines = [
         "Loading assets...",
-        "Initializing modules...",
-        "Connecting to Firebase...",
-        "Setting up authentication...",
-        "Department of Computer Science & Engineering...",
+        "Department of CSE...",
         "Welcome to NUBTK CSE Payment Portal."
     ];
     let terminalIndex = 0;
