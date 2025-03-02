@@ -703,7 +703,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         
-        searchTimeout = setTimeout(performSearch, 1000);
+        searchTimeout = setTimeout(performSearch, 3000);
     }
 
    
