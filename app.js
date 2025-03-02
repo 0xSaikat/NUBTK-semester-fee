@@ -158,8 +158,8 @@ document.addEventListener('DOMContentLoaded', function() {
             modalProfilePic.src = user.photoURL;
         } else {
             
-            userProfilePic.src = 'assets/default-profile.png';
-            modalProfilePic.src = 'assets/default-profile.png';
+            userProfilePic.src = 'df.png';
+            modalProfilePic.src = 'df.png';
         }
         
         
@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentUser.photoURL) {
             modalProfilePic.src = currentUser.photoURL;
         } else {
-            modalProfilePic.src = 'assets/default-profile.png';
+            modalProfilePic.src = 'df.png';
         }
     }
 
