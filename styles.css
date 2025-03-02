@@ -638,3 +638,121 @@ body {
     .auth-box { padding: 1rem; }
     .modal-content { padding: 1rem; margin: 10% auto; }
 }
+
+.auth-message.warning {
+    color: #ffbb00;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.resend-button {
+    margin-top: 10px;
+    background-color: transparent;
+    border: 1px solid #00ff9d;
+    color: #00ff9d;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s;
+}
+
+.resend-button:hover {
+    background-color: rgba(0, 255, 157, 0.1);
+}
+
+.verification-banner {
+    background-color: rgba(255, 187, 0, 0.1);
+    border-left: 3px solid #ffbb00;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.verify-now-btn {
+    background-color: #ffbb00;
+    color: #000;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+}
+
+.student-banner-ad {
+    margin: 15px 0;
+    padding: 15px;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(0, 50, 30, 0.9));
+    border: 1px solid #00ff9d;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+    animation: student-banner-glow 2s infinite alternate;
+}
+
+.student-banner-content {
+    text-align: center;
+}
+
+.student-banner-heading {
+    color: #00ff9d;
+    margin-top: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+}
+
+.student-banner-text {
+    color: #fff;
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.student-banner-button {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-top: 10px;
+    background-color: rgba(0, 255, 157, 0.2);
+    color: #00ff9d;
+    text-decoration: none;
+    border: 1px solid #00ff9d;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+}
+
+.student-banner-button:hover {
+    background-color: rgba(0, 255, 157, 0.4);
+    transform: scale(1.05);
+}
+
+@keyframes student-banner-glow {
+    from {
+        box-shadow: 0 0 5px rgba(0, 255, 157, 0.3);
+    }
+    to {
+        box-shadow: 0 0 15px rgba(0, 255, 157, 0.5);
+    }
+}
+
+.student-banner-ad {
+    margin: 15px 0;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+}
+
+.student-banner-link {
+    display: block;
+    width: 100%;
+}
+
+.student-banner-image {
+    width: 100%;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.student-banner-link:hover .student-banner-image {
+    transform: scale(1.02);
+}
