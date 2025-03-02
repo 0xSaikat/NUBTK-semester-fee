@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (currentUserData.studentId) {
                                     const matchingStudent = findMatchingStudent(currentUserData.studentId);
                                     if (matchingStudent) {
-                                        // Update user data with latest payment info if needed
+                                        
                                         if (!currentUserData.name || currentUserData.name !== matchingStudent.name) {
                                             firestore.collection('students').doc(user.uid).update({
                                                 name: matchingStudent.name
@@ -176,6 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             
             updateStudentPaymentChart(matchingStudent);
+
+    
         } else {
             
             document.getElementById('studentName').textContent = userData?.name || 'Student';
@@ -220,7 +222,35 @@ document.addEventListener('DOMContentLoaded', function() {
         loginMessage.className = 'auth-message';
         
         auth.signInWithEmailAndPassword(email, password)
-            .then(() => {
+            .then((userCredential) => {
+                const user = userCredential.user;
+                
+                
+                if (!user.emailVerified) {
+                    loginMessage.textContent = 'Please verify your email before logging in.';
+                    loginMessage.className = 'auth-message warning';
+                    
+                    
+                    const resendButton = document.createElement('button');
+                    resendButton.textContent = 'Resend Verification Email';
+                    resendButton.className = 'resend-button';
+                    resendButton.onclick = function() {
+                        user.sendEmailVerification().then(() => {
+                            loginMessage.textContent = 'Verification email sent! Please check your inbox.';
+                            loginMessage.className = 'auth-message success';
+                        }).catch(error => {
+                            loginMessage.textContent = error.message;
+                            loginMessage.className = 'auth-message error';
+                        });
+                    };
+                    
+                    loginMessage.appendChild(document.createElement('br'));
+                    loginMessage.appendChild(resendButton);
+                    
+                    
+                    return auth.signOut();
+                }
+                
                 loginMessage.textContent = 'Login successful!';
                 loginMessage.className = 'auth-message success';
                 loginForm.reset();
@@ -240,7 +270,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = document.getElementById('signupPassword').value;
         const profilePic = document.getElementById('profilePicture').files[0];
         
-        
         if (!/^\d{11}$/.test(studentId)) {
             signupMessage.textContent = 'Student ID must be exactly 11 digits';
             signupMessage.className = 'auth-message error';
@@ -250,9 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         signupMessage.textContent = 'Creating account...';
         signupMessage.className = 'auth-message';
         
-        
         loadPaymentData().then(() => {
-            
             const matchingStudent = findMatchingStudent(studentId);
             
             auth.createUserWithEmailAndPassword(email, password)
@@ -260,28 +287,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     const user = userCredential.user;
                     
                     
-                    return firestore.collection('students').doc(user.uid).set({
-                        studentId: studentId,
-                        email: email,
-                        name: matchingStudent?.name || `Student ${studentId}`,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    }).then(() => {
+                    return user.sendEmailVerification().then(() => {
+                        signupMessage.textContent = 'Verification email sent! Please check your inbox.';
+                        signupMessage.className = 'auth-message success';
                         
-                        if (profilePic) {
-                            return uploadProfilePicture(user, profilePic);
-                        }
-                        return user;
+                        return firestore.collection('students').doc(user.uid).set({
+                            studentId: studentId,
+                            email: email,
+                            name: matchingStudent?.name || `Student ${studentId}`,
+                            emailVerified: false,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        }).then(() => {
+                            if (profilePic) {
+                                return uploadProfilePicture(user, profilePic);
+                            }
+                            return user;
+                        });
                     });
                 })
                 .then(() => {
-                    signupMessage.textContent = 'Account created successfully!';
-                    signupMessage.className = 'auth-message success';
                     signupForm.reset();
                     
                     
                     setTimeout(() => {
                         loginTab.click();
-                    }, 1500);
+                    }, 3000);
                 })
                 .catch(error => {
                     signupMessage.textContent = error.message;
@@ -386,7 +416,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateProfileData() {
         if (!currentUser || !currentUserData) return;
         
-        
         let matchingStudent = null;
         if (currentUserData.studentId) {
             matchingStudent = findMatchingStudent(currentUserData.studentId);
@@ -396,21 +425,22 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('studentName').textContent = matchingStudent.name;
             document.getElementById('tuitionFee').textContent = formatCurrency(matchingStudent.tuitionFee);
             document.getElementById('totalPaid').textContent = formatCurrency(matchingStudent.receivedAmount);
+            
+            document.getElementById('totalReceived').textContent = formatCurrency(matchingStudent.totalReceived || matchingStudent.receivedAmount);
             document.getElementById('currentDues').textContent = formatCurrency(matchingStudent.dues);
             document.getElementById('scholarshipAmount').textContent = formatCurrency(matchingStudent.scholarship);
             
-            
             updateStudentPaymentChart(matchingStudent);
         } else {
-            
             document.getElementById('studentName').textContent = currentUserData.name || 'Student';
             document.getElementById('tuitionFee').textContent = formatCurrency(0);
             document.getElementById('totalPaid').textContent = formatCurrency(0);
+            
+            document.getElementById('totalReceived').textContent = formatCurrency(0);
             document.getElementById('currentDues').textContent = formatCurrency(0);
             document.getElementById('scholarshipAmount').textContent = formatCurrency(0);
         }
         
-       
         const modalProfilePic = document.getElementById('modalProfilePic');
         if (currentUser.photoURL) {
             modalProfilePic.src = currentUser.photoURL;
@@ -421,15 +451,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     function updateStudentPaymentChart(student) {
-        const ctx = document.getElementById('studentPaymentHistoryChart').getContext('2d');
+        const ctx = document.getElementById('totalReceivedChart').getContext('2d');
         
        
         
+        const totalReceived = student.totalReceived || student.receivedAmount || 0;
+        
+        
+        
+        const totalFee = student.totalPayable || (totalReceived + student.dues);
+        const paymentRate = totalReceived / 5; 
+        
         const paymentHistory = [
-            { month: 'Jan', amount: student.receivedAmount * 0.2 },
-            { month: 'Feb', amount: student.receivedAmount * 0.3 },
-            { month: 'Mar', amount: student.receivedAmount * 0.5 }
+            { month: 'Initial', amount: 0 },
+            { month: 'Payment 1', amount: paymentRate },
+            { month: 'Payment 2', amount: paymentRate * 2 },
+            { month: 'Payment 3', amount: paymentRate * 3 },
+            { month: 'Payment 4', amount: paymentRate * 4 },
+            { month: 'Current', amount: totalReceived }
         ];
+        
+        
+        const targetLine = paymentHistory.map(() => totalFee);
         
         if (charts.studentPayment) charts.studentPayment.destroy();
         
@@ -437,14 +480,26 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'line',
             data: {
                 labels: paymentHistory.map(item => item.month),
-                datasets: [{
-                    label: 'Payment History',
-                    data: paymentHistory.map(item => item.amount),
-                    backgroundColor: 'rgba(0, 255, 157, 0.2)',
-                    borderColor: '#00ff9d',
-                    borderWidth: 2,
-                    tension: 0.4
-                }]
+                datasets: [
+                    {
+                        label: 'Payment Progress',
+                        data: paymentHistory.map(item => item.amount),
+                        backgroundColor: 'rgba(0, 255, 157, 0.2)',
+                        borderColor: '#00ff9d',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Total Payable',
+                        data: targetLine,
+                        borderColor: 'rgba(255, 99, 132, 0.7)',
+                        borderWidth: 1,
+                        borderDash: [5, 5],
+                        fill: false,
+                        pointRadius: 0
+                    }
+                ]
             },
             options: {
                 responsive: true,
@@ -452,18 +507,39 @@ document.addEventListener('DOMContentLoaded', function() {
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Payment History',
+                        text: 'Payment Progress',
                         color: '#00ff9d',
                         font: {
                             family: 'Courier New, monospace',
                             size: 14
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.dataset.label || '';
+                                const value = context.raw || 0;
+                                return label + ': ' + formatCurrency(value);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 255, 157, 0.1)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return formatCurrency(value).split('.')[0]; 
+                            }
                         }
                     }
                 }
             }
         });
     }
-
   
     async function loadPaymentData() {
         try {
@@ -520,46 +596,6 @@ document.addEventListener('DOMContentLoaded', function() {
             checkForDataUpdates();
             console.log('Charts and data refreshed at', new Date().toLocaleTimeString());
         }, 30 * 60 * 1000);
-    }
-
-   
-    function addRefreshIndicator() {
-        const statsContainer = document.querySelector('.stats-container');
-        if (!statsContainer) return;
-        
-        const existingIndicator = document.querySelector('.refresh-indicator');
-        if (existingIndicator) existingIndicator.remove();
-        
-        const indicator = document.createElement('div');
-        indicator.className = 'refresh-indicator';
-        indicator.innerHTML = `
-            <span class="last-refresh">Last refresh: ${new Date().toLocaleTimeString()}</span>
-            <span class="next-refresh-time"></span>
-        `;
-        statsContainer.parentNode.insertBefore(indicator, statsContainer);
-        
-        function updateRefreshIndicator() {
-            const lastRefreshEl = document.querySelector('.last-refresh');
-            const nextRefreshEl = document.querySelector('.next-refresh-time');
-            
-            if (lastRefreshEl) {
-                lastRefreshEl.textContent = `Last refresh: ${new Date().toLocaleTimeString()}`;
-            }
-            
-            if (nextRefreshEl) {
-                const nextChartRefresh = new Date(Date.now() + 30 * 60 * 1000);
-                nextRefreshEl.textContent = `Next chart refresh: ${nextChartRefresh.toLocaleTimeString()}`;
-            }
-        }
-        
-        
-        const originalUpdateSummaryStats = updateSummaryStats;
-        window.updateSummaryStats = function() {
-            originalUpdateSummaryStats();
-            updateRefreshIndicator();
-        };
-        
-        updateRefreshIndicator();
     }
 
     
@@ -771,16 +807,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     function checkProfileImageExists() {
+        
+        const defaultProfilePath = 'df.png';
+        
         const img = new Image();
         img.onload = function() {
-            
+            console.log("Default profile image loaded successfully!");
         };
         img.onerror = function() {
+            console.warn("Default profile image not found at " + defaultProfilePath + "! Using fallback.");
             
-            console.warn("Default profile image not found! Using the placeholder in code.");
+            
+            const fallbackImageUri = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjM1IiByPSIyMCIgZmlsbD0iIzAwZmY5ZCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iMTAwIiByPSI0MCIgZmlsbD0iIzAwZmY5ZCIvPjwvc3ZnPg==';
+            
+            
+            const profileImages = document.querySelectorAll('img[src="' + defaultProfilePath + '"]');
+            profileImages.forEach(img => {
+                img.src = fallbackImageUri;
+            });
         };
-        img.src = 'df.png';
+        img.src = defaultProfilePath;
     }
+    
+   
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(checkProfileImageExists, 1000); 
+    });
 
     
     loadPaymentData().then(() => {
