@@ -756,3 +756,122 @@ body {
 .student-banner-link:hover .student-banner-image {
     transform: scale(1.02);
 }
+
+
+.payment-notes-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 157, 0.3);
+  }
+  
+  .notes-header {
+    color: #00ff9d;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  .payment-notes-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+  
+  .note-card {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-left: 3px solid #00ff9d;
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .note-amount {
+    color: #00ff9d;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .note-date {
+    color: #ccc;
+    font-size: 12px;
+    margin: 5px 0;
+  }
+  
+  .note-text {
+    color: #fff;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .note-actions {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    display: flex;
+  }
+  
+  .edit-note, .delete-note {
+    background: none;
+    border: none;
+    color: #00ff9d;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 14px;
+  }
+  
+  .edit-note:hover, .delete-note:hover {
+    color: #fff;
+  }
+  
+  .add-note-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .note-input, .note-textarea {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 157, 0.5);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .note-textarea {
+    min-height: 60px;
+    resize: vertical;
+  }
+  
+  .note-btn {
+    background-color: rgba(0, 255, 157, 0.2);
+    color: #00ff9d;
+    border: 1px solid #00ff9d;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+  }
+  
+  .note-btn:hover {
+    background-color: rgba(0, 255, 157, 0.4);
+  }
+  
+  .edit-mode {
+    border-left: 3px solid orange;
+  }
+  
+  .edit-mode .note-btn {
+    background-color: rgba(255, 165, 0, 0.2);
+    color: orange;
+    border: 1px solid orange;
+  }
+  
+  .edit-mode .note-btn:hover {
+    background-color: rgba(255, 165, 0, 0.4);
+  }
