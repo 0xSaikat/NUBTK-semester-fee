@@ -206,7 +206,18 @@
                     <a href="#" class="student-banner-button">Learn More</a>
                 </div>
             </div>
-            
+            <div class="payment-notes-section">
+                <h3 class="notes-header">Payment Notes</h3>
+                <div id="paymentNotesList" class="payment-notes-list">
+
+                </div>
+                <div class="add-note-form">
+                  <input type="number" id="noteAmount" placeholder="Amount" class="note-input">
+                  <input type="date" id="noteDate" class="note-input">
+                  <textarea id="noteText" placeholder="Note details..." class="note-textarea"></textarea>
+                  <button id="saveNoteBtn" class="note-btn">Save Note</button>
+                </div>
+            </div>
             <div class="profile-payment-chart">
                 <canvas id="totalReceivedChart"></canvas>
             </div>
