@@ -176,6 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             
             updateStudentPaymentChart(matchingStudent);
+            initializePaymentNotes();
+            loadPaymentNotes();
 
     
         } else {
@@ -447,6 +449,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             modalProfilePic.src = 'df.png';
         }
+
+        loadPaymentNotes();
     }
 
     
@@ -540,7 +544,156 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-  
+    
+    
+function initializePaymentNotes() {
+    const saveNoteBtn = document.getElementById('saveNoteBtn');
+    const noteAmount = document.getElementById('noteAmount');
+    const noteDate = document.getElementById('noteDate');
+    const noteText = document.getElementById('noteText');
+    const paymentNotesList = document.getElementById('paymentNotesList');
+    
+    let currentEditingNoteId = null;
+    
+    
+    noteDate.valueAsDate = new Date();
+    
+    
+    saveNoteBtn.addEventListener('click', () => {
+        if (!currentUser) return;
+        
+        const amount = parseFloat(noteAmount.value);
+        const date = noteDate.value;
+        const text = noteText.value.trim();
+        
+        if (isNaN(amount) || amount <= 0 || !date || !text) {
+            alert('Please fill in all fields correctly');
+            return;
+        }
+        
+        const noteData = {
+            amount: amount,
+            date: date,
+            text: text,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        };
+        
+        const notesRef = firestore.collection('students').doc(currentUser.uid).collection('paymentNotes');
+        
+        if (currentEditingNoteId) {
+           
+            notesRef.doc(currentEditingNoteId).update(noteData)
+                .then(() => {
+                    resetNoteForm();
+                    loadPaymentNotes();
+                })
+                .catch(error => {
+                    console.error("Error updating note:", error);
+                    alert('Error updating note: ' + error.message);
+                });
+        } else {
+            
+            notesRef.add(noteData)
+                .then(() => {
+                    resetNoteForm();
+                    loadPaymentNotes();
+                })
+                .catch(error => {
+                    console.error("Error adding note:", error);
+                    alert('Error adding note: ' + error.message);
+                });
+        }
+    });
+    
+    
+    function resetNoteForm() {
+        noteAmount.value = '';
+        noteDate.valueAsDate = new Date();
+        noteText.value = '';
+        saveNoteBtn.textContent = 'Save Note';
+        saveNoteBtn.parentElement.classList.remove('edit-mode');
+        currentEditingNoteId = null;
+    }
+    
+    
+    function loadPaymentNotes() {
+        if (!currentUser) return;
+        
+        const notesRef = firestore.collection('students').doc(currentUser.uid).collection('paymentNotes');
+        
+        notesRef.orderBy('timestamp', 'desc').get()
+            .then(snapshot => {
+                paymentNotesList.innerHTML = '';
+                
+                if (snapshot.empty) {
+                    paymentNotesList.innerHTML = '<p class="no-notes">No payment notes yet. Add your first note!</p>';
+                    return;
+                }
+                
+                snapshot.forEach(doc => {
+                    const noteData = doc.data();
+                    const noteId = doc.id;
+                    
+                    const formattedAmount = formatCurrency(noteData.amount);
+                    const formattedDate = new Date(noteData.date).toLocaleDateString('en-GB');
+                    
+                    const noteCard = document.createElement('div');
+                    noteCard.className = 'note-card';
+                    noteCard.dataset.noteId = noteId;
+                    
+                    noteCard.innerHTML = `
+                        <div class="note-amount">${formattedAmount}</div>
+                        <div class="note-date">${formattedDate}</div>
+                        <div class="note-text">${noteData.text}</div>
+                        <div class="note-actions">
+                            <button class="edit-note" title="Edit note">✏️</button>
+                            <button class="delete-note" title="Delete note">🗑️</button>
+                        </div>
+                    `;
+                    
+                    
+                    noteCard.querySelector('.edit-note').addEventListener('click', () => {
+                        currentEditingNoteId = noteId;
+                        noteAmount.value = noteData.amount;
+                        noteDate.value = noteData.date;
+                        noteText.value = noteData.text;
+                        saveNoteBtn.textContent = 'Update Note';
+                        saveNoteBtn.parentElement.classList.add('edit-mode');
+                        
+                       
+                        saveNoteBtn.scrollIntoView({ behavior: 'smooth' });
+                    });
+                    
+                    
+                    noteCard.querySelector('.delete-note').addEventListener('click', () => {
+                        if (confirm('Are you sure you want to delete this note?')) {
+                            notesRef.doc(noteId).delete()
+                                .then(() => {
+                                    loadPaymentNotes();
+                                    if (currentEditingNoteId === noteId) {
+                                        resetNoteForm();
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error("Error deleting note:", error);
+                                    alert('Error deleting note: ' + error.message);
+                                });
+                        }
+                    });
+                    
+                    paymentNotesList.appendChild(noteCard);
+                });
+            })
+            .catch(error => {
+                console.error("Error loading notes:", error);
+                paymentNotesList.innerHTML = '<p class="no-notes error">Error loading notes. Please try again.</p>';
+            });
+    }
+    
+    
+    window.loadPaymentNotes = loadPaymentNotes;
+}
+
     async function loadPaymentData() {
         try {
            
