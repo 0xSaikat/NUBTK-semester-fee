@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Authentication Redirect</title>
-    <!-- Firebase SDK -->
+    
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 </head>
@@ -11,7 +11,7 @@
     <div id="message">Processing your request...</div>
     
     <script>
-        // Initialize Firebase with your config
+        
         const firebaseConfig = {
             apiKey: "AIzaSyDFsna0GyM7Kp4hzbElyj5RIA-JZBuVUOk",
             authDomain: "nubtk-semester-fee.firebaseapp.com",
@@ -23,17 +23,17 @@
         
         firebase.initializeApp(firebaseConfig);
         
-        // Get query parameters from URL
+        
         const urlParams = new URLSearchParams(window.location.search);
         const mode = urlParams.get('mode');
         const oobCode = urlParams.get('oobCode');
         
-        // Handle verification
+        
         if (mode === 'verifyEmail' && oobCode) {
             firebase.auth().applyActionCode(oobCode)
                 .then(() => {
                     document.getElementById('message').textContent = 'Your email has been verified! Redirecting to login...';
-                    // Redirect to your main page after successful verification
+                    
                     setTimeout(() => {
                         window.location.href = '/';
                     }, 3000);
