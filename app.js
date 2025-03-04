@@ -265,62 +265,74 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
     signupForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+    e.preventDefault();
+    
+    const studentId = document.getElementById('signupStudentId').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const profilePic = document.getElementById('profilePicture').files[0];
+    
+    
+    if (!/^\d{11}$/.test(studentId)) {
+        signupMessage.textContent = 'Student ID must be exactly 11 digits';
+        signupMessage.className = 'auth-message error';
+        return;
+    }
+    
+    signupMessage.textContent = 'Validating student ID...';
+    signupMessage.className = 'auth-message';
+    
+    loadPaymentData().then(() => {
         
-        const studentId = document.getElementById('signupStudentId').value;
-        const email = document.getElementById('signupEmail').value;
-        const password = document.getElementById('signupPassword').value;
-        const profilePic = document.getElementById('profilePicture').files[0];
+        const matchingStudent = findMatchingStudent(studentId);
         
-        if (!/^\d{11}$/.test(studentId)) {
-            signupMessage.textContent = 'Student ID must be exactly 11 digits';
+        
+        if (!matchingStudent) {
+            signupMessage.textContent = 'Invalid Student ID. No matching record found.';
             signupMessage.className = 'auth-message error';
             return;
         }
         
-        signupMessage.textContent = 'Creating account...';
-        signupMessage.className = 'auth-message';
         
-        loadPaymentData().then(() => {
-            const matchingStudent = findMatchingStudent(studentId);
-            
-            auth.createUserWithEmailAndPassword(email, password)
-                .then(userCredential => {
-                    const user = userCredential.user;
+        auth.createUserWithEmailAndPassword(email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                
+               
+                return user.sendEmailVerification().then(() => {
+                    signupMessage.textContent = 'Verification email sent! Please check your inbox.';
+                    signupMessage.className = 'auth-message success';
                     
                     
-                    return user.sendEmailVerification().then(() => {
-                        signupMessage.textContent = 'Verification email sent! Please check your inbox.';
-                        signupMessage.className = 'auth-message success';
+                    return firestore.collection('students').doc(user.uid).set({
+                        studentId: studentId,
+                        email: email,
+                        name: matchingStudent.name || `Student ${studentId}`,
+                        emailVerified: false,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    }).then(() => {
                         
-                        return firestore.collection('students').doc(user.uid).set({
-                            studentId: studentId,
-                            email: email,
-                            name: matchingStudent?.name || `Student ${studentId}`,
-                            emailVerified: false,
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                        }).then(() => {
-                            if (profilePic) {
-                                return uploadProfilePicture(user, profilePic);
-                            }
-                            return user;
-                        });
+                        if (profilePic) {
+                            return uploadProfilePicture(user, profilePic);
+                        }
+                        return user;
                     });
-                })
-                .then(() => {
-                    signupForm.reset();
-                    
-                    
-                    setTimeout(() => {
-                        loginTab.click();
-                    }, 3000);
-                })
-                .catch(error => {
-                    signupMessage.textContent = error.message;
-                    signupMessage.className = 'auth-message error';
                 });
-        });
+            })
+            .then(() => {
+                signupForm.reset();
+                
+                
+                setTimeout(() => {
+                    loginTab.click();
+                }, 3000);
+            })
+            .catch(error => {
+                signupMessage.textContent = error.message;
+                signupMessage.className = 'auth-message error';
+            });
     });
+});
 
     
     function uploadProfilePicture(user, file) {
