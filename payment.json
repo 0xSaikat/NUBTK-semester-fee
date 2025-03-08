@@ -16488,5 +16488,22 @@
     "receivedAmount": 33458.0,
     "dues": 9625.0,
     "remarks": ""
+  },
+  {
+    "id": "00000000000",
+    "name": "Demo Account User",
+    "totalReceived": 33458.0,
+    "scholarshipPercentage": 70.0,
+    "creditsTaken": 21.0,
+    "regFee": 7500.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -31693.0,
+    "others": 22000.0,
+    "netPayable": 43083.0,
+    "previousDues": 0.0,
+    "totalPayable": 43083.0,
+    "receivedAmount": 33458.0,
+    "dues": 9625.0,
+    "remarks": ""
   }
 ]
