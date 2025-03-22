@@ -274,33 +274,7 @@
         </div>
     </div>
 
-    <script>
-        
-        function loadPopupAd() {
-            
-            const existingScripts = document.querySelectorAll('script[data-popup-ad="true"]');
-            existingScripts.forEach(script => script.remove());
-            
-            
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = '//pl26186739.effectiveratecpm.com/ef/9c/a1/ef9ca14418ce9eae91d346612600f2b6.js';
-            script.setAttribute('data-popup-ad', 'true');
-            document.body.appendChild(script);
-        }
-        
-        
-        window.addEventListener('load', function() {
-            
-            setTimeout(loadPopupAd, 3000);
-            
-            
-            setInterval(loadPopupAd, 60000);
-        });
-    </script>
-</body>
-
-  
-    <script src="app.js"></script>
+<script type='text/javascript' src='//pl26186739.effectiveratecpm.com/ef/9c/a1/ef9ca14418ce9eae91d346612600f2b6.js'></script>    
+ <script src="app.js"></script>
 </body>
 </html>
