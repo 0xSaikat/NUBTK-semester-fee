@@ -861,5 +861,19 @@ body {
     .modal-content { padding: 1rem; margin: 10% auto; }
 }
 
+#container-fdcbe2003e9af56934944b040ab60f21 {
+     width: 100%;
+     min-height: 90px; 
+     margin: 0 auto;
+ }
+ 
+ .ad-loading {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 90px;
+     background-color: rgba(0, 0, 0, 0.05);
+     border-radius: 8px;
+ }
 
 
