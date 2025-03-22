@@ -103,18 +103,10 @@
 
         <div class="ads-container">
             <div id="mainBannerAd">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key': '07574fd794fc323fba48d3bcbe056cba',
-                        'format': 'iframe',
-                        'height': 90,
-                        'width': 728,
-                        'params': {}
-                    };
-                </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/07574fd794fc323fba48d3bcbe056cba/invoke.js"></script>
+                <script async="async" data-cfasync="false" src="//pl26186858.effectiveratecpm.com/fdcbe2003e9af56934944b040ab60f21/invoke.js"></script>
+                <div id="container-fdcbe2003e9af56934944b040ab60f21"></div>
             </div>
-            <a href="https://hackbit.com" target="_blank" rel="noopener noreferrer" class="banner-link" id="fallbackBanner">
+            <a href="https://hackbit.com" target="_blank" rel="noopener noreferrer" class="banner-link" id="fallbackBanner" style="display:none;">
                 <img src="ads.png" alt="Advertisement Banner" class="banner-img">
             </a>
         </div>
@@ -185,18 +177,10 @@
             
             <div class="student-banner-ad">
                 <div id="profileBannerAd1">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key': '07574fd794fc323fba48d3bcbe056cba',
-                            'format': 'iframe',
-                            'height': 90,
-                            'width': 728,
-                            'params': {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//www.highperformanceformat.com/07574fd794fc323fba48d3bcbe056cba/invoke.js"></script>
+                    <script async="async" data-cfasync="false" src="//pl26186858.effectiveratecpm.com/fdcbe2003e9af56934944b040ab60f21/invoke.js"></script>
+                    <div id="container-fdcbe2003e9af56934944b040ab60f21"></div>
                 </div>
-                <a href="#" class="student-banner-link" id="fallbackProfileBanner1">
+                <a href="#" class="student-banner-link" id="fallbackProfileBanner1" style="display:none;">
                     <img src="student-ads.gif" alt="Semester Registration Banner" class="student-banner-image">
                 </a>
             </div>
@@ -247,8 +231,13 @@
                   <button id="saveNoteBtn" class="note-btn">Save Note</button>
                 </div>
             </div>
+            
             <div class="student-banner-ad">
-                <a href="#" class="student-banner-link">
+                <div id="profileBannerAd1">
+                    <script async="async" data-cfasync="false" src="//pl26186858.effectiveratecpm.com/fdcbe2003e9af56934944b040ab60f21/invoke.js"></script>
+                    <div id="container-fdcbe2003e9af56934944b040ab60f21"></div>
+                </div>
+                <a href="#" class="student-banner-link" id="fallbackProfileBanner1" style="display:none;">
                     <img src="student-ads.gif" alt="Semester Registration Banner" class="student-banner-image">
                 </a>
             </div>
@@ -268,8 +257,32 @@
         </div>
     </div>
 
-<script type='text/javascript' src='//pl26186739.effectiveratecpm.com/ef/9c/a1/ef9ca14418ce9eae91d346612600f2b6.js'></script>
+    <script>
+        
+        function loadPopupAd() {
+            
+            const existingScripts = document.querySelectorAll('script[data-popup-ad="true"]');
+            existingScripts.forEach(script => script.remove());
+            
+            
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = '//pl26186739.effectiveratecpm.com/ef/9c/a1/ef9ca14418ce9eae91d346612600f2b6.js';
+            script.setAttribute('data-popup-ad', 'true');
+            document.body.appendChild(script);
+        }
+        
+        
+        window.addEventListener('load', function() {
+            
+            setTimeout(loadPopupAd, 3000);
+            
+            
+            setInterval(loadPopupAd, 60000);
+        });
+    </script>
 </body>
+
   
     <script src="app.js"></script>
 </body>
