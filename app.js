@@ -1005,3 +1005,41 @@ function initializePaymentNotes() {
         checkProfileImageExists();
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    function checkAdLoaded(adContainerId, fallbackId) {
+        setTimeout(function() {
+            const adContainer = document.getElementById(adContainerId);
+            const fallbackBanner = document.getElementById(fallbackId);
+            
+            if (adContainer && fallbackBanner) {
+                
+                const adIframe = adContainer.querySelector('iframe');
+                
+                if (adIframe && adIframe.clientHeight > 0) {
+                    
+                    fallbackBanner.style.display = 'none';
+                } else {
+                    
+                    adContainer.style.display = 'none';
+                    fallbackBanner.style.display = 'block';
+                }
+            }
+        }, 3000); 
+    }
+    
+    
+    checkAdLoaded('mainBannerAd', 'fallbackBanner');
+    
+    
+    document.getElementById('profileBtn').addEventListener('click', function() {
+        setTimeout(function() {
+            checkAdLoaded('profileBannerAd1', 'fallbackProfileBanner1');
+            
+           
+            
+        }, 500);
+    });
+});
