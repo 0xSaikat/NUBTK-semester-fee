@@ -1007,45 +1007,38 @@ function initializePaymentNotes() {
 });
 
 
+
 document.addEventListener('DOMContentLoaded', function() {
     
-    const adContainers = document.querySelectorAll('[id^="container-"]');
-    adContainers.forEach(container => {
-        container.classList.add('ad-loading');
-    });
-    
-    
-    function checkNativeAdLoaded(containerId, fallbackId) {
+    function checkAdLoaded(adContainerId, fallbackId) {
         setTimeout(function() {
-            const adContainer = document.getElementById(containerId);
+            const adContainer = document.getElementById(adContainerId);
             const fallbackBanner = document.getElementById(fallbackId);
             
             if (adContainer && fallbackBanner) {
                 
-                adContainer.classList.remove('ad-loading');
+                const adIframe = adContainer.querySelector('iframe');
                 
-                
-                if (adContainer.offsetHeight > 20 && adContainer.innerHTML.trim() !== '') {
+                if (adIframe && adIframe.clientHeight > 0) {
                     
                     fallbackBanner.style.display = 'none';
                 } else {
                     
-                    adContainer.parentElement.style.display = 'none';
+                    adContainer.style.display = 'none';
                     fallbackBanner.style.display = 'block';
                 }
             }
         }, 3000); 
     }
     
-    
-    checkNativeAdLoaded('container-fdcbe2003e9af56934944b040ab60f21', 'fallbackBanner');
+   
+    checkAdLoaded('mainBannerAd', 'fallbackBanner');
     
     
     document.getElementById('profileBtn').addEventListener('click', function() {
         setTimeout(function() {
-            
-            checkNativeAdLoaded('container-fdcbe2003e9af56934944b040ab60f21', 'fallbackProfileBanner1');
-            
+            checkAdLoaded('profileBannerAd1', 'fallbackProfileBanner1');
+           
         }, 500);
     });
 });
