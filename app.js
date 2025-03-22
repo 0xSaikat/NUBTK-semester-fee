@@ -1009,21 +1009,28 @@ function initializePaymentNotes() {
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    function checkAdLoaded(adContainerId, fallbackId) {
+    const adContainers = document.querySelectorAll('[id^="container-"]');
+    adContainers.forEach(container => {
+        container.classList.add('ad-loading');
+    });
+    
+    
+    function checkNativeAdLoaded(containerId, fallbackId) {
         setTimeout(function() {
-            const adContainer = document.getElementById(adContainerId);
+            const adContainer = document.getElementById(containerId);
             const fallbackBanner = document.getElementById(fallbackId);
             
             if (adContainer && fallbackBanner) {
                 
-                const adIframe = adContainer.querySelector('iframe');
+                adContainer.classList.remove('ad-loading');
                 
-                if (adIframe && adIframe.clientHeight > 0) {
+                
+                if (adContainer.offsetHeight > 20 && adContainer.innerHTML.trim() !== '') {
                     
                     fallbackBanner.style.display = 'none';
                 } else {
                     
-                    adContainer.style.display = 'none';
+                    adContainer.parentElement.style.display = 'none';
                     fallbackBanner.style.display = 'block';
                 }
             }
@@ -1031,14 +1038,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     
-    checkAdLoaded('mainBannerAd', 'fallbackBanner');
+    checkNativeAdLoaded('container-fdcbe2003e9af56934944b040ab60f21', 'fallbackBanner');
     
     
     document.getElementById('profileBtn').addEventListener('click', function() {
         setTimeout(function() {
-            checkAdLoaded('profileBannerAd1', 'fallbackProfileBanner1');
             
-           
+            checkNativeAdLoaded('container-fdcbe2003e9af56934944b040ab60f21', 'fallbackProfileBanner1');
             
         }, 500);
     });
