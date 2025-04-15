@@ -84,6 +84,10 @@ body {
     padding: 2rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     animation: fadeInUp 0.5s ease-out;
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4d7aff #1e1e1e;
 }
 
 .auth-header {
@@ -876,4 +880,23 @@ body {
      border-radius: 8px;
  }
 
+#signupBloodGroup,
+#signupBloodGroup option {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
 
+
+.auth-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.auth-box::-webkit-scrollbar-track {
+    background: #1e1e1e;
+    border-radius: 4px;
+}
+
+.auth-box::-webkit-scrollbar-thumb {
+    background-color: #4d7aff;
+    border-radius: 4px;
+}
