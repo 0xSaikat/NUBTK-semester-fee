@@ -143,23 +143,36 @@ document.addEventListener('DOMContentLoaded', function() {
         const userProfilePic = document.getElementById('userProfilePic');
         const modalProfilePic = document.getElementById('modalProfilePic');
         
-       
+        
         let matchingStudent = null;
         if (userData && userData.studentId) {
             matchingStudent = findMatchingStudent(userData.studentId);
         }
         
-       
+        
         userDisplayName.textContent = userData?.studentId || user.email || 'Student';
         
         
         if (user.photoURL) {
             userProfilePic.src = user.photoURL;
             modalProfilePic.src = user.photoURL;
+            console.log("Using photo URL from user object:", user.photoURL);
+        } else if (userData && userData.photoURL) {
+            userProfilePic.src = userData.photoURL;
+            modalProfilePic.src = userData.photoURL;
+            console.log("Using photo URL from Firestore:", userData.photoURL);
+            
+            
+            user.updateProfile({
+                photoURL: userData.photoURL
+            }).catch(error => {
+                console.error("Error updating user profile with stored photoURL:", error);
+            });
         } else {
             
             userProfilePic.src = 'df.png';
             modalProfilePic.src = 'df.png';
+            console.log("No profile picture found, using default");
         }
         
         
@@ -168,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('studentId').textContent = `Student ID: ${userData?.studentId || '--'}`;
             document.getElementById('studentEmail').textContent = `Email: ${user.email || '--'}`;
             
-           
+            
             document.getElementById('tuitionFee').textContent = formatCurrency(matchingStudent.tuitionFee);
             document.getElementById('totalPaid').textContent = formatCurrency(matchingStudent.receivedAmount);
             document.getElementById('currentDues').textContent = formatCurrency(matchingStudent.dues);
@@ -178,8 +191,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateStudentPaymentChart(matchingStudent);
             initializePaymentNotes();
             loadPaymentNotes();
-
-    
         } else {
             
             document.getElementById('studentName').textContent = userData?.name || 'Student';
@@ -281,9 +292,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        
         if (!phoneNumber) {
             signupMessage.textContent = 'Phone number is required';
+            signupMessage.className = 'auth-message error';
+            return;
+        }
+        
+        if (!profilePic) {
+            signupMessage.textContent = 'Profile picture is required';
             signupMessage.className = 'auth-message error';
             return;
         }
@@ -302,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            
+           
             auth.createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
                     const user = userCredential.user;
@@ -322,16 +338,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             emailVerified: false,
                             createdAt: firebase.firestore.FieldValue.serverTimestamp()
                         }).then(() => {
-                           
-                            if (profilePic) {
-                                return uploadProfilePicture(user, profilePic);
-                            }
-                            return user;
+                            
+                            signupMessage.textContent = 'Creating account and uploading profile picture...';
+                            return uploadProfilePicture(user, profilePic);
                         });
                     });
                 })
                 .then(() => {
                     signupForm.reset();
+                    signupMessage.textContent = 'Account created successfully! Please verify your email and login.';
+                    signupMessage.className = 'auth-message success';
                     
                     
                     setTimeout(() => {
@@ -349,6 +365,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function uploadProfilePicture(user, file) {
         return new Promise((resolve, reject) => {
             
+            if (!file) {
+                reject(new Error('Profile picture is required'));
+                return;
+            }
+            
             if (file.size > 1024 * 1024) {
                 reject(new Error('Profile picture must be less than 1MB'));
                 return;
@@ -357,31 +378,58 @@ document.addEventListener('DOMContentLoaded', function() {
             const storageRef = storage.ref();
             const profilePicRef = storageRef.child(`profile_pics/${user.uid}`);
             
+            
+            const loadingMsg = document.createElement('div');
+            loadingMsg.className = 'profile-loading-message';
+            loadingMsg.textContent = 'Uploading profile picture...';
+            document.body.appendChild(loadingMsg);
+            
             profilePicRef.put(file)
-                .then(snapshot => snapshot.ref.getDownloadURL())
+                .then(snapshot => {
+                    console.log('Profile picture uploaded successfully!');
+                    return snapshot.ref.getDownloadURL();
+                })
                 .then(downloadURL => {
-                   
+                    console.log('Got download URL:', downloadURL);
+                    
                     return user.updateProfile({
                         photoURL: downloadURL
                     }).then(() => {
-                       
-                        return auth.currentUser.reload().then(() => {
-                           
-                            const freshUser = auth.currentUser;
+                        console.log('User profile updated with new photo URL');
+                        
+                        return firestore.collection('students').doc(user.uid).update({
+                            photoURL: downloadURL
+                        }).catch(error => {
+                            console.error("Error updating user document with photoURL:", error);
                             
-                            if (freshUser.photoURL) {
-                                const userProfilePic = document.getElementById('userProfilePic');
-                                const modalProfilePic = document.getElementById('modalProfilePic');
-                                
-                                if (userProfilePic) userProfilePic.src = freshUser.photoURL;
-                                if (modalProfilePic) modalProfilePic.src = freshUser.photoURL;
-                            }
-                            return freshUser;
                         });
                     });
                 })
+                .then(() => {
+                    
+                    return auth.currentUser.reload().then(() => {
+                        
+                        const freshUser = auth.currentUser;
+                        console.log('Reloaded user:', freshUser);
+                        
+                        if (freshUser.photoURL) {
+                            const userProfilePic = document.getElementById('userProfilePic');
+                            const modalProfilePic = document.getElementById('modalProfilePic');
+                            
+                            if (userProfilePic) userProfilePic.src = freshUser.photoURL;
+                            if (modalProfilePic) modalProfilePic.src = freshUser.photoURL;
+                        }
+                        
+                        if (loadingMsg) loadingMsg.remove();
+                        return freshUser;
+                    });
+                })
                 .then(user => resolve(user))
-                .catch(error => reject(error));
+                .catch(error => {
+                    console.error('Error in profile picture upload:', error);
+                    if (loadingMsg) loadingMsg.remove();
+                    reject(error);
+                });
         });
     }
 
@@ -422,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const loadingMsg = document.createElement('div');
             loadingMsg.className = 'profile-loading-message';
             loadingMsg.textContent = 'Updating profile picture...';
-            document.querySelector('.profile-card').appendChild(loadingMsg);
+            document.querySelector('.profile-info').appendChild(loadingMsg);
             
             uploadProfilePicture(currentUser, file)
                 .then(() => {
@@ -436,6 +484,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         }
     });
+
+    function updateUserDocumentWithPhotoURL(uid, photoURL) {
+        return firestore.collection('students').doc(uid).update({
+            photoURL: photoURL
+        }).catch(error => {
+            console.error("Error updating user document with photo URL:", error);
+        });
+    }
 
     
     function updateProfileData() {
