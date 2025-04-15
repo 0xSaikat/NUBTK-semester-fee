@@ -803,13 +803,73 @@ function initializePaymentNotes() {
     
     function performSearch() {
         const input = searchInput.value.trim().toUpperCase();
+        
+        
+        const bloodGroupPattern = /^(A|B|AB|O)[+-]$/i;
+        const isBloodGroupSearch = bloodGroupPattern.test(input);
+        
+        if (isBloodGroupSearch) {
+            
+            searchByBloodGroup(input);
+        } else {
+            
+            const filteredData = paymentData.filter(student => {
+                const studentId = student.id.toString().toUpperCase();
+                const studentName = student.name.toString().toUpperCase();
+                return studentId.includes(input) || studentName.includes(input);
+            });
+    
+            displaySearchResults(filteredData);
+        }
+    }
+    
+    function searchByBloodGroup(bloodGroup) {
+        if (!firebase.auth().currentUser) {
+            document.getElementById("results").innerHTML = '<p class="no-results">You must be logged in to search by blood group</p>';
+            return;
+        }
+        
+        document.getElementById("results").innerHTML = '<div class="search-loading">Searching for blood group donors...</div>';
+        
+        const db = firebase.firestore();
+        db.collection('students')
+            .where('bloodGroup', '==', bloodGroup.toUpperCase())
+            .get()
+            .then(snapshot => {
+                if (snapshot.empty) {
+                    document.getElementById("results").innerHTML = '<p class="no-results">No donors found with blood group ' + bloodGroup + '</p>';
+                    return;
+                }
+                
+                let html = `<table class="results-table" style="width: 100%;">
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Blood Group</th>
+                        <th>Phone Number</th>
+                    </tr>`;
+                    
+                snapshot.forEach(doc => {
+                    const userData = doc.data();
+                    html += `
+                    <tr>
+                        <td>${userData.studentId || '--'}</td>
+                        <td>${userData.name || '--'}</td>
+                        <td>${userData.bloodGroup}</td>
+                        <td>${userData.phoneNumber || '--'}</td>
+                    </tr>`;
+                });
+                
+                html += '</table>';
+                document.getElementById("results").innerHTML = html;
+            })
+            .catch(error => {
+                console.error("Error searching for blood group:", error);
+                document.getElementById("results").innerHTML = '<p class="no-results">Error searching for blood group: ' + error.message + '</p>';
+            });
+    }
 
-        const filteredData = paymentData.filter(student => {
-            const studentId = student.id.toString().toUpperCase();
-            const studentName = student.name.toString().toUpperCase();
-            return studentId.includes(input) || studentName.includes(input);
-        });
-
+    function displaySearchResults(filteredData) {
         let html = '';
         if (filteredData.length > 0) {
             html = `<table class="results-table">
@@ -829,7 +889,7 @@ function initializePaymentNotes() {
                     <th>Received Amount</th>
                     <th>Status</th>
                 </tr>`;
-
+    
             filteredData.forEach(student => {
                 const dueStatus = student.dues <= 0 ? 
                     '<span style="color: #00ff00">Paid</span>' : 
@@ -857,15 +917,14 @@ function initializePaymentNotes() {
                     <td>${dueStatus}</td>
                 </tr>`;
             });
-
+    
             html += '</table>';
-        } else if (input) {
+        } else if (searchInput.value.trim()) {
             html = '<p class="no-results">No matching records found</p>';
         }
-
+    
         document.getElementById("results").innerHTML = html;
     }
-
    
     function searchStudent() {
         
