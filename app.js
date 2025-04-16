@@ -551,12 +551,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         const modalProfilePic = document.getElementById('modalProfilePic');
-        if (currentUser.photoURL) {
-            modalProfilePic.src = currentUser.photoURL;
+        
+        
+        if (currentUserData && currentUserData.studentId) {
+            const testImg = new Image();
+            testImg.onload = function() {
+                
+                modalProfilePic.src = `profiles/${currentUserData.studentId}.png`;
+                console.log("Using student ID-based profile picture in modal");
+            };
+            testImg.onerror = function() {
+                
+                if (currentUser.photoURL) {
+                    modalProfilePic.src = currentUser.photoURL;
+                    console.log("Using photo URL from user object in modal");
+                } else if (currentUserData && currentUserData.photoURL) {
+                    modalProfilePic.src = currentUserData.photoURL;
+                    console.log("Using photo URL from Firestore in modal");
+                } else {
+                    
+                    modalProfilePic.src = 'df.png';
+                    console.log("No profile picture found for modal, using default");
+                }
+            };
+            testImg.src = `profiles/${currentUserData.studentId}.png`;
         } else {
-            modalProfilePic.src = 'df.png';
+            
+            if (currentUser.photoURL) {
+                modalProfilePic.src = currentUser.photoURL;
+            } else if (currentUserData && currentUserData.photoURL) {
+                modalProfilePic.src = currentUserData.photoURL;
+            } else {
+                modalProfilePic.src = 'df.png';
+            }
         }
-
+    
         loadPaymentNotes();
     }
 
