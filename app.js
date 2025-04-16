@@ -153,26 +153,52 @@ document.addEventListener('DOMContentLoaded', function() {
         userDisplayName.textContent = userData?.studentId || user.email || 'Student';
         
         
-        if (user.photoURL) {
-            userProfilePic.src = user.photoURL;
-            modalProfilePic.src = user.photoURL;
-            console.log("Using photo URL from user object:", user.photoURL);
-        } else if (userData && userData.photoURL) {
-            userProfilePic.src = userData.photoURL;
-            modalProfilePic.src = userData.photoURL;
-            console.log("Using photo URL from Firestore:", userData.photoURL);
+        if (userData && userData.studentId) {
             
-            
-            user.updateProfile({
-                photoURL: userData.photoURL
-            }).catch(error => {
-                console.error("Error updating user profile with stored photoURL:", error);
-            });
+            const testImg = new Image();
+            testImg.onload = function() {
+                
+                userProfilePic.src = `profiles/${userData.studentId}.png`;
+                modalProfilePic.src = `profiles/${userData.studentId}.png`;
+                console.log("Using student ID-based profile picture");
+            };
+            testImg.onerror = function() {
+                
+                if (user.photoURL) {
+                    userProfilePic.src = user.photoURL;
+                    modalProfilePic.src = user.photoURL;
+                    console.log("Using photo URL from user object:", user.photoURL);
+                } else if (userData && userData.photoURL) {
+                    userProfilePic.src = userData.photoURL;
+                    modalProfilePic.src = userData.photoURL;
+                    console.log("Using photo URL from Firestore:", userData.photoURL);
+                    
+                    
+                    user.updateProfile({
+                        photoURL: userData.photoURL
+                    }).catch(error => {
+                        console.error("Error updating user profile with stored photoURL:", error);
+                    });
+                } else {
+                    
+                    userProfilePic.src = 'df.png';
+                    modalProfilePic.src = 'df.png';
+                    console.log("No profile picture found, using default");
+                }
+            };
+            testImg.src = `profiles/${userData.studentId}.png`;
         } else {
             
-            userProfilePic.src = 'df.png';
-            modalProfilePic.src = 'df.png';
-            console.log("No profile picture found, using default");
+            if (user.photoURL) {
+                userProfilePic.src = user.photoURL;
+                modalProfilePic.src = user.photoURL;
+            } else if (userData && userData.photoURL) {
+                userProfilePic.src = userData.photoURL;
+                modalProfilePic.src = userData.photoURL;
+            } else {
+                userProfilePic.src = 'df.png';
+                modalProfilePic.src = 'df.png';
+            }
         }
         
         
@@ -899,6 +925,7 @@ function initializePaymentNotes() {
                 
                 let html = `<table class="results-table" style="width: 100%;">
                     <tr>
+                        <th>Profile</th>
                         <th>Student ID</th>
                         <th>Student Name</th>
                         <th>Blood Group</th>
@@ -909,6 +936,7 @@ function initializePaymentNotes() {
                     const userData = doc.data();
                     html += `
                     <tr>
+                        <td><img src="profiles/${userData.studentId}.png" alt="Profile" class="search-result-profile-pic" onerror="this.src='df.png'"></td>
                         <td>${userData.studentId || '--'}</td>
                         <td>${userData.name || '--'}</td>
                         <td>${userData.bloodGroup}</td>
@@ -930,6 +958,7 @@ function initializePaymentNotes() {
         if (filteredData.length > 0) {
             html = `<table class="results-table">
                 <tr>
+                    <th>Profile</th>
                     <th>Student ID</th>
                     <th>Student Full Name</th>
                     <th>Total Received</th>
@@ -955,8 +984,10 @@ function initializePaymentNotes() {
                 const othersStyle = student.others < 0 ? 'style="color: #ff6384"' : '';
                 const previousDuesStyle = student.previousDues < 0 ? 'style="color: #ff6384"' : '';
                 
+                
                 html += `
                 <tr>
+                    <td><img src="profiles/${student.id}.png" alt="Profile" class="search-result-profile-pic" onerror="this.src='df.png'"></td>
                     <td>${student.id}</td>
                     <td>${student.name}</td>
                     <td>${formatCurrency(student.totalReceived)}</td>
@@ -1170,3 +1201,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     });
 });
+
+function checkStudentProfileImages() {
+    if (!paymentData || !paymentData.length) return;
+    
+    console.log("Checking profile images for students...");
+    
+    
+    const profileStatus = {
+        found: [],
+        missing: []
+    };
+    
+    paymentData.forEach(student => {
+        const studentId = student.id;
+        const img = new Image();
+        
+        img.onload = function() {
+            profileStatus.found.push(studentId);
+            console.log(`Profile image found for student ${studentId}`);
+        };
+        
+        img.onerror = function() {
+            profileStatus.missing.push(studentId);
+            console.log(`No profile image found for student ${studentId}`);
+        };
+        
+        img.src = `profiles/${studentId}.png`;
+    });
+    
+    
+    setTimeout(() => {
+        console.log("Profile image status summary:");
+        console.log(`Found: ${profileStatus.found.length} images`);
+        console.log(`Missing: ${profileStatus.missing.length} images`);
+    }, 5000);
+}
