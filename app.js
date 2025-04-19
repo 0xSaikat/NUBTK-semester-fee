@@ -1266,3 +1266,71 @@ function checkStudentProfileImages() {
         console.log(`Missing: ${profileStatus.missing.length} images`);
     }, 5000);
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    setupDynamicBackground();
+});
+
+function setupDynamicBackground() {
+    
+    let bgContainer = document.getElementById('backgroundContainer');
+    if (!bgContainer) {
+        bgContainer = document.createElement('div');
+        bgContainer.id = 'backgroundContainer';
+        document.body.insertBefore(bgContainer, document.body.firstChild);
+    }
+    
+    
+    const bgImage = document.createElement('img');
+    bgImage.className = 'dynamic-bg';
+    bgContainer.appendChild(bgImage);
+    
+    
+    setRandomBackground(bgImage);
+    
+    
+    const lastVisit = localStorage.getItem('lastVisit');
+    const today = new Date().toDateString();
+    
+    
+    if (lastVisit !== today) {
+        localStorage.setItem('lastVisit', today);
+        localStorage.removeItem('lastBackgroundIndex'); 
+    }
+}
+
+function setRandomBackground(imgElement) {
+    
+    const backgrounds = [
+        'background/1.png',
+        'background/2.png',
+        'background/3.png',
+        'background/4.png'
+    ];
+    
+   
+    let lastIndex = parseInt(localStorage.getItem('lastBackgroundIndex'));
+    if (isNaN(lastIndex)) {
+        lastIndex = -1;
+    }
+    
+    
+    let newIndex;
+    do {
+        newIndex = Math.floor(Math.random() * backgrounds.length);
+    } while (backgrounds.length > 1 && newIndex === lastIndex);
+    
+    
+    localStorage.setItem('lastBackgroundIndex', newIndex);
+    
+    
+    const preloader = new Image();
+    preloader.onload = function() {
+        
+        imgElement.src = backgrounds[newIndex];
+        imgElement.style.opacity = '1';
+    };
+    preloader.src = backgrounds[newIndex];
+}
+
