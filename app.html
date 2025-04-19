@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android App Download</title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .message {
+            font-size: 1.5rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 3s forwards, typewriter 4s steps(40, end);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid #00ff00;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">Thanks for downloading the Android application! </div>
+
+    <script>
+        
+        const downloadFile = (url, fileName) => {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
+
+        
+        const resumeUrl = 'https://nubtk.hackbit.org/NUBTK.apk'; 
+        const animationDuration = 4000; 
+
+        setTimeout(() => {
+            downloadFile(resumeUrl, 'NUBTK.apk');
+        }, animationDuration);
+    </script>
+</body>
+</html>
