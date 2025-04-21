@@ -17304,5 +17304,22 @@
     "receivedAmount": 11000.0,
     "dues": 20982.800000000003,
     "remarks": ""
+  },
+  {
+    "id": "11111111111",
+    "name": "Test Account",
+    "totalReceived": 11000.0,
+    "scholarshipPercentage": 25.0,
+    "creditsTaken": 21.0,
+    "regFee": 7500.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -11319.0,
+    "others": 22000.0,
+    "netPayable": 63457.0,
+    "previousDues": 0.0,
+    "totalPayable": 63457.0,
+    "receivedAmount": 11000.0,
+    "dues": 20982.800000000003,
+    "remarks": ""
   }
 ]
