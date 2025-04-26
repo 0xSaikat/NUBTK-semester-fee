@@ -3,6 +3,8 @@
 
 A modern and user-friendly payment tracking system for students of the **Department of Computer Science & Engineering (CSE)** at **Northern University of Business & Technology Khulna (NUBTK)**. This project solves a real problem where the university only provides payment data in an Excel (.xls) sheet, making it difficult for students to understand their dues, payments, and summaries.
 
+![logo](social.png)
+
 ## 🚀 Features
 
 - 🔐 **User Authentication** (Login / Sign-up with email verification)
