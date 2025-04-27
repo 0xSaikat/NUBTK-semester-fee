@@ -35,7 +35,7 @@ Our university only provides a raw `.xls` sheet for payment details which is not
 - View remaining dues
 - Access their payment summaries in a clean and interactive way
 
-## ✨ Usage
+## 💻 Usage
 
 ```js
 https://nubtk.hackbit.org
@@ -49,7 +49,7 @@ You can learn more about my work on my personal website: [https://saikat.hackbit
 Connect with me on [LinkedIn](https://www.linkedin.com/in/0xsaikat/) for updates and collaborations.
 
 
-## 💚 HackBit
+## ✨ HackBit
 
 [HackBit](https://hackbit.org) is a cybersecurity-focused organization committed to discovering vulnerabilities, creating solutions, and making the internet a safer place. Join us in our mission to secure the digital world.
 
