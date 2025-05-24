@@ -17,6 +17,23 @@
     "remarks": "33886.0"
   },
   {
+    "id": "11180120197",
+    "name": "Howlader Omar  Faruk",
+    "totalReceived": 330620.0,
+    "scholarshipPercentage": 25.0,
+    "creditsTaken": 31.0,
+    "regFee": 7500.0,
+    "tuitionFee": 60760.0,
+    "scholarship": -15190.0,
+    "others": 0.0,
+    "netPayable": 53070.0,
+    "previousDues": 34493.0,
+    "totalPayable": 34493.0,
+    "receivedAmount": 87563.0,
+    "dues": 71642.0,
+    "remarks": "87563.0"
+  },
+  {
     "id": "11180120222",
     "name": "S. M. Tanjir Hossain",
     "totalReceived": 118748.0,
@@ -325,7 +342,7 @@
   {
     "id": "11200320571",
     "name": "Towrin Monir Trina",
-    "totalReceived": 201111.0,
+    "totalReceived": 219611.0,
     "scholarshipPercentage": 35.0,
     "creditsTaken": 30.0,
     "regFee": 7500.0,
@@ -336,8 +353,8 @@
     "previousDues": -107.0,
     "totalPayable": -107.0,
     "receivedAmount": 45613.0,
-    "dues": 31896.999999999996,
-    "remarks": "45613.0"
+    "dues": 13396.999999999996,
+    "remarks": "27113.0"
   },
   {
     "id": "11210120579",
@@ -563,7 +580,7 @@
   {
     "id": "11210320616",
     "name": "Shadia Binte Rashid Jim",
-    "totalReceived": 207258.0,
+    "totalReceived": 221258.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -574,8 +591,8 @@
     "previousDues": -4926.0,
     "totalPayable": -4926.0,
     "receivedAmount": 22174.0,
-    "dues": 14044.0,
-    "remarks": "22174.0"
+    "dues": 44.0,
+    "remarks": "8174.0"
   },
   {
     "id": "11210320620",
@@ -801,7 +818,7 @@
   {
     "id": "11210320634",
     "name": "Naim Sheikh",
-    "totalReceived": 161068.0,
+    "totalReceived": 166068.0,
     "scholarshipPercentage": 45.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -812,8 +829,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 26904.0,
-    "dues": 17832.8,
-    "remarks": "25904.0"
+    "dues": 12832.8,
+    "remarks": "20904.0"
   },
   {
     "id": "11210320635",
@@ -869,7 +886,7 @@
   {
     "id": "11210320639",
     "name": "Kazi Rafael Haque",
-    "totalReceived": 245648.0,
+    "totalReceived": 258648.0,
     "scholarshipPercentage": 35.0,
     "creditsTaken": 35.0,
     "regFee": 7500.0,
@@ -880,8 +897,8 @@
     "previousDues": 78.0,
     "totalPayable": 78.0,
     "receivedAmount": 52168.0,
-    "dues": 36541.0,
-    "remarks": "52168.0"
+    "dues": 23541.0,
+    "remarks": "39168.0"
   },
   {
     "id": "11210320640",
@@ -1090,7 +1107,7 @@
   {
     "id": "11210320662",
     "name": "Sanjid Al Fuad Mridul",
-    "totalReceived": 184700.0,
+    "totalReceived": 191700.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -1101,8 +1118,8 @@
     "previousDues": 52.0,
     "totalPayable": 52.0,
     "receivedAmount": 23232.0,
-    "dues": 16277.999999999998,
-    "remarks": "23232.0"
+    "dues": 9277.999999999998,
+    "remarks": "16232.0"
   },
   {
     "id": "11210320663",
@@ -1209,7 +1226,7 @@
   {
     "id": "11210320671",
     "name": "Md. Milton Sikari",
-    "totalReceived": 243397.0,
+    "totalReceived": 224897.0,
     "scholarshipPercentage": 45.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -1220,8 +1237,8 @@
     "previousDues": -29.0,
     "totalPayable": -29.0,
     "receivedAmount": 29031.0,
-    "dues": -9787.0,
-    "remarks": "-1069.0"
+    "dues": 8713.0,
+    "remarks": "17431.0"
   },
   {
     "id": "11210320672",
@@ -1957,7 +1974,7 @@
   {
     "id": "11220120750",
     "name": "Md. Sayeed Hossain",
-    "totalReceived": 151100.0,
+    "totalReceived": 161100.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 19.0,
     "regFee": 7500.0,
@@ -1968,8 +1985,8 @@
     "previousDues": 1552.0,
     "totalPayable": 1552.0,
     "receivedAmount": 23948.0,
-    "dues": 17229.199999999997,
-    "remarks": "23948.0"
+    "dues": 7229.199999999997,
+    "remarks": "13948.0"
   },
   {
     "id": "11220120751",
@@ -2246,7 +2263,7 @@
   {
     "id": "11220120770",
     "name": "Sanjana Ferdusi",
-    "totalReceived": 172978.0,
+    "totalReceived": 179998.0,
     "scholarshipPercentage": 55.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -2257,8 +2274,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 23376.0,
-    "dues": 7013.199999999999,
-    "remarks": "14026.0"
+    "dues": -6.800000000001091,
+    "remarks": "7006.0"
   },
   {
     "id": "11220120771",
@@ -2569,7 +2586,7 @@
   {
     "id": "11220120801",
     "name": "Nigar Ahmed Nila",
-    "totalReceived": 184800.0,
+    "totalReceived": 192300.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -2577,11 +2594,11 @@
     "scholarship": -17640.0,
     "others": 0.0,
     "netPayable": 25140.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 25140.0,
-    "dues": 7598.0,
-    "remarks": "15140.0"
+    "previousDues": -7500.0,
+    "totalPayable": -7500.0,
+    "receivedAmount": 17640.0,
+    "dues": 98.0,
+    "remarks": "7640.0"
   },
   {
     "id": "11220120803",
@@ -2743,8 +2760,8 @@
     "scholarshipPercentage": 100.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
-    "tuitionFee": 38808.0,
-    "scholarship": -38808.0,
+    "tuitionFee": 35280.0,
+    "scholarship": -35280.0,
     "others": 1000.0,
     "netPayable": 8500.0,
     "previousDues": -3000.0,
@@ -3113,7 +3130,7 @@
   {
     "id": "11220320865",
     "name": "Likhon Mondal",
-    "totalReceived": 165540.0,
+    "totalReceived": 174540.0,
     "scholarshipPercentage": 45.0,
     "creditsTaken": 28.0,
     "regFee": 7500.0,
@@ -3124,13 +3141,13 @@
     "previousDues": -3238.0,
     "totalPayable": -3238.0,
     "receivedAmount": 34446.0,
-    "dues": 23140.8,
-    "remarks": "34446.0"
+    "dues": 14140.8,
+    "remarks": "25446.0"
   },
   {
     "id": "11220320866",
     "name": "Tanvir Hassan",
-    "totalReceived": 95800.0,
+    "totalReceived": 110384.0,
     "scholarshipPercentage": 25.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -3141,8 +3158,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 33960.0,
-    "dues": 23772.0,
-    "remarks": "33960.0"
+    "dues": 9188.0,
+    "remarks": "19376.0"
   },
   {
     "id": "11220320868",
@@ -3334,7 +3351,7 @@
   {
     "id": "11220320882",
     "name": "Burhan Uddin",
-    "totalReceived": 156284.0,
+    "totalReceived": 165784.0,
     "scholarshipPercentage": 35.0,
     "creditsTaken": 32.0,
     "regFee": 7500.0,
@@ -3345,8 +3362,8 @@
     "previousDues": 184.0,
     "totalPayable": 184.0,
     "receivedAmount": 48452.0,
-    "dues": 33971.6,
-    "remarks": "48452.0"
+    "dues": 24471.6,
+    "remarks": "38952.0"
   },
   {
     "id": "11220320883",
@@ -3364,6 +3381,23 @@
     "receivedAmount": 38370.0,
     "dues": 26859.0,
     "remarks": "38370.0"
+  },
+  {
+    "id": "11220320885",
+    "name": "Asad Ali Khan",
+    "totalReceived": 109234.0,
+    "scholarshipPercentage": 35.0,
+    "creditsTaken": 25.0,
+    "regFee": 7500.0,
+    "tuitionFee": 49000.0,
+    "scholarship": -17150.0,
+    "others": 0.0,
+    "netPayable": 39350.0,
+    "previousDues": -20000.0,
+    "totalPayable": -20000.0,
+    "receivedAmount": 19350.0,
+    "dues": 7545.0,
+    "remarks": "19350.0"
   },
   {
     "id": "11220320886",
@@ -3708,7 +3742,7 @@
   {
     "id": "11220320914",
     "name": "Niloy Biswas",
-    "totalReceived": 190195.0,
+    "totalReceived": 182195.0,
     "scholarshipPercentage": 25.0,
     "creditsTaken": 31.0,
     "regFee": 7500.0,
@@ -3719,13 +3753,13 @@
     "previousDues": -3.0,
     "totalPayable": -3.0,
     "receivedAmount": 53067.0,
-    "dues": 9146.0,
-    "remarks": "25067.0"
+    "dues": 17146.0,
+    "remarks": "33067.0"
   },
   {
     "id": "11220320916",
     "name": "Shanawaz Sakib",
-    "totalReceived": 131642.0,
+    "totalReceived": 139642.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -3736,8 +3770,8 @@
     "previousDues": 202.0,
     "totalPayable": 202.0,
     "receivedAmount": 21814.0,
-    "dues": 15330.4,
-    "remarks": "21814.0"
+    "dues": 7330.4,
+    "remarks": "13814.0"
   },
   {
     "id": "11220320917",
@@ -3978,6 +4012,23 @@
     "remarks": "10456.0"
   },
   {
+    "id": "11220320938",
+    "name": "Tanjil Islam Muhit",
+    "totalReceived": 91412.0,
+    "scholarshipPercentage": 35.0,
+    "creditsTaken": 14.0,
+    "regFee": 7500.0,
+    "tuitionFee": 27440.0,
+    "scholarship": -9604.0,
+    "others": 0.0,
+    "netPayable": 25336.0,
+    "previousDues": 0.0,
+    "totalPayable": 0.0,
+    "receivedAmount": 25336.0,
+    "dues": 12735.199999999997,
+    "remarks": "20336.0"
+  },
+  {
     "id": "11220320939",
     "name": "S.M.Hiul Zaman Fiyaz",
     "totalReceived": 102856.0,
@@ -4118,17 +4169,17 @@
     "name": "Sakib Foysal Ejarder",
     "totalReceived": 206622.0,
     "scholarshipPercentage": 35.0,
-    "creditsTaken": 18.0,
+    "creditsTaken": 28.0,
     "regFee": 7500.0,
-    "tuitionFee": 35280.0,
-    "scholarship": -13583.0,
+    "tuitionFee": 54880.0,
+    "scholarship": -19208.0,
     "others": 0.0,
-    "netPayable": 29197.0,
+    "netPayable": 43172.0,
     "previousDues": 0.0,
     "totalPayable": 0.0,
-    "receivedAmount": 29197.0,
-    "dues": 3165.899999999998,
-    "remarks": "11925.0"
+    "receivedAmount": 43172.0,
+    "dues": 12948.399999999998,
+    "remarks": "25900.0"
   },
   {
     "id": "11220320949",
@@ -4220,17 +4271,17 @@
     "name": "Tisha Rani Chakroborty",
     "totalReceived": 194212.0,
     "scholarshipPercentage": 35.0,
-    "creditsTaken": 23.0,
+    "creditsTaken": 20.0,
     "regFee": 7500.0,
-    "tuitionFee": 45080.0,
-    "scholarship": -15778.0,
+    "tuitionFee": 39200.0,
+    "scholarship": -13720.0,
     "others": 0.0,
-    "netPayable": 36802.0,
+    "netPayable": 32980.0,
     "previousDues": -2.0,
     "totalPayable": -2.0,
-    "receivedAmount": 36800.0,
-    "dues": 13059.399999999998,
-    "remarks": "24100.0"
+    "receivedAmount": 32978.0,
+    "dues": 10384.0,
+    "remarks": "20278.0"
   },
   {
     "id": "11220320955",
@@ -5221,7 +5272,7 @@
   {
     "id": "11220321057",
     "name": "Syed Zawad Bin Sharif",
-    "totalReceived": 192206.0,
+    "totalReceived": 194706.0,
     "scholarshipPercentage": 35.0,
     "creditsTaken": 23.0,
     "regFee": 7500.0,
@@ -5232,8 +5283,8 @@
     "previousDues": -2548.0,
     "totalPayable": -2548.0,
     "receivedAmount": 34254.0,
-    "dues": 13713.399999999998,
-    "remarks": "24754.0"
+    "dues": 11213.399999999998,
+    "remarks": "22254.0"
   },
   {
     "id": "11220321059",
@@ -5246,11 +5297,11 @@
     "scholarship": -12348.0,
     "others": 0.0,
     "netPayable": 30432.0,
-    "previousDues": 288.0,
-    "totalPayable": 288.0,
-    "receivedAmount": 30720.0,
-    "dues": 21590.399999999998,
-    "remarks": "30720.0"
+    "previousDues": 5756.0,
+    "totalPayable": 5756.0,
+    "receivedAmount": 36188.0,
+    "dues": 27058.399999999998,
+    "remarks": "36188.0"
   },
   {
     "id": "11230121061",
@@ -5259,15 +5310,15 @@
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -20580.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -22638.0,
     "others": 0.0,
-    "netPayable": 28080.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 28080.0,
-    "dues": 8421.0,
-    "remarks": "16845.0"
+    "netPayable": 30138.0,
+    "previousDues": 7252.0,
+    "totalPayable": 7252.0,
+    "receivedAmount": 37390.0,
+    "dues": 17113.6,
+    "remarks": "26155.0"
   },
   {
     "id": "11230121063",
@@ -5276,15 +5327,15 @@
     "scholarshipPercentage": 60.0,
     "creditsTaken": 17.0,
     "regFee": 7500.0,
-    "tuitionFee": 33320.0,
-    "scholarship": -19992.0,
+    "tuitionFee": 36652.0,
+    "scholarship": -21991.0,
     "others": 0.0,
-    "netPayable": 20828.0,
-    "previousDues": -5924.0,
-    "totalPayable": -5924.0,
-    "receivedAmount": 14904.0,
-    "dues": 4355.5999999999985,
-    "remarks": "10604.0"
+    "netPayable": 22161.0,
+    "previousDues": -2082.0,
+    "totalPayable": -2082.0,
+    "receivedAmount": 20079.0,
+    "dues": 9130.699999999999,
+    "remarks": "15779.0"
   },
   {
     "id": "11230121065",
@@ -5293,15 +5344,15 @@
     "scholarshipPercentage": 40.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
-    "tuitionFee": 35280.0,
-    "scholarship": -14112.0,
+    "tuitionFee": 38808.0,
+    "scholarship": -15523.0,
     "others": 0.0,
-    "netPayable": 28668.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 28668.0,
-    "dues": 20067.6,
-    "remarks": "28668.0"
+    "netPayable": 30785.0,
+    "previousDues": 6938.0,
+    "totalPayable": 6938.0,
+    "receivedAmount": 37723.0,
+    "dues": 28487.5,
+    "remarks": "37723.0"
   },
   {
     "id": "11230121067",
@@ -5310,15 +5361,15 @@
     "scholarshipPercentage": 60.0,
     "creditsTaken": 17.0,
     "regFee": 7500.0,
-    "tuitionFee": 33320.0,
-    "scholarship": -19992.0,
+    "tuitionFee": 36652.0,
+    "scholarship": -21991.0,
     "others": 0.0,
-    "netPayable": 20828.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 20828.0,
-    "dues": 5079.5999999999985,
-    "remarks": "11328.0"
+    "netPayable": 22161.0,
+    "previousDues": 6508.0,
+    "totalPayable": 6508.0,
+    "receivedAmount": 28668.0,
+    "dues": 12520.699999999997,
+    "remarks": "19168.0"
   },
   {
     "id": "11230121068",
@@ -5327,15 +5378,15 @@
     "scholarshipPercentage": 50.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
-    "tuitionFee": 35280.0,
-    "scholarship": -17640.0,
+    "tuitionFee": 38808.0,
+    "scholarship": -19404.0,
     "others": 0.0,
-    "netPayable": 25140.0,
-    "previousDues": 8186.0,
-    "totalPayable": 8186.0,
-    "receivedAmount": 33326.0,
-    "dues": 25784.0,
-    "remarks": "33326.0"
+    "netPayable": 26904.0,
+    "previousDues": 8578.0,
+    "totalPayable": 8578.0,
+    "receivedAmount": 35482.0,
+    "dues": 27410.8,
+    "remarks": "35482.0"
   },
   {
     "id": "11230121069",
@@ -5344,15 +5395,15 @@
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -20580.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -22638.0,
     "others": 0.0,
-    "netPayable": 28080.0,
-    "previousDues": -3.0,
-    "totalPayable": -3.0,
-    "receivedAmount": 28077.0,
-    "dues": 8403.0,
-    "remarks": "16827.0"
+    "netPayable": 30138.0,
+    "previousDues": 7249.0,
+    "totalPayable": 7249.0,
+    "receivedAmount": 37387.0,
+    "dues": 17095.6,
+    "remarks": "26137.0"
   },
   {
     "id": "11230121070",
@@ -5361,15 +5412,15 @@
     "scholarshipPercentage": 100.0,
     "creditsTaken": 27.0,
     "regFee": 7500.0,
-    "tuitionFee": 52920.0,
-    "scholarship": -52920.0,
+    "tuitionFee": 58212.0,
+    "scholarship": -58212.0,
     "others": 0.0,
     "netPayable": 7500.0,
-    "previousDues": 250.0,
-    "totalPayable": 250.0,
-    "receivedAmount": 7750.0,
-    "dues": 2500.0,
-    "remarks": "4750.0"
+    "previousDues": 150.0,
+    "totalPayable": 150.0,
+    "receivedAmount": 7650.0,
+    "dues": 2400.0,
+    "remarks": "4650.0"
   },
   {
     "id": "11230121072",
@@ -5378,15 +5429,15 @@
     "scholarshipPercentage": 45.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -18522.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -20374.0,
     "others": 0.0,
-    "netPayable": 30138.0,
+    "netPayable": 32402.0,
     "previousDues": 13425.0,
     "totalPayable": 13425.0,
-    "receivedAmount": 43563.0,
-    "dues": 21021.6,
-    "remarks": "30063.0"
+    "receivedAmount": 45827.0,
+    "dues": 22606.399999999994,
+    "remarks": "32327.0"
   },
   {
     "id": "11230121073",
@@ -5395,15 +5446,15 @@
     "scholarshipPercentage": 45.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -18522.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -20374.0,
     "others": 0.0,
-    "netPayable": 30138.0,
-    "previousDues": -2.0,
-    "totalPayable": -2.0,
-    "receivedAmount": 30136.0,
-    "dues": 12094.599999999999,
-    "remarks": "21136.0"
+    "netPayable": 32402.0,
+    "previousDues": 7230.0,
+    "totalPayable": 7230.0,
+    "receivedAmount": 39632.0,
+    "dues": 20911.399999999998,
+    "remarks": "30632.0"
   },
   {
     "id": "11230121074",
@@ -5412,8 +5463,8 @@
     "scholarshipPercentage": 100.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -41160.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -45276.0,
     "others": 0.0,
     "netPayable": 7500.0,
     "previousDues": -100.0,
@@ -5429,15 +5480,15 @@
     "scholarshipPercentage": 30.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -12348.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -13583.0,
     "others": 0.0,
-    "netPayable": 36312.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 36312.0,
-    "dues": 10893.399999999998,
-    "remarks": "21787.0"
+    "netPayable": 39193.0,
+    "previousDues": 8056.0,
+    "totalPayable": 8056.0,
+    "receivedAmount": 47249.0,
+    "dues": 20966.1,
+    "remarks": "32724.0"
   },
   {
     "id": "11230121077",
@@ -5446,15 +5497,15 @@
     "scholarshipPercentage": 35.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -14406.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -15847.0,
     "others": 0.0,
-    "netPayable": 34254.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 34254.0,
-    "dues": 20277.8,
-    "remarks": "30554.0"
+    "netPayable": 36929.0,
+    "previousDues": 2548.0,
+    "totalPayable": 2548.0,
+    "receivedAmount": 39478.0,
+    "dues": 24698.3,
+    "remarks": "35778.0"
   },
   {
     "id": "11230121081",
@@ -5463,15 +5514,15 @@
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -20580.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -22638.0,
     "others": 0.0,
-    "netPayable": 28080.0,
-    "previousDues": -68.0,
-    "totalPayable": -68.0,
-    "receivedAmount": 28012.0,
-    "dues": 8388.0,
-    "remarks": "16812.0"
+    "netPayable": 30138.0,
+    "previousDues": 7086.0,
+    "totalPayable": 7086.0,
+    "receivedAmount": 37224.0,
+    "dues": 16982.6,
+    "remarks": "26024.0"
   },
   {
     "id": "11230121085",
@@ -5480,15 +5531,15 @@
     "scholarshipPercentage": 60.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -24696.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -27166.0,
     "others": 0.0,
-    "netPayable": 23964.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 23964.0,
-    "dues": 7189.799999999999,
-    "remarks": "14379.0"
+    "netPayable": 25610.0,
+    "previousDues": 22507.0,
+    "totalPayable": 22507.0,
+    "receivedAmount": 48117.0,
+    "dues": 30849.0,
+    "remarks": "38532.0"
   },
   {
     "id": "11230121086",
@@ -5497,15 +5548,15 @@
     "scholarshipPercentage": 45.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -18522.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -20374.0,
     "others": 0.0,
-    "netPayable": 30138.0,
-    "previousDues": -2656.0,
-    "totalPayable": -2656.0,
-    "receivedAmount": 27482.0,
-    "dues": 8440.599999999999,
-    "remarks": "17482.0"
+    "netPayable": 32402.0,
+    "previousDues": 3675.0,
+    "totalPayable": 3675.0,
+    "receivedAmount": 36077.0,
+    "dues": 16356.399999999998,
+    "remarks": "26077.0"
   },
   {
     "id": "11230121087",
@@ -5514,15 +5565,15 @@
     "scholarshipPercentage": 45.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -18522.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -20374.0,
     "others": 0.0,
-    "netPayable": 30138.0,
-    "previousDues": -3234.0,
-    "totalPayable": -3234.0,
-    "receivedAmount": 26904.0,
-    "dues": -9041.400000000001,
-    "remarks": "0.0"
+    "netPayable": 32402.0,
+    "previousDues": 4675.0,
+    "totalPayable": 4675.0,
+    "receivedAmount": 37077.0,
+    "dues": 452.3999999999978,
+    "remarks": "10173.0"
   },
   {
     "id": "11230121088",
@@ -5531,15 +5582,15 @@
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -20580.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -22638.0,
     "others": 0.0,
-    "netPayable": 28080.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 28080.0,
-    "dues": 8424.0,
-    "remarks": "16848.0"
+    "netPayable": 30138.0,
+    "previousDues": 7052.0,
+    "totalPayable": 7052.0,
+    "receivedAmount": 37190.0,
+    "dues": 16916.6,
+    "remarks": "25958.0"
   },
   {
     "id": "11230121089",
@@ -5548,15 +5599,15 @@
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -20580.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -22638.0,
     "others": 0.0,
-    "netPayable": 28080.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 28080.0,
-    "dues": 8424.0,
-    "remarks": "16848.0"
+    "netPayable": 30138.0,
+    "previousDues": 7252.0,
+    "totalPayable": 7252.0,
+    "receivedAmount": 37390.0,
+    "dues": 17116.6,
+    "remarks": "26158.0"
   },
   {
     "id": "11230121090",
@@ -5565,15 +5616,15 @@
     "scholarshipPercentage": 45.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -18522.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -20374.0,
     "others": 0.0,
-    "netPayable": 30138.0,
-    "previousDues": 596.0,
-    "totalPayable": 596.0,
-    "receivedAmount": 30734.0,
-    "dues": 15692.599999999999,
-    "remarks": "24734.0"
+    "netPayable": 32402.0,
+    "previousDues": 7113.0,
+    "totalPayable": 7113.0,
+    "receivedAmount": 39515.0,
+    "dues": 23794.399999999998,
+    "remarks": "33515.0"
   },
   {
     "id": "11230121091",
@@ -5582,15 +5633,15 @@
     "scholarshipPercentage": 45.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -18522.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -20374.0,
     "others": 0.0,
-    "netPayable": 30138.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 30138.0,
-    "dues": 21096.6,
-    "remarks": "30138.0"
+    "netPayable": 32402.0,
+    "previousDues": 8987.0,
+    "totalPayable": 8987.0,
+    "receivedAmount": 41389.0,
+    "dues": 31668.399999999998,
+    "remarks": "41389.0"
   },
   {
     "id": "11230121093",
@@ -5599,15 +5650,15 @@
     "scholarshipPercentage": 60.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -24696.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -27166.0,
     "others": 0.0,
-    "netPayable": 23964.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 23964.0,
-    "dues": 16774.8,
-    "remarks": "23964.0"
+    "netPayable": 25610.0,
+    "previousDues": 5508.0,
+    "totalPayable": 5508.0,
+    "receivedAmount": 31118.0,
+    "dues": 23435.0,
+    "remarks": "31118.0"
   },
   {
     "id": "11230121094",
@@ -5616,8 +5667,8 @@
     "scholarshipPercentage": 100.0,
     "creditsTaken": 25.0,
     "regFee": 7500.0,
-    "tuitionFee": 49000.0,
-    "scholarship": -49000.0,
+    "tuitionFee": 53900.0,
+    "scholarship": -53900.0,
     "others": 0.0,
     "netPayable": 7500.0,
     "previousDues": 0.0,
@@ -5629,19 +5680,19 @@
   {
     "id": "11230121095",
     "name": "Md. Ashikur Rahman",
-    "totalReceived": 171387.0,
+    "totalReceived": 181851.0,
     "scholarshipPercentage": 30.0,
     "creditsTaken": 28.0,
     "regFee": 7500.0,
-    "tuitionFee": 54880.0,
-    "scholarship": -16464.0,
+    "tuitionFee": 60368.0,
+    "scholarship": -18110.0,
     "others": 0.0,
-    "netPayable": 45916.0,
-    "previousDues": 10464.0,
-    "totalPayable": 10464.0,
-    "receivedAmount": 56380.0,
-    "dues": 24239.199999999997,
-    "remarks": "38014.0"
+    "netPayable": 49758.0,
+    "previousDues": 7742.0,
+    "totalPayable": 7742.0,
+    "receivedAmount": 57499.0,
+    "dues": 24206.6,
+    "remarks": "39133.0"
   },
   {
     "id": "11230121096",
@@ -5650,15 +5701,15 @@
     "scholarshipPercentage": 45.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -18522.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -20374.0,
     "others": 0.0,
-    "netPayable": 30138.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 30138.0,
-    "dues": 9041.599999999999,
-    "remarks": "18083.0"
+    "netPayable": 32402.0,
+    "previousDues": 2156.0,
+    "totalPayable": 2156.0,
+    "receivedAmount": 34558.0,
+    "dues": 12782.399999999998,
+    "remarks": "22503.0"
   },
   {
     "id": "11230121097",
@@ -5667,15 +5718,15 @@
     "scholarshipPercentage": 40.0,
     "creditsTaken": 17.0,
     "regFee": 7500.0,
-    "tuitionFee": 33320.0,
-    "scholarship": -13328.0,
+    "tuitionFee": 36652.0,
+    "scholarship": -14661.0,
     "others": 0.0,
-    "netPayable": 27492.0,
-    "previousDues": 46.0,
-    "totalPayable": 46.0,
-    "receivedAmount": 27538.0,
-    "dues": 8190.399999999998,
-    "remarks": "16438.0"
+    "netPayable": 29491.0,
+    "previousDues": 5436.0,
+    "totalPayable": 5436.0,
+    "receivedAmount": 34927.0,
+    "dues": 14979.699999999997,
+    "remarks": "23827.0"
   },
   {
     "id": "11230121098",
@@ -5684,15 +5735,15 @@
     "scholarshipPercentage": 45.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
-    "tuitionFee": 41160.0,
-    "scholarship": -18522.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -20374.0,
     "others": 0.0,
-    "netPayable": 30138.0,
-    "previousDues": -4.0,
-    "totalPayable": -4.0,
-    "receivedAmount": 30134.0,
-    "dues": 8992.599999999999,
-    "remarks": "18034.0"
+    "netPayable": 32402.0,
+    "previousDues": 7081.0,
+    "totalPayable": 7081.0,
+    "receivedAmount": 39483.0,
+    "dues": 17662.399999999998,
+    "remarks": "27383.0"
   },
   {
     "id": "11230121099",
@@ -5705,11 +5756,11 @@
     "scholarship": -27166.0,
     "others": 0.0,
     "netPayable": 25610.0,
-    "previousDues": -3.0,
-    "totalPayable": -3.0,
-    "receivedAmount": 25608.0,
-    "dues": 6279.0,
-    "remarks": "13963.0"
+    "previousDues": 4937.0,
+    "totalPayable": 4937.0,
+    "receivedAmount": 30547.0,
+    "dues": 11219.0,
+    "remarks": "18902.0"
   },
   {
     "id": "11230121100",
@@ -5731,7 +5782,7 @@
   {
     "id": "11230121102",
     "name": "Sheikh Md. Imran Kabir",
-    "totalReceived": 147531.0,
+    "totalReceived": 159931.0,
     "scholarshipPercentage": 45.0,
     "creditsTaken": 30.0,
     "regFee": 7500.0,
@@ -5742,13 +5793,13 @@
     "previousDues": 2.0,
     "totalPayable": 2.0,
     "receivedAmount": 43076.0,
-    "dues": 12453.8,
-    "remarks": "25376.0"
+    "dues": 53.79999999999927,
+    "remarks": "12976.0"
   },
   {
     "id": "11230121103",
     "name": "Rajorshi Roy",
-    "totalReceived": 110582.0,
+    "totalReceived": 115582.0,
     "scholarshipPercentage": 45.0,
     "creditsTaken": 24.0,
     "regFee": 7500.0,
@@ -5759,8 +5810,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 35959.0,
-    "dues": 25171.3,
-    "remarks": "35959.0"
+    "dues": 20171.3,
+    "remarks": "30959.0"
   },
   {
     "id": "11230121105",
@@ -5952,18 +6003,18 @@
   {
     "id": "11230121118",
     "name": "Sabrena Rahman Tamanna",
-    "totalReceived": 72658.0,
+    "totalReceived": 72758.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
     "tuitionFee": 38808.0,
-    "scholarship": -23285.0,
+    "scholarship": -23185.0,
     "others": 0.0,
-    "netPayable": 23023.0,
+    "netPayable": 23123.0,
     "previousDues": 0.0,
     "totalPayable": 0.0,
-    "receivedAmount": 23024.0,
-    "dues": 16016.099999999999,
+    "receivedAmount": 23124.0,
+    "dues": 15986.099999999999,
     "remarks": "22924.0"
   },
   {
@@ -6785,7 +6836,7 @@
   {
     "id": "11230121182",
     "name": "Md. Abu Bakar Siam",
-    "totalReceived": 57400.0,
+    "totalReceived": 65000.0,
     "scholarshipPercentage": 100.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -6796,8 +6847,8 @@
     "previousDues": 100.0,
     "totalPayable": 100.0,
     "receivedAmount": 7600.0,
-    "dues": 5350.0,
-    "remarks": "7600.0"
+    "dues": -2250.0,
+    "remarks": "0.0"
   },
   {
     "id": "11230121183",
@@ -6849,6 +6900,23 @@
     "receivedAmount": 32402.0,
     "dues": 9721.399999999998,
     "remarks": "19442.0"
+  },
+  {
+    "id": "11230121187",
+    "name": "Md. Shaikh Salsabil",
+    "totalReceived": 119365.0,
+    "scholarshipPercentage": 35.0,
+    "creditsTaken": 20.0,
+    "regFee": 7500.0,
+    "tuitionFee": 43120.0,
+    "scholarship": -15092.0,
+    "others": 0.0,
+    "netPayable": 35528.0,
+    "previousDues": -24908.0,
+    "totalPayable": -24908.0,
+    "receivedAmount": 10620.0,
+    "dues": -38.400000000001455,
+    "remarks": "10620.0"
   },
   {
     "id": "11230121188",
@@ -6989,7 +7057,7 @@
   {
     "id": "11230121199",
     "name": "Md. Nasiruddin Shael",
-    "totalReceived": 116248.0,
+    "totalReceived": 126492.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -7000,8 +7068,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 25610.0,
-    "dues": 17927.0,
-    "remarks": "25610.0"
+    "dues": 7683.0,
+    "remarks": "15366.0"
   },
   {
     "id": "11230121200",
@@ -7176,7 +7244,7 @@
   {
     "id": "11230321216",
     "name": "Howlader Omer Faruk",
-    "totalReceived": 11000.0,
+    "totalReceived": 31000.0,
     "scholarshipPercentage": 30.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -7187,8 +7255,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 61193.0,
-    "dues": 35135.1,
-    "remarks": "50193.0"
+    "dues": 15135.099999999999,
+    "remarks": "30193.0"
   },
   {
     "id": "11230321217",
@@ -7337,11 +7405,11 @@
     "scholarship": -11642.0,
     "others": 0.0,
     "netPayable": 34666.0,
-    "previousDues": 0.0,
-    "totalPayable": 0.0,
-    "receivedAmount": 34666.0,
-    "dues": 24266.199999999997,
-    "remarks": "34666.0"
+    "previousDues": -37684.0,
+    "totalPayable": -37684.0,
+    "receivedAmount": -3018.0,
+    "dues": -13417.800000000003,
+    "remarks": "-3018.0"
   },
   {
     "id": "11230321233",
@@ -7448,7 +7516,7 @@
   {
     "id": "11230321245",
     "name": "Mahajabin Sultana Joty",
-    "totalReceived": 101069.0,
+    "totalReceived": 119989.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -7459,8 +7527,8 @@
     "previousDues": 1.0,
     "totalPayable": 1.0,
     "receivedAmount": 24749.0,
-    "dues": 7324.5999999999985,
-    "remarks": "14749.0"
+    "dues": -11595.400000000001,
+    "remarks": "-4171.0"
   },
   {
     "id": "11230321246",
@@ -7652,7 +7720,7 @@
   {
     "id": "11230321261",
     "name": "Saurav Kumar Paul",
-    "totalReceived": 139609.0,
+    "totalReceived": 152609.0,
     "scholarshipPercentage": 25.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -7663,8 +7731,8 @@
     "previousDues": 294.0,
     "totalPayable": 294.0,
     "receivedAmount": 40134.0,
-    "dues": 28182.0,
-    "remarks": "40134.0"
+    "dues": 15182.0,
+    "remarks": "27134.0"
   },
   {
     "id": "11230321262",
@@ -7737,7 +7805,7 @@
   {
     "id": "11230321266",
     "name": "Fahim Hossen",
-    "totalReceived": 68780.0,
+    "totalReceived": 77780.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -7748,8 +7816,8 @@
     "previousDues": 50.0,
     "totalPayable": 50.0,
     "receivedAmount": 23073.0,
-    "dues": 16166.099999999999,
-    "remarks": "23073.0"
+    "dues": 7166.0999999999985,
+    "remarks": "14073.0"
   },
   {
     "id": "11230321268",
@@ -7907,7 +7975,7 @@
   {
     "id": "11230321284",
     "name": "Shoriful Islam",
-    "totalReceived": 122800.0,
+    "totalReceived": 132200.0,
     "scholarshipPercentage": 45.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -7918,8 +7986,8 @@
     "previousDues": -50.0,
     "totalPayable": -50.0,
     "receivedAmount": 31166.0,
-    "dues": 9301.199999999997,
-    "remarks": "18666.0"
+    "dues": -98.80000000000291,
+    "remarks": "9266.0"
   },
   {
     "id": "11230321288",
@@ -8349,7 +8417,7 @@
   {
     "id": "11230321319",
     "name": "Ashikur Rahman Sobuj",
-    "totalReceived": 53000.0,
+    "totalReceived": 55250.0,
     "scholarshipPercentage": 100.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -8360,8 +8428,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 7500.0,
-    "dues": 2250.0,
-    "remarks": "4500.0"
+    "dues": 0.0,
+    "remarks": "2250.0"
   },
   {
     "id": "11230321320",
@@ -8400,7 +8468,7 @@
   {
     "id": "11230321322",
     "name": "Mst Amena Akter Akhi",
-    "totalReceived": 116514.0,
+    "totalReceived": 129814.0,
     "scholarshipPercentage": 40.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -8411,8 +8479,8 @@
     "previousDues": -3.0,
     "totalPayable": -3.0,
     "receivedAmount": 33369.0,
-    "dues": 23357.399999999998,
-    "remarks": "33369.0"
+    "dues": 10057.399999999998,
+    "remarks": "20069.0"
   },
   {
     "id": "11230321323",
@@ -8672,7 +8740,7 @@
   {
     "id": "11230321345",
     "name": "Abdullah Al Zubaer",
-    "totalReceived": 102150.0,
+    "totalReceived": 109650.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -8683,8 +8751,8 @@
     "previousDues": 20.0,
     "totalPayable": 20.0,
     "receivedAmount": 24768.0,
-    "dues": 7343.5999999999985,
-    "remarks": "14768.0"
+    "dues": -156.40000000000146,
+    "remarks": "7268.0"
   },
   {
     "id": "11230321346",
@@ -9012,7 +9080,7 @@
   {
     "id": "11230321369",
     "name": "Mrenalini Rani",
-    "totalReceived": 91070.0,
+    "totalReceived": 96070.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 23.0,
     "regFee": 7500.0,
@@ -9023,8 +9091,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 27335.0,
-    "dues": 19134.5,
-    "remarks": "27335.0"
+    "dues": 14134.5,
+    "remarks": "22335.0"
   },
   {
     "id": "11230321371",
@@ -9269,17 +9337,17 @@
     "name": "Mst. Setara Khatun",
     "totalReceived": 129859.0,
     "scholarshipPercentage": 40.0,
-    "creditsTaken": 20.0,
+    "creditsTaken": 23.0,
     "regFee": 7500.0,
-    "tuitionFee": 43120.0,
-    "scholarship": -17248.0,
+    "tuitionFee": 49588.0,
+    "scholarship": -19835.0,
     "others": 0.0,
-    "netPayable": 33372.0,
+    "netPayable": 37253.0,
     "previousDues": -16.0,
     "totalPayable": -16.0,
-    "receivedAmount": 33356.0,
-    "dues": 10011.399999999998,
-    "remarks": "20023.0"
+    "receivedAmount": 37237.0,
+    "dues": 12728.099999999999,
+    "remarks": "23904.0"
   },
   {
     "id": "11230321388",
@@ -9505,7 +9573,7 @@
   {
     "id": "11230321404",
     "name": "Hasibul Islam",
-    "totalReceived": 22000.0,
+    "totalReceived": 11000.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -9845,7 +9913,7 @@
   {
     "id": "11230321430",
     "name": "Tabassum Naima Ema",
-    "totalReceived": 100973.0,
+    "totalReceived": 108398.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -9856,8 +9924,8 @@
     "previousDues": -48.0,
     "totalPayable": -48.0,
     "receivedAmount": 24700.0,
-    "dues": 7420.5999999999985,
-    "remarks": "14845.0"
+    "dues": -4.400000000001455,
+    "remarks": "7420.0"
   },
   {
     "id": "11230321431",
@@ -10085,17 +10153,17 @@
     "name": "Muaj",
     "totalReceived": 123111.0,
     "scholarshipPercentage": 45.0,
-    "creditsTaken": 21.0,
+    "creditsTaken": 20.0,
     "regFee": 7500.0,
-    "tuitionFee": 45276.0,
-    "scholarship": -20374.0,
+    "tuitionFee": 43120.0,
+    "scholarship": -19404.0,
     "others": 0.0,
-    "netPayable": 32402.0,
+    "netPayable": 31216.0,
     "previousDues": 0.0,
     "totalPayable": 0.0,
-    "receivedAmount": 32402.0,
-    "dues": 9720.399999999998,
-    "remarks": "19441.0"
+    "receivedAmount": 31216.0,
+    "dues": 8890.199999999997,
+    "remarks": "18255.0"
   },
   {
     "id": "11230321450",
@@ -10202,7 +10270,7 @@
   {
     "id": "11230321459",
     "name": "Sadia Afrin",
-    "totalReceived": 84165.0,
+    "totalReceived": 95165.0,
     "scholarshipPercentage": 40.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -10213,13 +10281,13 @@
     "previousDues": 43864.0,
     "totalPayable": 43864.0,
     "receivedAmount": 77236.0,
-    "dues": 59724.399999999994,
-    "remarks": "69736.0"
+    "dues": 48724.399999999994,
+    "remarks": "58736.0"
   },
   {
     "id": "11230321460",
     "name": "Sk. Tasnim Ur Rahman",
-    "totalReceived": 100970.0,
+    "totalReceived": 108394.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -10230,8 +10298,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 24748.0,
-    "dues": 7423.5999999999985,
-    "remarks": "14848.0"
+    "dues": -0.4000000000014552,
+    "remarks": "7424.0"
   },
   {
     "id": "11230321461",
@@ -10372,7 +10440,7 @@
   {
     "id": "11230321471",
     "name": "Afsar Uddin Alif",
-    "totalReceived": 110202.0,
+    "totalReceived": 122652.0,
     "scholarshipPercentage": 45.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -10383,8 +10451,8 @@
     "previousDues": -52.0,
     "totalPayable": -52.0,
     "receivedAmount": 31164.0,
-    "dues": 21799.199999999997,
-    "remarks": "31164.0"
+    "dues": 9349.199999999997,
+    "remarks": "18714.0"
   },
   {
     "id": "11230321472",
@@ -10559,7 +10627,7 @@
   {
     "id": "11230321487",
     "name": "Zakia Jesmine Jerin",
-    "totalReceived": 100969.0,
+    "totalReceived": 108393.0,
     "scholarshipPercentage": 60.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -10570,8 +10638,8 @@
     "previousDues": -1676.0,
     "totalPayable": -1676.0,
     "receivedAmount": 23072.0,
-    "dues": 7424.5999999999985,
-    "remarks": "14849.0"
+    "dues": 0.5999999999985448,
+    "remarks": "7425.0"
   },
   {
     "id": "11230321489",
@@ -11477,7 +11545,7 @@
   {
     "id": "11230321563",
     "name": "Pallobi Samadder",
-    "totalReceived": 110142.0,
+    "totalReceived": 125142.0,
     "scholarshipPercentage": 45.0,
     "creditsTaken": 27.0,
     "regFee": 7500.0,
@@ -11488,8 +11556,8 @@
     "previousDues": 9.0,
     "totalPayable": 9.0,
     "receivedAmount": 39525.0,
-    "dues": 27670.899999999998,
-    "remarks": "39525.0"
+    "dues": 12670.899999999998,
+    "remarks": "24525.0"
   },
   {
     "id": "11230321566",
@@ -11919,7 +11987,7 @@
   {
     "id": "11240121607",
     "name": "Aditi Roy Prome",
-    "totalReceived": 108215.0,
+    "totalReceived": 118615.0,
     "scholarshipPercentage": 30.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -11930,8 +11998,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 34666.0,
-    "dues": 10400.199999999997,
-    "remarks": "20800.0"
+    "dues": 0.19999999999708962,
+    "remarks": "10400.0"
   },
   {
     "id": "11240121608",
@@ -12123,7 +12191,7 @@
   {
     "id": "11240121623",
     "name": "Md. Mehrab Hossain Api",
-    "totalReceived": 75605.0,
+    "totalReceived": 87605.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -12134,8 +12202,8 @@
     "previousDues": 1065.0,
     "totalPayable": 1065.0,
     "receivedAmount": 27969.0,
-    "dues": 19897.8,
-    "remarks": "27969.0"
+    "dues": 7897.799999999999,
+    "remarks": "15969.0"
   },
   {
     "id": "11240121625",
@@ -12667,7 +12735,7 @@
   {
     "id": "11240121666",
     "name": "Avijit Bachhar",
-    "totalReceived": 118607.0,
+    "totalReceived": 130171.0,
     "scholarshipPercentage": 20.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -12678,8 +12746,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 38546.0,
-    "dues": 11564.199999999997,
-    "remarks": "23128.0"
+    "dues": 0.19999999999708962,
+    "remarks": "11564.0"
   },
   {
     "id": "11240121667",
@@ -12752,7 +12820,7 @@
   {
     "id": "11240121672",
     "name": "Suraiya Khatun Rakhi",
-    "totalReceived": 110349.0,
+    "totalReceived": 129014.0,
     "scholarshipPercentage": 30.0,
     "creditsTaken": 18.0,
     "regFee": 7500.0,
@@ -12763,8 +12831,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 34666.0,
-    "dues": 8266.199999999997,
-    "remarks": "18666.0"
+    "dues": -10398.800000000003,
+    "remarks": "1.0"
   },
   {
     "id": "11240121675",
@@ -13007,7 +13075,7 @@
   {
     "id": "11240321697",
     "name": "Afia Alam Tisha",
-    "totalReceived": 51357.0,
+    "totalReceived": 57488.0,
     "scholarshipPercentage": 70.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -13018,8 +13086,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 20436.0,
-    "dues": 6131.199999999999,
-    "remarks": "12262.0"
+    "dues": 0.1999999999989086,
+    "remarks": "6131.0"
   },
   {
     "id": "11240321698",
@@ -13126,7 +13194,7 @@
   {
     "id": "11240321704",
     "name": "Fahima Farzana",
-    "totalReceived": 79457.0,
+    "totalReceived": 91457.0,
     "scholarshipPercentage": 25.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -13137,13 +13205,13 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 39840.0,
-    "dues": 11888.0,
-    "remarks": "23840.0"
+    "dues": -112.0,
+    "remarks": "11840.0"
   },
   {
     "id": "11240321705",
     "name": "Md. Shoibe Hossain Rifat",
-    "totalReceived": 64800.0,
+    "totalReceived": 72800.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -13154,8 +13222,8 @@
     "previousDues": -662.0,
     "totalPayable": -662.0,
     "receivedAmount": 28398.0,
-    "dues": 7680.0,
-    "remarks": "16398.0"
+    "dues": -320.0,
+    "remarks": "8398.0"
   },
   {
     "id": "11240321706",
@@ -13466,7 +13534,7 @@
   {
     "id": "11240321728",
     "name": "Md. Salauddin",
-    "totalReceived": 63457.0,
+    "totalReceived": 79457.0,
     "scholarshipPercentage": 25.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -13477,8 +13545,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 39840.0,
-    "dues": 27888.0,
-    "remarks": "39840.0"
+    "dues": 11888.0,
+    "remarks": "23840.0"
   },
   {
     "id": "11240321729",
@@ -13761,7 +13829,7 @@
     "regFee": 7500.0,
     "tuitionFee": 45276.0,
     "scholarship": -22638.0,
-    "others": 0.0,
+    "others": 22000.0,
     "netPayable": 52138.0,
     "previousDues": 0.0,
     "totalPayable": 0.0,
@@ -14044,7 +14112,7 @@
   {
     "id": "11240321764",
     "name": "Naimur Rahman Rahat",
-    "totalReceived": 76270.0,
+    "totalReceived": 76370.0,
     "scholarshipPercentage": 30.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -14055,8 +14123,8 @@
     "previousDues": -7.0,
     "totalPayable": -7.0,
     "receivedAmount": 37677.0,
-    "dues": 11301.8,
-    "remarks": "22607.0"
+    "dues": 11201.8,
+    "remarks": "22507.0"
   },
   {
     "id": "11240321765",
@@ -14673,7 +14741,7 @@
   {
     "id": "11240321812",
     "name": "Md. Raja Masud Khan Pathan",
-    "totalReceived": 52138.0,
+    "totalReceived": 62138.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -14684,8 +14752,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 29060.0,
-    "dues": 20342.0,
-    "remarks": "29060.0"
+    "dues": 10342.0,
+    "remarks": "19060.0"
   },
   {
     "id": "11240321813",
@@ -14843,7 +14911,7 @@
   {
     "id": "11240321823",
     "name": "Prema Saha",
-    "totalReceived": 63955.0,
+    "totalReceived": 72955.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -14854,8 +14922,8 @@
     "previousDues": -317.0,
     "totalPayable": -317.0,
     "receivedAmount": 28743.0,
-    "dues": 8525.0,
-    "remarks": "17243.0"
+    "dues": -475.0,
+    "remarks": "8243.0"
   },
   {
     "id": "11240321825",
@@ -15555,6 +15623,23 @@
     "remarks": "17436.0"
   },
   {
+    "id": "11240321879",
+    "name": "Sujana Ahmed Mim",
+    "totalReceived": 46000.0,
+    "scholarshipPercentage": 30.0,
+    "creditsTaken": 33.0,
+    "regFee": 7500.0,
+    "tuitionFee": 71148.0,
+    "scholarship": -21344.0,
+    "others": 0.0,
+    "netPayable": 57304.0,
+    "previousDues": -14991.0,
+    "totalPayable": -14991.0,
+    "receivedAmount": 42313.0,
+    "dues": 25121.799999999996,
+    "remarks": "42313.0"
+  },
+  {
     "id": "11240321880",
     "name": "Tanmir Choudhury",
     "totalReceived": 82220.0,
@@ -15574,7 +15659,7 @@
   {
     "id": "11240321881",
     "name": "Tamanna Asrafi",
-    "totalReceived": 52200.0,
+    "totalReceived": 57200.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -15585,8 +15670,8 @@
     "previousDues": -62.0,
     "totalPayable": -62.0,
     "receivedAmount": 28998.0,
-    "dues": 20280.0,
-    "remarks": "28998.0"
+    "dues": 15280.0,
+    "remarks": "23998.0"
   },
   {
     "id": "11240321882",
@@ -15965,7 +16050,7 @@
   {
     "id": "11240321909",
     "name": "Emratul Zannat Emu",
-    "totalReceived": 70166.0,
+    "totalReceived": 75166.0,
     "scholarshipPercentage": 40.0,
     "creditsTaken": 20.0,
     "regFee": 7500.0,
@@ -15976,8 +16061,8 @@
     "previousDues": -11000.0,
     "totalPayable": -11000.0,
     "receivedAmount": 22372.0,
-    "dues": 9860.399999999998,
-    "remarks": "19872.0"
+    "dues": 4860.399999999998,
+    "remarks": "14872.0"
   },
   {
     "id": "11240321910",
@@ -16611,7 +16696,7 @@
   {
     "id": "11250121950",
     "name": "Md. Rifat Hossain Pranto",
-    "totalReceived": 27450.0,
+    "totalReceived": 39794.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -16622,8 +16707,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 52138.0,
-    "dues": 12346.599999999999,
-    "remarks": "24688.0"
+    "dues": 2.599999999998545,
+    "remarks": "12344.0"
   },
   {
     "id": "11250121951",
@@ -16845,6 +16930,23 @@
     "receivedAmount": 63457.0,
     "dues": 31719.899999999994,
     "remarks": "47457.0"
+  },
+  {
+    "id": "11250121966",
+    "name": "Prapti Roy",
+    "totalReceived": 11000.0,
+    "scholarshipPercentage": 0.0,
+    "creditsTaken": 21.0,
+    "regFee": 7500.0,
+    "tuitionFee": 45276.0,
+    "scholarship": 0.0,
+    "others": 0.0,
+    "netPayable": 52776.0,
+    "previousDues": 0.0,
+    "totalPayable": 0.0,
+    "receivedAmount": 52457.0,
+    "dues": 29019.899999999994,
+    "remarks": "41457.0"
   },
   {
     "id": "11250121967",
@@ -17240,7 +17342,7 @@
   {
     "id": "11250121991",
     "name": "Mushfikur Rahman Jahin",
-    "totalReceived": 27455.0,
+    "totalReceived": 39796.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -17251,8 +17353,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 52138.0,
-    "dues": 12341.599999999999,
-    "remarks": "24683.0"
+    "dues": 0.5999999999985448,
+    "remarks": "12342.0"
   },
   {
     "id": "11250121992",
@@ -17359,7 +17461,7 @@
   {
     "id": "11250121998",
     "name": "Md Ahsan Habib Shahjada",
-    "totalReceived": 31983.0,
+    "totalReceived": 47720.0,
     "scholarshipPercentage": 25.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -17370,8 +17472,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 63457.0,
-    "dues": 15736.899999999994,
-    "remarks": "31474.0"
+    "dues": -0.10000000000582077,
+    "remarks": "15737.0"
   },
   {
     "id": "11250121999",
@@ -17699,7 +17801,7 @@
   {
     "id": "11250122019",
     "name": "Al Jeba Yesmin",
-    "totalReceived": 27500.0,
+    "totalReceived": 40000.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -17710,8 +17812,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 52138.0,
-    "dues": 12296.599999999999,
-    "remarks": "24638.0"
+    "dues": -203.40000000000146,
+    "remarks": "12138.0"
   },
   {
     "id": "11250122021",
@@ -17835,7 +17937,7 @@
   {
     "id": "11250122028",
     "name": "Sk. Romiujjaman Rajon",
-    "totalReceived": 11000.0,
+    "totalReceived": 27455.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -17846,8 +17948,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 52138.0,
-    "dues": 28796.6,
-    "remarks": "41138.0"
+    "dues": 12341.599999999999,
+    "remarks": "24683.0"
   },
   {
     "id": "11250122029",
@@ -18039,7 +18141,7 @@
   {
     "id": "11250122040",
     "name": "Sk. Md. Jubaer",
-    "totalReceived": 11000.0,
+    "totalReceived": 46135.0,
     "scholarshipPercentage": 30.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -18050,8 +18152,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 61193.0,
-    "dues": 35135.1,
-    "remarks": "50193.0"
+    "dues": 0.09999999999854481,
+    "remarks": "15058.0"
   },
   {
     "id": "11250122041",
@@ -18175,7 +18277,7 @@
   {
     "id": "11250122048",
     "name": "Raiyan Hasan",
-    "totalReceived": 11000.0,
+    "totalReceived": 33492.0,
     "scholarshipPercentage": 30.0,
     "creditsTaken": 25.0,
     "regFee": 7500.0,
@@ -18186,8 +18288,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 67230.0,
-    "dues": 39361.0,
-    "remarks": "56230.0"
+    "dues": 16869.0,
+    "remarks": "33738.0"
   },
   {
     "id": "11250122049",
@@ -18243,7 +18345,7 @@
   {
     "id": "11250122053",
     "name": "Inoon Nahar Ape",
-    "totalReceived": 11000.0,
+    "totalReceived": 27455.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -18254,8 +18356,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 52138.0,
-    "dues": 28796.6,
-    "remarks": "41138.0"
+    "dues": 12341.599999999999,
+    "remarks": "24683.0"
   },
   {
     "id": "11250122054",
@@ -18411,6 +18513,23 @@
     "remarks": "31457.0"
   },
   {
+    "id": "11250122064",
+    "name": "Minhajul Islam Ony",
+    "totalReceived": 11000.0,
+    "scholarshipPercentage": 30.0,
+    "creditsTaken": 21.0,
+    "regFee": 7500.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -13583.0,
+    "others": 22000.0,
+    "netPayable": 61193.0,
+    "previousDues": 0.0,
+    "totalPayable": 0.0,
+    "receivedAmount": 61193.0,
+    "dues": 35135.1,
+    "remarks": "50193.0"
+  },
+  {
     "id": "11250122065",
     "name": "Maria Sultana",
     "totalReceived": 11000.0,
@@ -18426,6 +18545,23 @@
     "receivedAmount": 52138.0,
     "dues": 28796.6,
     "remarks": "41138.0"
+  },
+  {
+    "id": "11250122066",
+    "name": "Aysha Noor",
+    "totalReceived": 11000.0,
+    "scholarshipPercentage": 25.0,
+    "creditsTaken": 21.0,
+    "regFee": 7500.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -11319.0,
+    "others": 22000.0,
+    "netPayable": 63457.0,
+    "previousDues": 0.0,
+    "totalPayable": 0.0,
+    "receivedAmount": 63457.0,
+    "dues": 36719.899999999994,
+    "remarks": "52457.0"
   },
   {
     "id": "11250122067",
@@ -18447,7 +18583,7 @@
   {
     "id": "11250122068",
     "name": "Dwilshad Jahan Tisha",
-    "totalReceived": 11000.0,
+    "totalReceived": 32000.0,
     "scholarshipPercentage": 30.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -18458,8 +18594,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 61193.0,
-    "dues": 35135.1,
-    "remarks": "50193.0"
+    "dues": 14135.099999999999,
+    "remarks": "29193.0"
   },
   {
     "id": "11250122069",
@@ -18566,7 +18702,7 @@
   {
     "id": "11250122075",
     "name": "Md.Saleh Azgor Rishad",
-    "totalReceived": 11000.0,
+    "totalReceived": 25771.0,
     "scholarshipPercentage": 50.0,
     "creditsTaken": 21.0,
     "regFee": 7500.0,
@@ -18577,8 +18713,8 @@
     "previousDues": 0.0,
     "totalPayable": 0.0,
     "receivedAmount": 52138.0,
-    "dues": 28796.6,
-    "remarks": "41138.0"
+    "dues": 14025.599999999999,
+    "remarks": "26367.0"
   },
   {
     "id": "11250122076",
@@ -18685,6 +18821,23 @@
   {
     "id": "11250122082",
     "name": "Hitesh Roy",
+    "totalReceived": 11000.0,
+    "scholarshipPercentage": 40.0,
+    "creditsTaken": 21.0,
+    "regFee": 7500.0,
+    "tuitionFee": 45276.0,
+    "scholarship": -18110.0,
+    "others": 22000.0,
+    "netPayable": 56666.0,
+    "previousDues": 0.0,
+    "totalPayable": 0.0,
+    "receivedAmount": 56666.0,
+    "dues": 31966.199999999997,
+    "remarks": "45666.0"
+  },
+  {
+    "id": "11250122083",
+    "name": "Md. Bahauddin Dakua",
     "totalReceived": 11000.0,
     "scholarshipPercentage": 40.0,
     "creditsTaken": 21.0,
