@@ -16,8 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const storage = firebase.storage();
 
     
-    const splash = document.getElementById('splash');
-    const terminalText = document.getElementById('terminalText');
     const authContainer = document.getElementById('authContainer');
     const mainContainer = document.getElementById('mainContainer');
     const loginTab = document.getElementById('loginTab');
@@ -43,25 +41,14 @@ document.addEventListener('DOMContentLoaded', function() {
     let searchTimeout = null; 
 
     
-    const terminalLines = [
-        "Loading assets...",
-        "Department of CSE...",
-        "Welcome to NUBTK CSE Payment Portal."
-    ];
-    let terminalIndex = 0;
-
-    const animateTerminal = () => {
-        if (terminalIndex < terminalLines.length) {
-            terminalText.textContent = terminalLines[terminalIndex++];
-            setTimeout(animateTerminal, 1000);
-        } else {
-            splash.style.display = 'none';
-            checkAuthState();
-        }
+    window.toggleMainNav = function() {
+        const navLinks = document.getElementById('navLinks');
+        if (navLinks) navLinks.classList.toggle('open');
     };
 
     
-    animateTerminal();
+    document.getElementById('mainNavbar').style.display = 'block';
+    checkAuthState();
 
     
     function checkAuthState() {
@@ -265,31 +252,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const user = userCredential.user;
                 
                 
-                if (!user.emailVerified) {
-                    loginMessage.textContent = 'Please verify your email before logging in.';
-                    loginMessage.className = 'auth-message warning';
-                    
-                    
-                    const resendButton = document.createElement('button');
-                    resendButton.textContent = 'Resend Verification Email';
-                    resendButton.className = 'resend-button';
-                    resendButton.onclick = function() {
-                        user.sendEmailVerification().then(() => {
-                            loginMessage.textContent = 'Verification email sent! Please check your inbox.';
-                            loginMessage.className = 'auth-message success';
-                        }).catch(error => {
-                            loginMessage.textContent = error.message;
-                            loginMessage.className = 'auth-message error';
-                        });
-                    };
-                    
-                    loginMessage.appendChild(document.createElement('br'));
-                    loginMessage.appendChild(resendButton);
-                    
-                    
-                    return auth.signOut();
-                }
-                
                 loginMessage.textContent = 'Login successful!';
                 loginMessage.className = 'auth-message success';
                 loginForm.reset();
@@ -335,6 +297,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         loadPaymentData().then(() => {
             
+            if (paymentData.length === 0) {
+                signupMessage.textContent = 'Unable to load student data from payment.json. Make sure the file exists and is accessible.';
+                signupMessage.className = 'auth-message error';
+                return;
+            }
+            
+            
             const matchingStudent = findMatchingStudent(studentId);
             
             
@@ -350,29 +319,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     const user = userCredential.user;
                     
                     
-                    return user.sendEmailVerification().then(() => {
-                        signupMessage.textContent = 'Verification email sent! Please check your inbox.';
-                        signupMessage.className = 'auth-message success';
-                        
-                        
-                        return firestore.collection('students').doc(user.uid).set({
-                            studentId: studentId,
-                            email: email,
-                            phoneNumber: phoneNumber,
-                            bloodGroup: bloodGroup,
-                            name: matchingStudent.name || `Student ${studentId}`,
-                            emailVerified: false,
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                        }).then(() => {
-                            
-                            signupMessage.textContent = 'Creating account and uploading profile picture...';
-                            return uploadProfilePicture(user, profilePic);
-                        });
+                    return firestore.collection('students').doc(user.uid).set({
+                        studentId: studentId,
+                        email: email,
+                        phoneNumber: phoneNumber,
+                        bloodGroup: bloodGroup,
+                        name: matchingStudent.name || `Student ${studentId}`,
+                        emailVerified: true,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    }).then(() => {
+                        signupMessage.textContent = 'Creating account and uploading profile picture...';
+                        return uploadProfilePicture(user, profilePic);
                     });
                 })
                 .then(() => {
                     signupForm.reset();
-                    signupMessage.textContent = 'Account created successfully! Please verify your email and login.';
+                    signupMessage.textContent = 'Account created successfully! You can now login.';
                     signupMessage.className = 'auth-message success';
                     
                     
@@ -625,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         label: 'Payment Progress',
                         data: paymentHistory.map(item => item.amount),
                         backgroundColor: 'rgba(0, 255, 157, 0.2)',
-                        borderColor: '#00ff9d',
+                        borderColor: '#00ff41',
                         borderWidth: 2,
                         tension: 0.4,
                         fill: true
@@ -648,7 +610,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     title: {
                         display: true,
                         text: 'Payment Progress',
-                        color: '#00ff9d',
+                        color: '#00ff41',
                         font: {
                             family: 'Courier New, monospace',
                             size: 14
@@ -853,9 +815,12 @@ function initializePaymentNotes() {
             
             return true;
         } catch (error) {
-            console.error('Error loading data:', error);
-            document.getElementById('fileStatus').innerHTML = 'Error loading data file';
-            document.getElementById('fileStatus').className = 'file-status error';
+            console.error('Error loading payment.json:', error);
+            const msg = document.getElementById('fileStatus');
+            if (msg) {
+                msg.innerHTML = 'Error loading payment.json — ' + error.message;
+                msg.className = 'file-status error';
+            }
             return false;
         }
     }
@@ -1056,12 +1021,12 @@ function initializePaymentNotes() {
         }
         
         
-        searchTimeout = setTimeout(performSearch, 3000);
+        searchTimeout = setTimeout(performSearch, 500);
     }
 
    
     function updateCharts(totalDues, totalReceived) {
-        Chart.defaults.color = '#00ff9d';
+        Chart.defaults.color = '#00ff41';
         Chart.defaults.borderColor = 'rgba(0, 255, 157, 0.1)';
         
         
@@ -1077,7 +1042,7 @@ function initializePaymentNotes() {
                     label: 'Total Received',
                     data: recentPayments.map(student => student.receivedAmount),
                     backgroundColor: 'rgba(0, 255, 157, 0.2)',
-                    borderColor: '#00ff9d',
+                    borderColor: '#00ff41',
                     borderWidth: 1
                 }]
             },
@@ -1088,7 +1053,7 @@ function initializePaymentNotes() {
                     title: {
                         display: true,
                         text: 'Recent Payments Overview',
-                        color: '#00ff9d',
+                        color: '#00ff41',
                         font: {
                             family: 'Courier New, monospace',
                             size: 14
@@ -1113,7 +1078,7 @@ function initializePaymentNotes() {
                         'rgba(255, 99, 132, 0.2)'
                     ],
                     borderColor: [
-                        '#00ff9d',
+                        '#00ff41',
                         '#ff6384'
                     ],
                     borderWidth: 1
@@ -1126,7 +1091,7 @@ function initializePaymentNotes() {
                     title: {
                         display: true,
                         text: 'Overall Payment Status',
-                        color: '#00ff9d',
+                        color: '#00ff41',
                         font: {
                             family: 'Courier New, monospace',
                             size: 14
@@ -1145,13 +1110,13 @@ function initializePaymentNotes() {
     style.innerHTML = `
         .search-loading {
             padding: 10px;
-            color: #00ff9d;
+            color: #00ff41;
             text-align: center;
             font-family: 'Courier New', monospace;
         }
         .profile-loading-message {
             margin-top: 10px;
-            color: #00ff9d;
+            color: #00ff41;
             text-align: center;
             font-family: 'Courier New', monospace;
         }
@@ -1285,6 +1250,11 @@ function setupDynamicBackground() {
     const bgImage = document.createElement('img');
     bgImage.className = 'dynamic-bg';
     bgContainer.appendChild(bgImage);
+    
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'dynamic-bg-overlay';
+    bgContainer.appendChild(overlay);
     
     
     setRandomBackground(bgImage);
