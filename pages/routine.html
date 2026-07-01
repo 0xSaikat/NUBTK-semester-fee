@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Class Routine — NUBTK Portal</title>
+  <link rel="stylesheet" href="../css/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
+  <style>
+    
+    .routine-output-wrap {
+      background: white; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4); padding: 24px; 
+    }
+    .routine-header-block { text-align: center; margin-bottom: 14px; } 
+    .routine-header-block .uni { font-size: 13pt; font-weight: 800; color: #0B1D3A; font-family: 'Times New Roman', serif; }
+    .routine-header-block .title { font-size: 11pt; font-weight: 700; margin: 6px 0 4px; color: #0B1D3A; letter-spacing: 1px; text-transform: uppercase; }
+    .routine-header-block .section-badge {
+      display: inline-block; background: #0B1D3A; color: #00ff41;
+      font-size: 10pt; font-weight: 800; padding: 4px 24px; border-radius: 6px;
+      letter-spacing: 2px; margin-top: 4px;
+    }
+    .routine-table { width: 100%; border-collapse: collapse; font-family: var(--ff-body); font-size: 0.78rem; }
+    .routine-table th {
+      background: #0B1D3A; color: #00ff41; text-align: center;
+      padding: 8px 6px; font-weight: 700; letter-spacing: 0.5px;
+      border: 1.5px solid #0B1D3A;
+    }
+    .routine-table td {
+      border: 1px solid #ccc; padding: 6px 4px; text-align: center; 
+      vertical-align: middle; color: #222; background: white; 
+    }
+    .routine-table td.empty { background: #fafafa; color: #ccc; font-size: 0.75rem; }
+    .cell-course { font-weight: 700; font-size: 0.78rem; color: #0B1D3A; }
+    .cell-room { font-size: 0.68rem; color: #666; margin-top: 1px; }
+    .cell-badge {
+      font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+      display: inline-block; margin-top: 2px; letter-spacing: 0.5px;
+    }
+    .badge-theory { background: #EBF4FF; color: #1D4ED8; }
+    .badge-lab { background: #FEF3C7; color: #B45309; }
+    .badge-phy-lab { background: #FCE7F3; color: #9D174D; }
+
+    .section-search-box {
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .section-search-box input {
+      text-transform: uppercase; font-size: 1.2rem; font-weight: 700;
+      letter-spacing: 3px; text-align: center; width: 140px;
+    }
+    .no-routine {
+      text-align: center; padding: 60px 20px; color: var(--muted);
+    }
+    .no-routine .big { font-size: 3rem; margin-bottom: 12px; }
+    .no-routine p { font-size: 0.9rem; }
+
+    
+    .routine-day-block { margin-bottom: 20px; background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+    .routine-day-block h4 { color: #0B1D3A; font-size: 1.05rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
+    .routine-slot-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .routine-slot-row .slot-time { font-size: 0.85rem; font-weight: 700; color: #64748b; width: 85px; flex-shrink: 0; }
+    .slot-input { background: #f8fafc; border: 1px solid #cbd5e1; color: #0f172a; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; padding: 10px 12px; border-radius: 8px; outline: none; transition: 0.2s; }
+    .slot-input:focus { border-color: #00ff41; background: #fff; box-shadow: 0 0 0 3px rgba(0,255,65,0.15); }
+    .slot-input.course-input { width: 140px; }
+    .slot-input.room-input { width: 110px; }
+    .slot-type-sel { width: 120px; cursor: pointer; }
+
+    
+    .slot-input.name-input { width: 140px; }
+    
+    .cell-class-name { 
+      background-color: #1f2937; 
+      color: #ffffff; 
+      font-size: 0.65rem; 
+      font-weight: 600; 
+      text-transform: capitalize; 
+      line-height: 1.2;
+      padding: 5px 2px; 
+      
+      
+      margin-top: 6px; 
+      margin-bottom: -6px; 
+      margin-left: -4px; 
+      margin-right: -4px; 
+      border-top: 1px solid #0B1D3A; 
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="page-wrap" style="padding-bottom:60px;">
+  <div class="page-header">
+    <div class="breadcrumb"><a href="../index.html">Home</a> › Class Routine</div>
+    <h1>Class Routine</h1>
+    <p>Enter your section code to generate your personalized class schedule from the Live Database.</p>
+  </div>
+
+  <div class="section-card">
+    <h2>Find Your Routine</h2>
+        <div class="section-search-box">
+      <div class="form-group" style="margin:0;">
+        <label class="form-label">Section (e.g. 2D, 1A, 3B)</label>
+        <input type="text" class="form-input" id="section-input" maxlength="3" placeholder="2D"
+          style="text-transform:uppercase;font-size:1.2rem;font-weight:700;letter-spacing:3px;text-align:center;width:120px;"
+          oninput="this.value=this.value.toUpperCase()"
+          onkeydown="if(event.key==='Enter') generateRoutine()"/>
+      </div>
+      
+      <div style="align-self:flex-end; display: flex; gap: 10px;">
+        <button class="btn btn-gold" onclick="generateRoutine()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Generate Routine
+        </button>
+        <button class="btn btn-outline" onclick="loadManualBuilder()" style="border-color: #00ff41; color: #00ff41;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Manual Create
+        </button>
+      </div>
+    </div>
+
+    <p class="form-hint">Type your section code (like 1A, 2D, 3A etc.) and click Generate.</p>
+  </div>
+
+  <div id="routine-result"></div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script>
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+function notify(msg, dur=2800) {
+  const n = document.getElementById('notif');
+  n.textContent = msg; n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), dur);
+}
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCF9BoDxWa-0XTwbCBxjHrrBdQrKioJua8",
+  authDomain: "nubtk-portal.firebaseapp.com",
+  databaseURL: "https://nubtk-portal-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "nubtk-portal",
+  storageBucket: "nubtk-portal.firebasestorage.app",
+  messagingSenderId: "45891604739",
+  appId: "1:45891604739:web:33251f784080f09816d936"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+const TIME_SLOTS = ['08:30 AM', '09:40 AM', '10:50 AM', '12:00 PM', '02:10 PM', '03:20 PM', '04:30 PM'];
+const DAYS = ['Saturday', 'Sunday', 'Tuesday', 'Wednesday', 'Thursday' ];
+
+let currentSectionData = {};
+
+function generateRoutine() {
+  const section = document.getElementById('section-input').value.trim().toUpperCase();
+  if (!section) { notify(' Please enter your section!'); return; }
+
+  notify(' Fetching live routine...');
+  const result = document.getElementById('routine-result');
+
+  db.ref('routines/' + section).once('value').then((snapshot) => {
+    const secData = snapshot.val();
+
+    if (!secData) {
+      result.innerHTML = `
+        <div class="section-card" style="text-align: center; padding: 50px 20px; background: #fafafa; border: 2px dashed #cbd5e1; border-radius: 12px; margin-top: 20px;">
+            <div style="font-size: 3.5rem; margin-bottom: 15px;">📭</div>
+            <h3 style="color: #ef4444; font-size: 1.6rem; font-weight: 800; margin-bottom: 10px;">Routine Not Found!</h3>
+            <p style="color: #64748b; margin-bottom: 25px; font-size: 1rem; line-height: 1.5;">
+                Maybe the Routine not updated by Author for <strong style="color:#0f172a;">Section ${section}</strong> yet.<br>Please check if the OFFICIAL Routine has been published yet.
+            </p>
+            <button class="btn btn-outline" onclick="loadManualBuilder()" style="border-color: #00ff41; color: #00ff41; border-width: 2px;">
+                ✍️ Create One Manually
+            </button>
+        </div>
+      `;
+      notify(' Routine not found!');
+      return;
+    }
+
+    let rows = '';
+    TIME_SLOTS.forEach(time => {
+      let row = `<tr><td style="font-weight:700;color:#0B1D3A;white-space:nowrap;background:#f8f8ff;padding:8px 12px;">${time}</td>`;
+      DAYS.forEach(day => {
+        const key = `${day}|${time}`;
+        const cell = secData[key];
+        if (cell) {
+          const badgeClass = cell.type === 'lab' ? 'badge-lab' : cell.type === 'phy-lab' ? 'badge-phy-lab' : 'badge-theory';
+          const badgeLabel = cell.type === 'lab' ? 'LAB' : cell.type === 'phy-lab' ? 'PHY LAB' : 'THEORY';
+          row += `<td>
+            <div class="cell-course">${cell.course}</div>
+            <div class="cell-room">${cell.room}</div>
+            <span class="cell-badge ${badgeClass}">${badgeLabel}</span>
+          </td>`;
+        } else {
+          row += `<td class="empty">—</td>`;
+        }
+      });
+      row += '</tr>';
+      rows += row;
+    });
+
+    result.innerHTML = `
+      <div class="section-card" style="padding:0;overflow:hidden;" id="routine-card">
+        <div style="padding:24px 28px 0;">
+          <div class="btn-row" style="margin-top:0;margin-bottom:20px;">
+            <button class="btn btn-gold" onclick="downloadRoutinePDF()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              PDF
+            </button>
+            <button class="btn btn-outline" onclick="downloadRoutineJPG()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              JPG
+            </button>
+            <button class="btn btn-outline" style="border-color:#3b82f6; color:#3b82f6;" onclick="editGeneratedRoutine()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Edit This Routine
+            </button>
+          </div>
+        </div>
+        <div style="padding:0 28px 28px;">
+          <div class="routine-output-wrap" id="routine-printable">
+            <div class="routine-header-block">
+              <div class="uni">Northern University of Business &amp; Technology Khulna</div>
+              <div class="title">Class Schedule · Spring 2025</div>
+              <div class="section-badge">SECTION — ${section}</div>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="routine-table">
+                <thead>
+                  <tr>
+                    <th>TIME</th>
+                    ${DAYS.map(d => `<th>${d.toUpperCase()}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+              </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px; padding-top: 12px; border-top: 1px dashed #cbd5e1; font-size: 0.75rem; color: #64748b; font-style: italic;">
+              ⚠️ <strong style="color: #ef4444;">Disclaimer:</strong> This routine schedule is automatically compiled. Please re-check with the official department notices to ensure accuracy.
+        </div>
+      </div>`;
+    notify(`✅ Routine loaded for Section ${section}`);
+  }).catch((error) => {
+    notify(' Error connecting to database!');
+    console.error(error);
+  });
+}
+
+function downloadRoutinePDF() {
+  const el = document.getElementById('routine-printable');
+  const tableWrap = el.querySelector('div[style*="overflow-x"]');
+  
+  const origOverflow = tableWrap ? tableWrap.style.overflowX : '';
+  const origWidth = el.style.width;
+  const origMinWidth = el.style.minWidth;
+  const origMargin = el.style.margin;
+
+  if (tableWrap) tableWrap.style.overflowX = 'visible';
+  el.style.width = 'max-content'; 
+  el.style.minWidth = '1000px'; 
+  el.style.margin = '0 auto 0 0'; 
+
+  notify(' Preparing perfect single-page PDF...');
+
+  setTimeout(() => {
+    const secInput = document.getElementById('section-input');
+    const secName = secInput && secInput.value.trim() ? secInput.value.trim() : 'Custom';
+
+    const fullWidth = el.scrollWidth;
+    const fullHeight = el.scrollHeight + 30; 
+
+    html2pdf().set({
+      margin: 10,
+      filename: `NUBTK_Routine_Section_${secName}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+
+      jsPDF: { unit: 'px', format: [fullWidth, fullHeight], orientation: 'landscape' },
+      pagebreak: { mode: ['avoid-all'] } 
+    }).from(el).save().then(() => {
+      if (tableWrap) tableWrap.style.overflowX = origOverflow;
+      el.style.width = origWidth;
+      el.style.minWidth = origMinWidth;
+      el.style.margin = origMargin;
+      notify(' PDF Downloaded Successfully!');
+    });
+  }, 150); 
+}
+
+function downloadRoutineJPG() {
+  const el = document.getElementById('routine-printable');
+  const tableWrap = el.querySelector('div[style*="overflow-x"]');
+  const table = el.querySelector('.routine-table');
+
+  const fullWidth = table ? table.offsetWidth + 60 : el.scrollWidth;
+
+  const originalOverflow = tableWrap ? tableWrap.style.overflowX : '';
+  const originalWidth = el.style.width;
+
+  if (tableWrap) tableWrap.style.overflowX = 'visible';
+  el.style.width = fullWidth + 'px';
+
+  notify(' Preparing full JPG...');
+
+  html2canvas(el, { 
+    scale: 2, 
+    useCORS: true, 
+    scrollY: 0, 
+    backgroundColor: '#fff',
+    width: fullWidth,        
+    windowWidth: fullWidth   
+  }).then(canvas => {
+
+    if (tableWrap) tableWrap.style.overflowX = originalOverflow;
+    el.style.width = originalWidth;
+    
+    const link = document.createElement('a');
+    link.download = `NUBTK_Routine_Section_${document.getElementById('section-input') ? document.getElementById('section-input').value.trim() : 'Custom'}.jpg`;
+    link.href = canvas.toDataURL('image/jpeg', 0.95);
+    link.click();
+    notify(' JPG Downloaded Successfully!');
+  });
+}
+
+function loadManualBuilder() {
+  const savedDraft = localStorage.getItem('routine_manual_draft');
+  let draftData = {};
+  let savedSection = '';
+  
+  if (savedDraft) {
+    const parsed = JSON.parse(savedDraft);
+    draftData = parsed.data || {};
+    savedSection = parsed.section || '';
+  }
+
+  const currentInputSec = document.getElementById('section-input').value.trim().toUpperCase();
+  const sec = currentInputSec || savedSection || 'CUSTOM';
+  const result = document.getElementById('routine-result');
+
+  let html = `
+  <div class="section-card" style="background:#f8fafc; border: 1px solid #e2e8f0;">
+    <div style="text-align:center; margin-bottom:10px; display:flex; justify-content:center; align-items:center; gap:10px;">
+      <h3 style="color:var(--gold); margin:0;">Manual Builder:</h3>
+      <input type="text" id="manual-sec-input" class="form-input" value="${sec === 'CUSTOM' ? '' : sec}" placeholder="Section" style="width: 110px; text-align: center; font-size: 1rem; font-weight: bold; text-transform: uppercase; padding: 6px 10px; border: 2px solid var(--gold);" oninput="this.value=this.value.toUpperCase()">
+    </div>
+    
+     <p style="font-size:0.8rem; color:#ef4444; text-align:center; margin-bottom:15px; font-weight: 600;">
+        Note: The "Class Name" should not exceed 20 characters to fit perfectly.
+     </p>
+
+    <div class="btn-row" style="justify-content: center; margin-bottom: 20px; gap: 8px;">
+        <button class="btn btn-outline" onclick="saveRoutineDraft()" style="font-size:0.8rem; padding: 6px 12px; border-color:#3b82f6; color:#3b82f6;">Save Draft</button>
+        <button class="btn btn-outline" onclick="resetManualForm()" style="font-size:0.8rem; padding: 6px 12px; border-color:#f87171; color:#f87171;">Reset Form</button>
+    </div>
+    
+    <div>`;
+
+  DAYS.forEach(day => {
+    html += `<div class="routine-day-block"><h4>${day}</h4>`;
+    TIME_SLOTS.forEach(time => {
+      const key = `${day}|${time}`;
+
+      const val = draftData[key] || { course: '', room: '', type: 'theory', className: '' };
+      
+      html += `<div class="routine-slot-row">
+        <span class="slot-time">${time}</span>
+        <input type="text" class="slot-input course-input" placeholder="Code (CSE 1101)" data-key="${key}" data-field="course" value="${val.course}"/>
+        
+        <input type="text" class="slot-input name-input" placeholder="Class Name" data-key="${key}" data-field="className" value="${val.className || ''}" maxlength="20"/>
+        
+        <input type="text" class="slot-input room-input" placeholder="Room" data-key="${key}" data-field="room" value="${val.room}"/>
+        <select class="slot-input slot-type-sel" data-key="${key}" data-field="type">
+          <option value="theory" ${val.type === 'theory' ? 'selected' : ''}>Theory</option>
+          <option value="lab" ${val.type === 'lab' ? 'selected' : ''}>Lab</option>
+          <option value="phy-lab" ${val.type === 'phy-lab' ? 'selected' : ''}>Phy Lab</option>
+        </select>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  html += `</div>
+    <div class="btn-row" style="justify-content: center; margin-top: 25px;">
+        <button class="btn btn-gold" onclick="previewManualRoutine()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Preview & Download
+        </button>
+      <button class="btn btn-outline" onclick="document.getElementById('routine-result').innerHTML=''">Close</button>
+    </div>
+  </div>`;
+
+  result.innerHTML = html;
+}
+
+function previewManualRoutine() {
+  saveRoutineDraft(false); 
+  
+
+  const draftObj = JSON.parse(localStorage.getItem('routine_manual_draft') || '{}');
+  const sec = draftObj.section || 'CUSTOM';
+
+  const secData = {};
+  
+
+  document.querySelectorAll('.slot-input[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    const field = el.dataset.field;
+    if (!secData[key]) secData[key] = {};
+    secData[key][field] = el.value.trim();
+  });
+
+  Object.keys(secData).forEach(k => {
+    if (!secData[k].course) delete secData[k];
+  });
+
+  let rows = '';
+  TIME_SLOTS.forEach(time => {
+    let row = `<tr><td style="font-weight:700;color:#0B1D3A;white-space:nowrap;background:#f8f8ff;padding:8px 12px;">${time}</td>`;
+    DAYS.forEach(day => {
+      const key = `${day}|${time}`;
+      const cell = secData[key];
+      if (cell) {
+        const badgeClass = cell.type === 'lab' ? 'badge-lab' : cell.type === 'phy-lab' ? 'badge-phy-lab' : 'badge-theory';
+        const badgeLabel = cell.type === 'lab' ? 'LAB' : cell.type === 'phy-lab' ? 'PHY LAB' : 'THEORY';
+        
+
+        const classNameHtml = cell.className ? `<div class="cell-class-name">${cell.className}</div>` : '';
+
+        row += `<td>
+          <div class="cell-course">${cell.course}</div>
+          <div class="cell-room">${cell.room}</div>
+          <div style="margin-top:2px;"><span class="cell-badge ${badgeClass}">${badgeLabel}</span></div>
+          ${classNameHtml}
+        </td>`;
+      } else {
+        row += `<td class="empty">—</td>`;
+      }
+    });
+    row += '</tr>';
+    rows += row;
+  });
+
+  const result = document.getElementById('routine-result');
+  result.innerHTML = `
+    <div class="section-card" style="padding:0;overflow:hidden;" id="routine-card">
+      <div style="padding:24px 28px 0;">
+        <div class="btn-row" style="margin-top:0;margin-bottom:20px; display:flex; justify-content:center; gap:10px;">
+            <button class="btn btn-gold" onclick="downloadRoutinePDF()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF
+            </button>
+            <button class="btn btn-outline" onclick="downloadRoutineJPG()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              Download JPG
+            </button>
+            <button class="btn btn-outline" style="border-color:#f87171; color:#f87171;" onclick="loadManualBuilder()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Back to Edit
+            </button>
+        </div>
+      </div>
+      <div style="padding:0 28px 28px;">
+        <div class="routine-output-wrap" id="routine-printable">
+          <div class="routine-header-block">
+            <div class="uni">Northern University of Business &amp; Technology Khulna</div>
+            <div class="title">Class Schedule · Custom Builder</div>
+            <div class="section-badge">SECTION — ${sec}</div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="routine-table">
+              <thead>
+                <tr>
+                  <th>TIME</th>
+                  ${DAYS.map(d => `<th>${d.toUpperCase()}</th>`).join('')}
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function saveRoutineDraft(notifyUser = true) {
+  const draftData = {};
+
+  document.querySelectorAll('.slot-input[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    const field = el.dataset.field;
+    if (!draftData[key]) draftData[key] = {};
+    draftData[key][field] = el.value;
+  });
+  
+    const manualSecInput = document.getElementById('manual-sec-input');
+  const section = manualSecInput ? manualSecInput.value.trim() : document.getElementById('section-input').value.trim();
+
+  localStorage.setItem('routine_manual_draft', JSON.stringify({
+    section: section,
+    data: draftData
+  }));
+  
+  if(notifyUser) notify(' Draft saved successfully!');
+}
+
+function resetManualForm() {
+  if(confirm('Are you sure you want to clear all inputs?')) {
+    localStorage.removeItem('routine_manual_draft');
+    loadManualBuilder(); 
+    notify(' Form Reset Successful!');
+  }
+}
+
+function editGeneratedRoutine() {
+  const section = document.getElementById('section-input').value.trim().toUpperCase();
+  const draftData = {};
+
+  const tableCells = document.querySelectorAll('#routine-result .routine-table tbody td');
+  
+  if (tableCells.length === 0) {
+    notify(' No routine data found to edit!');
+    return;
+  }
+
+  TIME_SLOTS.forEach((time, timeIndex) => {
+    DAYS.forEach((day, dayIndex) => {
+
+      const rowIndex = dayIndex;
+      const colIndex = timeIndex + 1; 
+      
+      const row = document.querySelectorAll('#routine-result .routine-table tbody tr')[rowIndex];
+      if (row) {
+        const cell = row.cells[colIndex];
+        if (cell && !cell.classList.contains('empty') && cell.innerText !== '—') {
+
+          const course = cell.querySelector('.cell-course') ? cell.querySelector('.cell-course').innerText.trim() : '';
+          const room = cell.querySelector('.cell-room') ? cell.querySelector('.cell-room').innerText.trim() : '';
+          const badge = cell.querySelector('.cell-badge') ? cell.querySelector('.cell-badge').innerText.trim() : '';
+          
+          let type = 'theory';
+          if (badge === 'LAB') type = 'lab';
+          else if (badge === 'PHY LAB') type = 'phy-lab';
+
+          const classNameNode = cell.querySelector('.cell-class-name');
+          const classNameStr = classNameNode ? classNameNode.innerText.trim() : '';
+
+          const key = `${day}|${time}`;
+          draftData[key] = { course: course, room: room, type: type, className: classNameStr };
+        }
+      }
+    });
+  });
+
+  localStorage.setItem('routine_manual_draft', JSON.stringify({
+    section: section,
+    data: draftData
+  }));
+
+  loadManualBuilder();
+  notify(' Routine loaded! You can now modify it.');
+}
+
+  (function() {
+  const PAGE_NAME = 'routine'; 
+  const db = firebase.database();
+  
+
+  db.ref('visitors/total_visits').transaction(v => (v || 0) + 1).catch(e => console.error(e));
+  db.ref('visitors/pages/' + PAGE_NAME).transaction(v => (v || 0) + 1).catch(e => console.error(e));
+  
+
+  const onlineRef = db.ref('visitors/online_count');
+  
+
+  const safeRandomId = Date.now() + '_' + Math.floor(Math.random() * 1000);
+  const userRef = db.ref('visitors/online_users/' + safeRandomId);
+  
+  userRef.set(true).catch(e => console.error(e));
+  userRef.onDisconnect().remove();
+  
+  db.ref('visitors/online_users').on('value', snap => {
+    const count = snap.numChildren();
+    onlineRef.set(count).catch(e => console.error(e));
+  });
+})();
+
+  
+</script>
+
+<script src="../navbar.js"></script>
+</body>
+</html>

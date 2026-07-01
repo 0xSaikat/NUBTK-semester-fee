@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cover Page Generator — NUBTK Portal</title>
+  <link rel="stylesheet" href="../css/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
+  <style>
+    
+    .cover-preview {
+      background: white; color: #111;
+      width: 794px; height: 1120px; 
+      overflow: hidden;
+      padding: 40px 70px; 
+      font-family: 'Times New Roman', serif;
+      position: relative; box-sizing: border-box;
+    }
+    .cover-header { text-align: center; margin-bottom: 20px; } 
+    
+    .cover-logo-row { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; margin-bottom: 14px; }
+    
+    .cover-logo-img { 
+      width: 220px; height: 220px; 
+      object-fit: contain; 
+    }
+    
+    .cover-uni-name { font-size: 18pt; font-weight: 900; line-height: 1.25; color: #000; }
+    .cover-dept { font-size: 13pt; font-weight: 700; margin-top: 8px; color: #111; }
+    .cover-divider { border: none; border-top: 2px solid #000; margin: 16px 0; }
+    .cover-meta { text-align: center; margin-bottom: 28px; }
+    .cover-meta-row { font-size: 11.5pt; margin: 4px 0; color: #111; }
+    .cover-meta-row strong { font-weight: 700; }
+    .cover-type-badge {
+      display: inline-block; font-size: 14pt; font-weight: 900;
+      border: 2.5px solid #000; padding: 6px 32px; letter-spacing: 2px;
+      text-transform: uppercase; margin: 12px 0;
+    }
+    
+    .cover-title { text-align: center; font-size: 12pt; font-style: italic; margin-bottom: 20px; color: #333; } 
+
+    
+.template-10 {
+  background: #ffffff; color: #111;
+  font-family: 'Times New Roman', serif;
+  position: relative; overflow: hidden;
+}
+
+.template-10::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 0; height: 0; border-style: solid;
+  border-width: 400px 180px 0 0;
+  border-color: #1a1a1a transparent transparent transparent;
+  z-index: 0;
+}
+
+.template-10::after {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 0; height: 0; border-style: solid;
+  border-width: 400px 120px 0 0;
+  border-color: #2d7a2d transparent transparent transparent;
+  z-index: 0;
+}
+
+.template-10 .geo-accent {
+  position: absolute; top: 0; right: 0;
+  width: 0; height: 0; border-style: solid;
+  border-width: 0 180px 400px 0;
+  border-color: transparent #1a1a1a transparent transparent;
+  z-index: 0;
+}
+
+.template-10 .geo-accent2 {
+  position: absolute; top: 0; right: 0;
+  width: 0; height: 0; border-style: solid;
+  border-width: 0 120px 400px 0;
+  border-color: transparent #2d7a2d transparent transparent;
+  z-index: 0;
+}
+
+.template-10 .geo-accent3 {
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 0; border-style: solid;
+  border-width: 0 0 300px 180px;
+  border-color: transparent transparent #1a1a1a transparent;
+  z-index: 0;
+}
+
+.template-10 .geo-accent4 {
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 0; border-style: solid;
+  border-width: 0 0 300px 120px;
+  border-color: transparent transparent #2d7a2d transparent;
+  z-index: 0;
+}
+
+.template-10 .geo-accent5 {
+  position: absolute; bottom: 0; right: 0;
+  width: 0; height: 0; border-style: solid;
+  border-width: 0 0 300px 180px;
+  border-color: transparent transparent transparent #1a1a1a;
+  z-index: 0;
+}
+
+.template-10 .geo-accent6 {
+  position: absolute; bottom: 0; right: 0;
+  width: 0; height: 0; border-style: solid;
+  border-width: 0 0 300px 120px;
+  border-color: transparent transparent transparent #2d7a2d;
+  z-index: 0;
+}
+.template-10 .cover-header,
+.template-10 .cover-meta,
+.template-10 .cover-title,
+.template-10 .cover-table,
+.template-10 .cover-date { position: relative; z-index: 2; }
+.template-10 .cover-logo-row { position: relative; z-index: 2; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 6px; margin-top: 10px; }
+.template-10 .cover-logo-img { width: 160px; height: 160px; object-fit: contain; filter: none; background: transparent; }
+.template-10 .cover-header { text-align: center; margin-bottom: 8px; }
+.template-10 .cover-uni-name { color: #111; font-size: 17pt; font-weight: 900; }
+.template-10 .cover-dept { color: #2d7a2d; font-size: 12pt; font-weight: 700; margin-top: 4px; }
+.template-10 .cover-divider { border-color: #2d7a2d; border-width: 2px; margin: 10px 0; }
+.template-10 .cover-meta { text-align: center; margin-bottom: 14px; }
+.template-10 .cover-meta-row { color: #111; font-size: 11pt; }
+.template-10 .cover-type-badge { background: #1a1a1a; color: #4caf50; border: none; font-size: 13pt; padding: 6px 30px; border-radius: 4px; letter-spacing: 2px; }
+.template-10 .cover-title { color: #1a1a1a; font-size: 12pt; font-style: italic; margin-bottom: 14px; }
+.template-10 .cover-table th { background: #1a1a1a; color: #4caf50; border: 1px solid #333; }
+.template-10 .cover-table td { border: 1px solid #ccc; color: #111; }
+.template-10 .cover-table td strong { color: #1a1a1a; }
+.template-10 .cover-date { position: absolute; bottom: 30px; left: 0; right: 0; text-align: center; font-size: 11pt; font-weight: 700; color: #1a1a1a; z-index: 2; }
+
+    .template-wave { 
+      background: #ffffff; color: #111; font-family: 'Times New Roman', serif; position: relative; 
+      padding: 40px 70px; overflow: hidden; border: none;
+    }
+    
+        
+    .template-wave { 
+      background: #ffffff; color: #111; font-family: 'Times New Roman', serif; position: relative; 
+      
+      padding: 40px 70px 200px 70px; 
+      overflow: hidden; border: none; 
+      min-height: 1120px; 
+      box-sizing: border-box;
+    }
+    
+    
+    .template-wave::before {
+      content: ''; position: absolute; top: -160px; left: -10%; 
+      width: 120%; height: 280px; background: #0B1D3A; 
+      border-radius: 50%;
+      box-shadow: 0 20px 0 #A0AEC0, 0 60px 0 #D81B60; 
+      transform: rotate(-5deg); z-index: 1; pointer-events: none;
+    }
+    
+    
+    .template-wave::after {
+      content: ''; position: absolute; bottom: -220px; left: -10%; 
+      width: 120%; height: 320px; background: #0B1D3A; 
+      border-radius: 50%;
+      box-shadow: 0 -20px 0 #A0AEC0, 0 -60px 0 #D81B60;
+      transform: rotate(-5deg); z-index: 1; pointer-events: none;
+    }
+    
+    
+    .template-wave .cover-header, .template-wave .cover-meta, .template-wave .cover-title, .template-wave .cover-table, .template-wave .cover-date {
+      position: relative; z-index: 2; text-align: center;
+    }
+    .template-wave .cover-logo-row { flex-direction: column; align-items: center; gap: 15px; margin-bottom: 15px; margin-top: 50px; }
+    
+    .template-wave .cover-logo-img { width: 140px; height: 140px; background: white; border-radius: 50%; padding: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+    
+    .template-wave .cover-uni-name { color: #111; font-size: 18pt; font-weight: bold; }
+    .template-wave .cover-dept { color: #333; margin-top: 5px; font-size: 13pt; font-weight: bold; }
+    .template-wave .cover-divider { display: none; } 
+    
+    .template-wave .cover-type-badge { background: #D81B60; color: white; border: none; font-size: 14pt; padding: 6px 32px; margin: 15px 0; border-radius: 50px; font-weight: bold; display: inline-block; }
+    .template-wave .cover-title { color: #111; font-size: 14pt; font-weight: bold; font-style: italic; margin-bottom: 25px; }
+    
+    
+    .template-wave .cover-table { font-family: 'Times New Roman', serif; width: 100%; border: none; margin-bottom: 30px; }
+    .template-wave .cover-table th { background: transparent; color: #111; border-bottom: 2px solid #D81B60; padding: 8px 0; font-size: 13pt; text-align: center; }
+    .template-wave .cover-table td { border: none; padding-top: 15px; text-align: left; vertical-align: top; }
+    
+    .template-wave .cover-date { 
+    color: #fff; font-size: 12pt; font-weight: bold; 
+    position: absolute;
+    bottom: 55px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    text-align: center;
+    }
+
+   
+    .template-arrow {
+      background: #ffffff;
+      color: #111;
+      font-family: 'Times New Roman', serif;
+      position: relative;
+      overflow: hidden;
+      padding: 40px 70px;
+      box-sizing: border-box;
+    }
+
+    .template-arrow::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='794' height='1120'%3E%3Cpolygon points='0,30 170,30 220,75 170,120 0,120' fill='%231a1a1a'/%3E%3Cpolygon points='0,30 145,30 195,75 145,120 0,120' fill='%238B0000'/%3E%3Cpolygon points='25,42 125,42 168,75 125,108 25,108' fill='%23C41E1E'/%3E%3Cpolygon points='0,145 170,145 220,190 170,235 0,235' fill='%231a1a1a'/%3E%3Cpolygon points='0,145 145,145 195,190 145,235 0,235' fill='%238B0000'/%3E%3Cpolygon points='25,157 125,157 168,190 125,223 25,223' fill='%23C41E1E'/%3E%3Cpolygon points='794,885 624,885 574,930 624,975 794,975' fill='%231a1a1a'/%3E%3Cpolygon points='794,885 649,885 599,930 649,975 794,975' fill='%238B0000'/%3E%3Cpolygon points='769,897 669,897 626,930 669,963 769,963' fill='%23C41E1E'/%3E%3Cpolygon points='794,1000 624,1000 574,1045 624,1090 794,1090' fill='%231a1a1a'/%3E%3Cpolygon points='794,1000 649,1000 599,1045 649,1090 794,1090' fill='%238B0000'/%3E%3Cpolygon points='769,1012 669,1012 626,1045 669,1078 769,1078' fill='%23C41E1E'/%3E%3C/svg%3E");
+      background-size: 794px 1120px;
+      background-repeat: no-repeat;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .template-arrow .cover-header,
+    .template-arrow .cover-logo-row,
+    .template-arrow .cover-meta,
+    .template-arrow .cover-title,
+    .template-arrow .cover-table,
+    .template-arrow .cover-date {
+      position: relative;
+      z-index: 2;
+    }
+
+    .template-arrow .cover-logo-row { flex-direction: column; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .template-arrow .cover-logo-img { width: 165px; height: 165px; object-fit: contain; }
+    .template-arrow .cover-header   { text-align: center; margin-bottom: 5 px; }
+    .template-arrow .cover-meta     { text-align: center; margin-bottom: 18px; }
+    .template-arrow .cover-type-badge {
+      display: inline-block; font-size: 14pt; font-weight: 900;
+      border: 2.5px solid #000; padding: 6px 32px;
+      letter-spacing: 2px; text-transform: uppercase; margin: 12px 0;
+    }
+    .template-arrow .cover-date {
+      position: absolute; bottom: 60px; left: 0; right: 0;
+      text-align: center; font-size: 12pt; font-weight: 700; z-index: 2;
+    }
+
+.template-arrow .cover-header,
+.template-arrow .cover-logo-row,
+.template-arrow .cover-meta,
+.template-arrow .cover-title,
+.template-arrow .cover-table,
+.template-arrow .cover-date {
+  position: relative;
+  z-index: 2;
+}
+
+.template-arrow .arrow-tl,
+.template-arrow .arrow-br {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.template-arrow .arrow-tl { top: 0; left: 0; }
+.template-arrow .arrow-br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+.template-arrow .arrow-tl .a1,
+.template-arrow .arrow-tl .a2,
+.template-arrow .arrow-tl .a3,
+.template-arrow .arrow-br .a1,
+.template-arrow .arrow-br .a2,
+.template-arrow .arrow-br .a3 {
+  position: absolute;
+  clip-path: polygon(0% 0%, 70% 0%, 100% 50%, 70% 100%, 0% 100%, 30% 50%);
+}
+
+.template-arrow .arrow-tl .a1 { width:160px; height:80px; top:20px;  left:-30px; background:#1a1a1a; }
+.template-arrow .arrow-tl .a2 { width:140px; height:70px; top:25px;  left:10px;  background:#8B0000; }
+.template-arrow .arrow-tl .a3 { width:120px; height:60px; top:30px;  left:45px;  background:#C41E1E; }
+
+.template-arrow .arrow-tl .a4 { width:160px; height:80px; top:120px; left:-30px; background:#1a1a1a; }
+.template-arrow .arrow-tl .a5 { width:140px; height:70px; top:125px; left:10px;  background:#8B0000; }
+.template-arrow .arrow-tl .a6 { width:120px; height:60px; top:130px; left:45px;  background:#C41E1E; }
+
+.template-arrow .arrow-tl .a7 { width:160px; height:80px; top:220px; left:-30px; background:#1a1a1a; }
+.template-arrow .arrow-tl .a8 { width:140px; height:70px; top:225px; left:10px;  background:#8B0000; }
+.template-arrow .arrow-tl .a9 { width:120px; height:60px; top:230px; left:45px;  background:#C41E1E; }
+
+.template-arrow .arrow-br .a1 { width:160px; height:80px; top:20px;  left:-30px; background:#1a1a1a; }
+.template-arrow .arrow-br .a2 { width:140px; height:70px; top:25px;  left:10px;  background:#8B0000; }
+.template-arrow .arrow-br .a3 { width:120px; height:60px; top:30px;  left:45px;  background:#C41E1E; }
+.template-arrow .arrow-br .a4 { width:160px; height:80px; top:120px; left:-30px; background:#1a1a1a; }
+.template-arrow .arrow-br .a5 { width:140px; height:70px; top:125px; left:10px;  background:#8B0000; }
+.template-arrow .arrow-br .a6 { width:120px; height:60px; top:130px; left:45px;  background:#C41E1E; }
+.template-arrow .arrow-br .a7 { width:160px; height:80px; top:220px; left:-30px; background:#1a1a1a; }
+.template-arrow .arrow-br .a8 { width:140px; height:70px; top:225px; left:10px;  background:#8B0000; }
+.template-arrow .arrow-br .a9 { width:120px; height:60px; top:230px; left:45px;  background:#C41E1E; }
+
+.template-arrow .cover-logo-row { flex-direction: column; align-items: center; gap: 15px; margin-bottom: 14px; }
+.template-arrow .cover-logo-img { width: 165px; height: 165px; object-fit: contain; }
+.template-arrow .cover-header   { text-align: center; margin-bottom: 20px; }
+.template-arrow .cover-meta     { text-align: center; margin-bottom: 28px; }
+.template-arrow .cover-type-badge {
+  display: inline-block; font-size: 14pt; font-weight: 900;
+  border: 2.5px solid #000; padding: 6px 32px;
+  letter-spacing: 2px; text-transform: uppercase; margin: 12px 0;
+}
+.template-arrow .cover-date {
+  position: absolute; bottom: 60px; left: 0; right: 0;
+  text-align: center; font-size: 12pt; font-weight: 700; z-index: 2;
+}
+
+    .template-6 { 
+      background: white; color: #111; font-family: 'DM Sans', sans-serif; position: relative; 
+      border: 3px solid #00ff41; border-radius: 20px; 
+      padding: 30px 60px; 
+      overflow: hidden;
+    }
+    
+    .template-6::before {
+      content: ''; position: absolute; top: -50px; left: -50px; 
+      width: 150px; height: 150px; border-radius: 50%;
+      border: 2px solid rgba(0,255,65,0.3); z-index: 1;
+    }
+    .template-6::after {
+      content: ''; position: absolute; bottom: 100px; right: -80px; 
+      width: 250px; height: 250px; border-radius: 50%;
+      border: 3px solid rgba(0,255,65,0.2); z-index: 1;
+    }
+    .template-6 .cover-header { position: relative; z-index: 2; margin-bottom: 12px; }
+    .template-6 .cover-logo-img { width: 220px; height: 220px; }
+    .template-6 .cover-uni-name { color: #0B1D3A; font-size: 17pt; }
+    .template-6 .cover-dept { color: #555; margin-top: 0; font-size: 11.5pt; }
+    .template-6 .cover-divider { border-color: #00ff41; border-width: 2.5px; }
+    .template-6 .cover-meta { position: relative; z-index: 2; margin-bottom: 24px; }
+    .template-6 .cover-meta-row strong { color: #0B1D3A; }
+    .template-6 .cover-type-badge { background: #0B1D3A; color: #00ff41; border: none; font-size: 13pt; padding: 5px 30px; margin: 10px 0; border-radius: 8px; }
+    .template-6 .cover-title { color: #00ff41; font-size: 14pt; font-weight: bold; font-style: normal; text-decoration: none; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 18px; }
+    .template-6 .cover-table { font-family: 'DM Sans', sans-serif; }
+    .template-6 .cover-table th { background: #0B1D3A; color: #fff; }
+    .template-6 .cover-table td { border-color: rgba(0,255,65,0.2); }
+    .template-6 .cover-table td strong { color: #0B1D3A; }
+    .template-6 .cover-date { color: #777; font-size: 11pt; border-top: 1px solid #eee; padding-top: 15px; }
+
+    
+    .template-7 { 
+      background: white; color: #111; font-family: 'DM Sans', sans-serif; position: relative; 
+      border: 1px solid #00ff41; border-radius: 12px;
+      padding: 0; overflow: hidden;
+    }
+    .template-7 .cover-header { text-align: left; padding: 25px 50px 10px; border-bottom: 2px solid #00ff41; margin-bottom: 20px; }
+    .template-7 .cover-logo-row { flex-direction: row; justify-content: flex-start; gap: 20px; }
+    .template-7 .cover-logo-img { width: 100px; height: 100px; object-fit: contain; }
+    .template-7 .cover-uni-name { font-size: 15pt; color: #0B1D3A; text-align: left;}
+    .template-7 .cover-dept { margin-top: 0; font-size: 11pt; color: #555; text-align: left; }
+    .template-7 .cover-divider { display: none; }
+    .template-7 .cover-meta { text-align: left; padding: 0 50px 0 70px; margin-bottom: 20px; }
+    .template-7 .cover-type-badge { background: transparent; color: #00ff41; border: 2px solid #00ff41; border-radius: 5px; font-size: 11.5pt; font-weight: 800;}
+    .template-7 .cover-title { border: 1px solid #ddd; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-style: normal; color: #111;}
+    .template-7 .cover-table, .template-7 .cover-table th, .template-7 .cover-table td { border: none; }
+    .template-7 .cover-table th { background: transparent; color: #0B1D3A; border-bottom: 2px solid #ddd; text-align: left; font-size: 13pt; }
+    .template-7 .cover-table td { border: none; padding-top: 12px; color: #333; }
+    .template-7 .cover-date { bottom: 0; padding: 15px 50px 10px; color: #00ff41; background: #fafafa; border-top: 1px solid #ddd; font-weight: 700;}
+
+    
+    .template-4 { 
+      background: #0B1D3A; 
+      color: #fff; font-family: 'DM Sans', sans-serif; position: relative; 
+      border: 1px solid #0B1D3A; padding-top: 20px;
+    }
+    
+    .template-4::before {
+      content: ''; position: absolute; top: -100px; right: -100px; 
+      width: 400px; height: 400px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0,255,65,0.3) 0%, rgba(0,255,65,0) 70%); z-index: 1;
+    }
+    .template-4 .cover-logo-img { background: white; border-radius: 50%; padding: 10px; border: 4px solid #fff; margin-top: -10px;}
+    .template-4 .cover-header { position: relative; z-index: 2; margin-bottom: 10px; }
+    .template-4 .cover-uni-name { color: white; font-size: 16pt; }
+    .template-4 .cover-dept { color: white; margin-top: 0; font-size: 11pt; }
+    .template-4 .cover-divider { display: none; }
+    .template-4 .cover-meta { position: relative; z-index: 2; text-align: left; padding: 15px 15px 15px 30px; border-left: 5px solid #00ff41; background: rgba(255,255,255,0.05); margin-bottom: 20px; border-radius: 0 10px 10px 0;}
+    .template-4 .cover-meta-row strong { color: #00ff41; }
+    .template-4 .cover-type-badge { background: #00ff41; color: #111; border: none; font-size: 12pt; padding: 4px 24px; margin: 8px 0; border-radius: 99px; }
+    .template-4 .cover-title { color: white; font-size: 14pt; font-weight: bold; font-style: normal; margin-bottom: 15px; text-decoration: none;}
+    .template-4 .cover-table, .template-4 .cover-table th, .template-4 .cover-table td { border-color: rgba(255,255,255,0.2); }
+    .template-4 .cover-table th { background: rgba(255,255,255,0.1); color: #00ff41; }
+    .template-4 .cover-table td { color: #f0f0f0; }
+    .template-4 .cover-table td strong { color: white; }
+    .template-4 .cover-date { background: white; color: #111; padding: 10px; border-radius: 10px 10px 0 0; font-family: sans-serif; }
+
+    
+    .template-5 { padding-top: 0; padding-bottom: 0; position: relative; border: 1px solid #111;}
+    
+    .template-5::after {
+      content: ''; position: absolute; bottom: 0; right: 0; 
+      width: 0; height: 0; border-style: solid; 
+      border-width: 0 0 120px 120px; border-color: transparent transparent #00ff41 transparent; z-index: 1;
+    }
+    .template-5 .cover-header { text-align: left; padding: 30px 40px 10px; border-bottom: 3px solid #111; margin-bottom: 15px;}
+    .template-5 .cover-logo-row { flex-direction: row; justify-content: space-between; gap: 0; }
+    .template-5 .cover-logo-img { width: 100px; height: 100px; object-fit: contain; }
+    .template-5 .cover-uni-name { font-size: 15pt; }
+    .template-5 .cover-dept { margin-top: 0; font-size: 12pt; }
+    .template-5 .cover-divider { display: none; }
+    .template-5 .cover-meta { text-align: left; position: relative; z-index: 2;}
+    .template-5 .cover-type-badge { border: 2px solid #111; color: #111; background: transparent; }
+    .template-5 .cover-title { border: 1px solid #111; padding: 10px; background: #fafafa; }
+    .template-5 .cover-table, .template-5 .cover-table th, .template-5 .cover-table td { border: none; }
+    .template-5 .cover-table th { background: transparent; color: #111; border: none; border-bottom: 2px solid #00ff41; text-align: left; font-size: 13pt; }
+    .template-5 .cover-table td { border: none; padding-top: 15px; }
+    .template-5 .cover-date { bottom: 0; padding: 15px; border-top: 1px solid #111; background: white; z-index: 2;}
+
+    
+    .template-2 .cover-logo-row { flex-direction: row; justify-content: flex-start; gap: 24px; border-bottom: 3px solid #111; padding-bottom: 15px; margin-bottom: 20px; }
+    .template-2 .cover-logo-img { width: 90px; height: 90px; }
+    .template-2 .cover-header { text-align: left; margin-bottom: 15px; }
+    .template-2 .cover-uni-name { font-size: 16pt; }
+    .template-2 .cover-dept { margin-top: 0; font-size: 12pt; }
+    .template-2 .cover-divider { display: none; }
+    .template-2 .cover-meta { text-align: left; }
+    .template-2 .cover-title { text-align: left; font-size: 14pt; font-weight: bold; text-decoration: underline; font-style: normal; color: #000; }
+    .template-2 .cover-table, .template-2 .cover-table th, .template-2 .cover-table td { border: none; }
+    .template-2 .cover-table th { background: transparent; text-align: left; border-bottom: 2px solid #111; padding: 5px 0; color: #111; }
+    .template-2 .cover-table td { padding: 15px 0 0 0; }
+    .template-2 .cover-date { text-align: left; padding-left: 70px; }
+
+    
+    .template-3 { border: 8px double #111; padding: 32px 62px; } 
+    .template-3 .cover-logo-img { width: 140px; height: 140px; }
+    .template-3 .cover-type-badge { background: #111; color: white; border: none; }
+    .template-3 .cover-table th { background: #111; color: #fff; }
+    .template-3 .cover-date { font-family: monospace; font-size: 13pt; font-weight: bold; }
+    
+    
+    .cover-table {
+      width: 100%; border-collapse: collapse; margin-top: 16px;
+      font-size: 11pt;
+    }
+    .cover-table th {
+      background: #f0f0f0; text-align: center; padding: 10px 14px;
+      border: 1.5px solid #555; font-weight: 700; font-size: 12pt;
+    }
+    .cover-table td {
+      padding: 13px 16px; border: 1.5px solid #555;
+      vertical-align: top; line-height: 1.7;
+    }
+    .cover-table td strong { display: block; }
+    
+    
+    .cover-date { position: absolute; bottom: 60px; left: 0; right: 0; text-align: center; font-size: 12pt; font-weight: 700; }
+
+    
+    .preview-scale-outer {
+      overflow: hidden; 
+      background: #e5e5e5; padding: 28px 0; border-radius: 12px;
+      display: flex; justify-content: center; align-items: flex-start;
+      transition: height 0.3s ease;
+    }
+    .preview-shadow { 
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35); 
+      transform-origin: top center; 
+    }
+
+    
+    .suggest-box {
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--navy2, #112244); border: 1px solid var(--gold, #00ff41);
+      border-radius: 8px; margin-top: 4px; z-index: 100;
+      max-height: 200px; overflow-y: auto; display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+    .suggest-item {
+      padding: 10px 14px; cursor: pointer; color: #fff; font-size: 0.95rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.2s;
+    }
+    .suggest-item:last-child { border-bottom: none; }
+    .suggest-item:hover { background: rgba(0,255,65,0.15); color: var(--gold, #00ff41); }
+    .suggest-acro { font-size: 0.75rem; color: #bbb; margin-left: 6px; }
+    .suggest-meta { display: block; font-size: 0.8rem; color: #8A99B3; margin-top: 3px; }
+
+    
+    .saved-item {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 18px; display: flex; align-items: center; gap: 14px; margin-bottom: 10px;
+      cursor: pointer; transition: border-color 0.2s;
+    }
+    .saved-item:hover { border-color: var(--gold); }
+    .saved-item-name { flex: 1; font-size: 0.9rem; font-weight: 500; }
+    .saved-item-meta { font-size: 0.78rem; color: var(--muted); }
+
+    
+    .admin-logo-preview {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;
+    }
+    .admin-logo-thumb {
+      width: 60px; height: 60px; object-fit: contain;
+      border: 2px solid var(--border); border-radius: 8px; background: white; padding: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap" style="padding-bottom:60px;">
+  <div class="page-header">
+    <div class="breadcrumb"><a href="../index.html">Home</a> › Cover Page Generator</div>
+    <h1>Cover Page Generator</h1>
+    <p>Create Assignment or Lab front pages for your section — edit, preview, and download.</p>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('edit')">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit
+    </button>
+    <button class="tab-btn" onclick="switchTab('preview')">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      Preview
+    </button>
+    <button class="tab-btn" onclick="switchTab('saved')">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      Saved
+    </button>
+  </div>
+
+  <div class="panel active" id="panel-edit">
+    <div class="section-card">
+      <h2>Cover Page Details</h2>
+      <div class="form-grid" id="fields-container">
+        </div>
+      <div class="btn-row">
+        <button class="btn btn-gold" onclick="saveAndPreview()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Save & Preview
+        </button>
+        <button class="btn btn-outline" onclick="saveDraftNamed()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          Save Draft
+        </button>
+        <button class="btn btn-outline" onclick="resetForm()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Reset
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-preview">
+    <div class="btn-row" style="margin-top:0; margin-bottom:20px;">
+      <button class="btn btn-gold" onclick="downloadPDF()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+      <button class="btn btn-outline" onclick="downloadJPG()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Download JPG
+      </button>
+      <button class="btn btn-outline" onclick="switchTab('edit')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Back to Edit
+      </button>
+    </div>
+    <div class="preview-scale-outer">
+      <div class="preview-shadow" id="cover-output">
+        </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-saved">
+    <div class="section-card">
+      <h2>Saved Cover Pages</h2>
+      <div id="saved-list">
+        <p style="color:var(--muted); font-size:0.9rem;">No saved cover pages yet.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCF9BoDxWa-0XTwbCBxjHrrBdQrKioJua8",
+  authDomain: "nubtk-portal.firebaseapp.com",
+  databaseURL: "https://nubtk-portal-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "nubtk-portal",
+  storageBucket: "nubtk-portal.firebasestorage.app",
+  messagingSenderId: "45891604739",
+  appId: "1:45891604739:web:33251f784080f09816d936"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+  
+
+function notify(msg, dur=2800) {
+  const n = document.getElementById('notif');
+  n.textContent = msg; n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), dur);
+}
+function toggleNav() { document.querySelector('.nav-links').classList.toggle('open'); }
+
+function adjustPreviewScale() {
+  const outer = document.querySelector('.preview-scale-outer');
+  const shadow = document.querySelector('.preview-shadow');
+  if (!outer || !shadow) return;
+  
+  const availableWidth = outer.clientWidth - 20; 
+  const originalWidth = 794; 
+  
+  if (availableWidth < originalWidth) {
+    const scale = availableWidth / originalWidth;
+    shadow.style.transform = `scale(${scale})`;
+    outer.style.height = `${(1120 * scale) + 60}px`; 
+  } else {
+    shadow.style.transform = 'scale(1)';
+    outer.style.height = 'auto';
+  }
+}
+window.addEventListener('resize', adjustPreviewScale);
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', ['edit','preview','saved'][i] === tab);
+  });
+  document.querySelectorAll('.panel').forEach((p,i) => {
+    p.classList.toggle('active', ['panel-edit','panel-preview','panel-saved'][i] === `panel-${tab}`);
+  });
+  if (tab === 'preview') {
+    renderPreview();
+    setTimeout(adjustPreviewScale, 10);
+  }
+  if (tab === 'saved') renderSavedList();
+}
+
+window.liveAdminConfig = null; 
+window.firebaseLoaded = false;
+
+function getAdminConfig() {
+  if (window.liveAdminConfig) return window.liveAdminConfig;
+  
+  const saved = localStorage.getItem('nubtk_cover_config');
+  if (saved) { try { return JSON.parse(saved); } catch(e){} }
+  
+
+  return {
+    logoOptions: [],
+    fields: [
+      { id:'dept', label:'Department', type:'select', required:true, options:['Computer Science and Engineering','Civil Engineering','Electrical and Electronic Engineering','Architecture','Business Administration','Law','English Language & Literature'] },
+      { id:'courseTitle', label:'Course Title', type:'text', required:true, placeholder:'e.g. Data Structures' },
+      { id:'courseCode', label:'Course Code', type:'text', required:true, placeholder:'e.g. CSE 2101' },
+      { id:'coverType', label:'Type', type:'select', required:true, options:['ASSIGNMENT','LAB REPORT','TERM PAPER','PROJECT REPORT','PRESENTATION'] },
+      { id:'coverTitle', label:'Title (Optional)', type:'text', required:false, placeholder:'Assignment/Lab topic' },
+      { id:'teacherName', label:"Teacher's Name", type:'text', required:true, placeholder:'e.g. Md. Hasibul Islam' },
+      { id:'teacherDesig', label:"Teacher's Designation", type:'select', required:false, options:['Lecturer','Senior Lecturer','Assistant Professor','Associate Professor','Professor','Head of Department'] },
+      { id:'studentName', label:'Your Name', type:'text', required:true, placeholder:'Your full name' },
+      { id:'studentId', label:'Student ID', type:'text', required:true, placeholder:'e.g. 11240321910' },
+      { id:'section', label:'Section', type:'text', required:true, placeholder:'e.g. 2D' },
+      { id:'submissionDate', label:'Date of Submission', type:'date', required:true },
+    ]
+  };
+}
+
+function renderFields() {
+  const cfg = getAdminConfig();
+  const container = document.getElementById('fields-container');
+  const saved = JSON.parse(localStorage.getItem('nubtk_cover_draft') || '{}');
+  let html = '';
+
+  const logos = (window.liveAdminConfig?.logoOptions?.length > 0) ? window.liveAdminConfig.logoOptions : (cfg.logoOptions?.length > 0 ? cfg.logoOptions : getDefaultLogos());
+  html += `<div class="form-group full">
+    <label class="form-label">Select Cover Design</label>
+    <select class="form-select" id="form-template" style="margin-bottom: 10px;">
+      <option value="template-1" ${saved.template==='template-1'?'selected':''}>Design 1: Classic Center</option>
+      <option value="template-2" ${saved.template==='template-2'?'selected':''}>Design 2: Modern Left-Aligned</option>
+      <option value="template-3" ${saved.template==='template-3'?'selected':''}>Design 3: Formal Boxed</option>
+      <option value="template-4" ${saved.template==='template-4'?'selected':''}>Design 4: Modern Geometric (Dark)</option>
+      <option value="template-5" ${saved.template==='template-5'?'selected':''}>Design 5: Academic Split (Light)</option>
+      <option value="template-6" ${saved.template==='template-6'?'selected':''}>Design 6: NUBTK Gold Arc</option>
+      <option value="template-7" ${saved.template==='template-7'?'selected':''}>Design 7: Fine Line Minimal</option>
+      <option value="template-wave" ${saved.template==='template-wave'?'selected':''}>Design: Abstract Wave (Pink & Blue)</option>
+      <option value="template-arrow" ${saved.template==='template-arrow'?'selected':''}>Design 9: Red Arrow / Chevron</option>
+      <option value="template-10" ${saved.template==='template-10'?'selected':''}>Design 10: Green Black Geometric</option>
+    </select>
+  </div>
+  <div class="form-group full">
+    <label class="form-label">Select Logo</label>
+    <div class="logo-grid" id="logo-grid">`;
+  logos.forEach((src, i) => {
+    const sel = (saved.logoIdx == i) ? 'selected' : '';
+    html += `<div class="logo-opt ${sel}" onclick="selectLogo(${i})" data-idx="${i}"><img src="${src}" alt="Logo ${i+1}"/></div>`;
+  });
+  html += `</div></div>`;
+
+  cfg.fields.forEach(f => {
+    const val = saved[f.id] || '';
+    const req = f.required ? '*' : '';
+    html += `<div class="form-group">
+      <label class="form-label">${f.label}${req ? ' <span style="color:var(--gold)">*</span>' : ''}</label>`;
+    if (f.type === 'select') {
+      html += `<select class="form-select" id="field_${f.id}">
+        <option value="">-- Select --</option>`;
+      (f.options||[]).forEach(o => html += `<option value="${o}" ${val===o?'selected':''}>${o}</option>`);
+      html += `</select>`;
+    } else if (f.type === 'date') {
+      html += `<input type="date" class="form-input" id="field_${f.id}" value="${val}"/>`;
+    } else {
+      html += `<input type="text" class="form-input" id="field_${f.id}" placeholder="${f.placeholder||''}" value="${val}"/>`;
+    }
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+  if (saved.logoIdx !== undefined) selectLogo(saved.logoIdx, false);
+
+  setupAutoDesignation();
+  setupAutoStudentInfo();
+}
+
+let liveTeacherList = [];
+
+db.ref('teachers').on('value', (snapshot) => {
+  const data = snapshot.val() || {};
+  liveTeacherList = Object.values(data);
+});
+
+function setupAutoDesignation() {
+  const allLabels = document.querySelectorAll('.form-label');
+  let nameInput = null;
+  let desigSelect = null;
+
+  allLabels.forEach(lbl => {
+    const text = lbl.innerText.toLowerCase();
+    if (text.includes("teacher's name") || text.includes("teacher name")) {
+      nameInput = lbl.parentElement.querySelector('input');
+
+      lbl.parentElement.style.position = 'relative'; 
+    }
+    if (text.includes("designation")) {
+      desigSelect = lbl.parentElement.querySelector('select');
+    }
+  });
+
+  if (!nameInput || !desigSelect) return;
+
+  let suggestBox = document.getElementById('t-suggest-box');
+  if (!suggestBox) {
+    suggestBox = document.createElement('div');
+    suggestBox.id = 't-suggest-box';
+    suggestBox.className = 'suggest-box';
+    nameInput.parentElement.appendChild(suggestBox);
+  }
+
+  nameInput.addEventListener('input', function() {
+    const query = this.value.trim().toLowerCase();
+    suggestBox.innerHTML = ''; 
+    
+
+    if (query.length < 1) {
+      suggestBox.style.display = 'none';
+      return;
+    }
+
+    const matchedTeachers = liveTeacherList.filter(t => {
+      const tName = (t.name || '').toLowerCase();
+      const tAcro = (t.acronym || '').toLowerCase();
+
+      return tName.includes(query) || (tAcro && tAcro.includes(query));
+    });
+
+    if (matchedTeachers.length === 0) {
+      suggestBox.style.display = 'none';
+      return;
+    }
+
+    matchedTeachers.forEach(t => {
+      const item = document.createElement('div');
+      item.className = 'suggest-item';
+      
+      const acroText = t.acronym ? `<span class="suggest-acro">(${t.acronym})</span>` : '';
+      item.innerHTML = `<strong>${t.name}</strong> ${acroText}<span class="suggest-meta">${t.designation} • Dept. of ${t.dept}</span>`;
+      
+
+      item.addEventListener('click', function() {
+        nameInput.value = t.name;
+        
+
+        const optionExists = Array.from(desigSelect.options).some(opt => opt.value === t.designation);
+        if (optionExists) {
+          desigSelect.value = t.designation;
+        }
+        
+        suggestBox.style.display = 'none'; 
+      });
+      
+      suggestBox.appendChild(item);
+    });
+    
+    suggestBox.style.display = 'block'; 
+  });
+
+  document.addEventListener('click', function(e) {
+    if (e.target !== nameInput && !suggestBox.contains(e.target)) {
+      suggestBox.style.display = 'none';
+    }
+  });
+}
+
+let liveStudentList = {};
+
+db.ref('students').on('value', (snapshot) => {
+  liveStudentList = snapshot.val() || {};
+});
+
+function setupAutoStudentInfo() {
+  const allLabels = document.querySelectorAll('.form-label');
+  let idInput = null;
+  let nameInput = null;
+
+  allLabels.forEach(lbl => {
+    const text = lbl.innerText.toLowerCase();
+    
+    if (text === "student id" || text.includes("student id") || text === "id") {
+      idInput = lbl.parentElement.querySelector('input');
+    }
+    if (text === "student name" || text.includes("student name") || text.includes("your name")) {
+      nameInput = lbl.parentElement.querySelector('input');
+    }
+  });
+
+  if (!idInput || !nameInput) return;
+
+  idInput.addEventListener('input', function() {
+    const typedId = this.value.trim();
+    
+
+    if (liveStudentList[typedId]) {
+      nameInput.value = liveStudentList[typedId];
+      
+
+      nameInput.style.borderColor = "var(--gold)";
+      nameInput.style.boxShadow = "0 0 8px rgba(0,255,65,0.3)";
+      
+      setTimeout(() => {
+        nameInput.style.borderColor = "";
+        nameInput.style.boxShadow = "";
+      }, 1500);
+    }
+  });
+}
+  
+
+function getDefaultLogos() {
+  const makeLogoSVG = (text, color) =>
+    'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="${color}" stroke="#ccc" stroke-width="1.5"/><text x="32" y="38" font-size="11" font-family="serif" font-weight="bold" text-anchor="middle" fill="white">${text}</text></svg>`);
+  return [
+    makeLogoSVG('NUBTK', '#0B1D3A'),
+    makeLogoSVG('CSE', '#1a3a6e'),
+    makeLogoSVG('NUBTK', '#2a5298'),
+    makeLogoSVG('KHU', '#0d2b4e'),
+  ];
+}
+
+let selectedLogoIdx = null;
+function selectLogo(idx, save=true) {
+  selectedLogoIdx = idx;
+  document.querySelectorAll('.logo-opt').forEach((el, i) => el.classList.toggle('selected', i == idx));
+}
+
+function collectData() {
+  const cfg = getAdminConfig();
+  const tempSelect = document.getElementById('form-template');
+  
+
+  const data = { 
+    logoIdx: selectedLogoIdx,
+    template: tempSelect ? tempSelect.value : 'template-1'
+  };
+  let missingRequired = false;
+
+  cfg.fields.forEach(f => {
+    const el = document.getElementById('field_' + f.id);
+    if (el) {
+      data[f.id] = el.value;
+
+      if (f.required && el.value.trim() === '') {
+        missingRequired = true;
+      }
+    }
+  });
+  return { data, missingRequired };
+}
+
+function saveDraft() {
+
+  const { data } = collectData(); 
+  localStorage.setItem('nubtk_cover_draft', JSON.stringify(data));
+  notify(' Draft saved!');
+}
+
+function saveAndPreview() {
+  saveDraft();
+  switchTab('preview');
+}
+
+function resetForm() {
+  localStorage.removeItem('nubtk_cover_draft');
+  selectedLogoIdx = null;
+  renderFields();
+  notify(' Form reset');
+}
+
+function renderPreview() {
+  const cfg  = getAdminConfig();
+  
+
+  const data = {};
+  cfg.fields.forEach(f => {
+    const el = document.getElementById('field_' + f.id);
+    data[f.id] = el ? el.value : (JSON.parse(localStorage.getItem('nubtk_cover_draft') || '{}')[f.id] || '');
+  });
+  
+  const draft = JSON.parse(localStorage.getItem('nubtk_cover_draft') || '{}');
+  const logos = cfg.logoOptions?.length ? cfg.logoOptions : getDefaultLogos();
+  const logoSrc = (draft.logoIdx != null) ? logos[draft.logoIdx] : logos[0];
+
+  const findVal = (exactId, strictLabels, loose = [], exclude = []) => {
+    let f = cfg.fields.find(x => x.id === exactId);
+    if (f && data[f.id]) return String(data[f.id]);
+    f = cfg.fields.find(x => strictLabels.includes((x.label||'').toLowerCase().trim()));
+    if (f && data[f.id]) return String(data[f.id]);
+    f = cfg.fields.find(x => {
+      const l = (x.label||'').toLowerCase().trim();
+      return loose.some(k => l.includes(k)) && !exclude.some(e => l.includes(e));
+    });
+    return (f && data[f.id]) ? String(data[f.id]) : '';
+  };
+
+  let dept        = findVal('dept',        ['department', 'dept'],                 ['department', 'dept'], ['teacher', 'student']);
+  let courseTitle = findVal('courseTitle', ['course title','subject name'],['course title','subject'], ['code','teacher']);
+  let courseCode  = findVal('courseCode',  ['course code','subject code'], ['code'],       ['title','name']);
+  let coverType   = findVal('coverType',   ['type', 'report type'],        ['type'],       ['file']);
+  let coverTitle  = findVal('coverTitle',  ['title','topic'],              ['topic'],      ['course','subject']);
+  let teacherName = findVal('teacherName', ["teacher's name",'teacher name','submitted to'],['teacher'],  ['designation', 'student']);
+  let teacherDesig= findVal('teacherDesig',["teacher's designation", 'designation'],      ['designation'],['student', 'name']);
+  let studentName = findVal('studentName', ['your name','student name', 'submitted by'],   ['student name','name'],['teacher','course']);
+  let studentId   = findVal('studentId',   ['student id', 'id', 'roll'],   ['id','roll'],  ['email']);
+  let section     = findVal('section',     ['section','batch', 'group'],   ['section'],    []);
+  let submDate    = findVal('submissionDate',['date of submission','submission date', 'date'],['date'],[]);
+
+  if (studentName) studentName = studentName.replace(/^(Name|Student Name)\s*:\s*/i, '').trim();
+  if (studentId) studentId = studentId.replace(/^(Student ID|ID|Roll)\s*:\s*/i, '').trim();
+  if (section) section = section.replace(/^(Section|Batch)\s*:\s*/i, '').trim();
+  if (teacherName) teacherName = teacherName.replace(/^(Course Teacher|Teacher Name|Name)\s*:\s*/i, '').trim();
+
+  if (submDate && !submDate.includes('/')) {
+    const d = new Date(submDate);
+    if (!isNaN(d)) submDate = d.toLocaleDateString('en-GB', {day:'2-digit',month:'2-digit',year:'numeric'});
+  }
+
+  const d_dept = dept || '[Department Name]';
+  const d_courseCode = courseCode || '[Course Code]';
+  const d_courseTitle = courseTitle || '[Course Title]';
+  const d_coverTitle = coverTitle || '[Assignment Topic]';
+  const d_teacherName = teacherName || '[Teacher\'s Name]';
+  const d_teacherDesig = teacherDesig || '[Designation]';
+  const d_studentName = studentName || '[Your Name]';
+  const d_studentId = studentId || '[Your ID]';
+  const d_section = section || '[Section/Batch]';
+  const d_date = submDate || '[Date]';
+
+  const tpl = document.getElementById('form-template')?.value || draft.template || 'template-1';
+  const output = document.getElementById('cover-output');
+  if (!output) return;
+
+  output.innerHTML = `
+  <div class="cover-preview ${tpl}" id="cover-page">
+    <div class="cover-header">
+      <div class="cover-logo-row">
+        <img class="cover-logo-img" src="${logoSrc}" alt="NUBTK Logo" crossorigin="anonymous"/>
+        <div class="cover-uni-name">Northern University of Business<br/>&amp; Technology Khulna</div>
+      </div>
+      <div class="cover-dept" style="${!dept ? 'color:#94a3b8;' : ''}">Department of ${d_dept}</div>
+      <hr class="cover-divider"/>
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-row" style="${!courseCode ? 'color:#94a3b8;' : ''}"><strong>Course Code:</strong> ${d_courseCode}</div>
+      <div class="cover-meta-row" style="${!courseTitle ? 'color:#94a3b8;' : ''}"><strong>Course Title:</strong> ${d_courseTitle}</div>
+      <div style="margin-top:16px;"><span class="cover-type-badge">${coverType || 'ASSIGNMENT'}</span></div>
+    </div>
+    ${coverTitle ? `<div class="cover-title">"${coverTitle}"</div>` : ''}
+
+    <table class="cover-table">
+      <tr><th>Submitted To</th><th>Submitted By</th></tr>
+      <tr>
+        <td>
+          <strong style="${!teacherName ? 'color:#94a3b8;' : ''}">${d_teacherName}</strong>
+          <div style="${!teacherDesig ? 'color:#94a3b8; margin-top:4px;' : 'margin-top:4px;'}">${d_teacherDesig}</div>
+          <div style="${!dept ? 'color:#94a3b8;' : ''}">Department of ${d_dept}</div>
+          Northern University of Business &amp; Technology Khulna.
+        </td>
+        <td>
+          <strong>Name:</strong> <span style="${!studentName ? 'color:#94a3b8;' : ''}">${d_studentName}</span><br/>
+          <strong>Student ID:</strong> <span style="${!studentId ? 'color:#94a3b8;' : ''}">${d_studentId}</span><br/>
+          <strong>Section:</strong> <span style="${!section ? 'color:#94a3b8;' : ''}">${d_section}</span><br/>
+          Northern University of Business &amp; Technology Khulna.
+        </td>
+      </tr>
+    </table>
+    ${tpl === 'template-10' ? '<div class="geo-accent"></div><div class="geo-accent2"></div><div class="geo-accent3"></div><div class="geo-accent4"></div><div class="geo-accent5"></div><div class="geo-accent6"></div>' : ''}
+    <div class="cover-date" style="${!submDate ? 'color:#94a3b8;' : ''}">Date of Submission: ${d_date}</div>
+  </div>`;
+}
+
+function ensureLogoLoaded(el) {
+  const img = el.querySelector('.cover-logo-img');
+  if (!img || img.complete) return Promise.resolve();
+  return new Promise(resolve => {
+    img.onload = resolve;
+    img.onerror = resolve; 
+    setTimeout(resolve, 4000); 
+  });
+}
+
+function downloadPDF() {
+  const { missingRequired } = collectData();
+  if (missingRequired) { notify('Fill the Required Fields first!'); switchTab('edit'); return; }
+
+  const el = document.getElementById('cover-page');
+  const shadow = document.querySelector('.preview-shadow');
+  if (shadow) shadow.style.transform = 'scale(1)';
+
+  notify('Preparing PDF...');
+  ensureLogoLoaded(el).then(() => {
+    html2pdf().set({
+      margin: 0, filename: 'NUBTK_Cover_Page.pdf',
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+      jsPDF: { unit: 'px', format: [794, 1120], orientation: 'portrait' }
+    }).from(el).save().then(() => adjustPreviewScale());
+  });
+}
+
+function downloadJPG() {
+  const { missingRequired } = collectData();
+  if (missingRequired) { notify('Fill the Required Fields first!'); switchTab('edit'); return; }
+
+  const el = document.getElementById('cover-page');
+  const shadow = document.querySelector('.preview-shadow');
+  if (shadow) shadow.style.transform = 'scale(1)';
+
+  notify('Preparing JPG...');
+  ensureLogoLoaded(el).then(() => {
+    html2canvas(el, { scale: 2, useCORS: true, scrollY: 0, backgroundColor: '#fff' }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'NUBTK_Cover_Page.jpg';
+      link.href = canvas.toDataURL('image/jpeg', 0.95);
+      link.click();
+      adjustPreviewScale();
+    });
+  });
+}
+
+function saveDraftNamed() {
+  const { data } = collectData(); 
+  const name = prompt('Name this cover page:');
+  if (!name) return;
+  const list = JSON.parse(localStorage.getItem('nubtk_saved_covers') || '[]');
+  list.push({ name, data, ts: Date.now() });
+  localStorage.setItem('nubtk_saved_covers', JSON.stringify(list));
+  notify(' Saved: ' + name);
+}
+
+function renderSavedList() {
+  const list = JSON.parse(localStorage.getItem('nubtk_saved_covers') || '[]');
+  const container = document.getElementById('saved-list');
+  if (!list.length) { container.innerHTML = '<p style="color:var(--muted);font-size:0.9rem;">No saved cover pages yet. Fill the form and click Save Draft.</p>'; return; }
+  container.innerHTML = list.map((item, i) => `
+    <div class="saved-item" onclick="loadSaved(${i})">
+      <div>
+        <div class="saved-item-name"> ${item.name}</div>
+        <div class="saved-item-meta">${new Date(item.ts).toLocaleDateString()} · ${item.data.coverType||'Assignment'} · Section ${item.data.section||'—'}</div>
+      </div>
+      <button class="btn btn-danger" style="padding:6px 12px;font-size:0.78rem;" onclick="event.stopPropagation();deleteSaved(${i})">✕</button>
+    </div>`).join('');
+}
+
+function loadSaved(i) {
+  const list = JSON.parse(localStorage.getItem('nubtk_saved_covers') || '[]');
+  localStorage.setItem('nubtk_cover_draft', JSON.stringify(list[i].data));
+  switchTab('edit');
+  renderFields();
+  notify(' Loaded: ' + list[i].name);
+}
+
+function deleteSaved(i) {
+  const list = JSON.parse(localStorage.getItem('nubtk_saved_covers') || '[]');
+  list.splice(i, 1);
+  localStorage.setItem('nubtk_saved_covers', JSON.stringify(list));
+  renderSavedList();
+  notify(' Deleted');
+}
+
+renderFields();
+
+Promise.all([
+  db.ref('settings/logos').once('value'),
+  db.ref('settings/fields').once('value')
+]).then(([logosSnap, fieldsSnap]) => {
+  let safeLogos = [];
+  if (logosSnap.val()) {
+    safeLogos = Array.isArray(logosSnap.val()) ? logosSnap.val() : Object.values(logosSnap.val());
+  }
+
+  let safeFields = getAdminConfig().fields;
+  if (fieldsSnap.val()) {
+    safeFields = Array.isArray(fieldsSnap.val()) ? fieldsSnap.val() : Object.values(fieldsSnap.val());
+  }
+
+  window.liveAdminConfig = {
+    logoOptions: safeLogos,
+    fields: safeFields
+  };
+
+  try {
+    localStorage.setItem('nubtk_cover_config', JSON.stringify(window.liveAdminConfig));
+  } catch(e) {
+    console.warn('LocalStorage limit exceeded!');
+  }
+
+  renderFields();
+});
+
+  (function() {
+  const PAGE_NAME = 'cover'; 
+  const db = firebase.database();
+  
+
+  db.ref('visitors/total_visits').transaction(v => (v || 0) + 1).catch(e => console.error(e));
+  db.ref('visitors/pages/' + PAGE_NAME).transaction(v => (v || 0) + 1).catch(e => console.error(e));
+  
+
+  const onlineRef = db.ref('visitors/online_count');
+  
+
+  const safeRandomId = Date.now() + '_' + Math.floor(Math.random() * 1000);
+  const userRef = db.ref('visitors/online_users/' + safeRandomId);
+  
+  userRef.set(true).catch(e => console.error(e));
+  userRef.onDisconnect().remove();
+  
+  db.ref('visitors/online_users').on('value', snap => {
+    const count = snap.numChildren();
+    onlineRef.set(count).catch(e => console.error(e));
+  });
+})();
+  
+</script>
+  <script src="../navbar.js"></script>
+</body>
+</html>

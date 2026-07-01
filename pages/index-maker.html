@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Index Maker — NUBTK Portal</title>
+  <link rel="stylesheet" href="../css/main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <style>
+    
+    .app-container {
+      max-width: 1400px; margin: 0 auto; padding: 2px;
+      display: grid; grid-template-columns: 400px 1fr; gap: 30px;
+      align-items: start;
+    }
+
+    
+    .form-panel {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      position: sticky; top: 100px; 
+    }
+
+    
+    @media (max-width: 1024px) {
+      .app-container { grid-template-columns: 1fr; }
+      .form-panel { position: static; } 
+    }
+
+    .row-item {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(0,255,65,0.3);
+      border-radius: 8px; padding: 12px; margin-bottom: 12px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: relative;
+    }
+    .row-item .full-width { grid-column: 1 / -1; }
+    .remove-btn {
+      position: absolute; top: -10px; right: -10px;
+      background: #ef4444; color: white; border: none;
+      width: 24px; height: 24px; border-radius: 50%;
+      font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+
+   
+    .preview-panel { width: 100%; max-width: 100%; overflow: hidden; }
+    
+    .preview-scale-outer {
+      background: #e5e5e5; padding: 28px 0; border-radius: 12px;
+      display: flex; justify-content: center; align-items: flex-start;
+      overflow: hidden; transition: height 0.3s ease; width: 100%;
+    }
+    
+    #pdf-wrapper { 
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35); 
+      transform-origin: top center; 
+      display: flex; flex-direction: column; background: #fff;
+    }
+
+    
+    .a4-page {
+      background: white; color: #111; width: 794px; height: 1120px; 
+      padding: 80px 70px; box-sizing: border-box;
+      font-family: 'Times New Roman', serif; position: relative; 
+      border: 2px solid #111; page-break-after: always;
+    }
+    .a4-page:last-child { page-break-after: auto; }
+    
+    .idx-main-title { text-align: center; font-size: 32pt; font-weight: bold; text-decoration: underline; margin-bottom: 25px; }
+    .idx-sub-title { text-align: center; font-size: 16pt; font-weight: bold; margin-bottom: 30px; color: #333; }
+    
+    
+    .idx-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .idx-table th { border: 2px solid #111; padding: 10px 8px; font-size: 14pt; font-weight: bold; text-align: center; background: #f8f9fa; }
+    .idx-table td { border: 2px solid #111; padding: 12px 10px; font-size: 13pt; height: 50px; } 
+    .idx-table td.center { text-align: center; }
+    .idx-table td.left { text-align: left; vertical-align: middle; }
+    
+    .page-num { position: absolute; bottom: 30px; right: 70px; font-size: 12pt; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap" style="padding-bottom:60px;">
+  <div class="page-header">
+    <div class="breadcrumb"><a href="../index.html">Home</a> › Index Maker</div>
+    <h1>Index Maker</h1>
+    <p>Create a professional multi-page Index for your Lab Reports and Assignments.</p>
+  </div>
+
+  <div class="app-container">
+    
+    <div class="form-panel">
+      <h2 style="font-family: var(--ff-head); color: var(--gold); margin-bottom: 20px; font-size: 1.5rem;">Index Details</h2>
+      
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label class="form-label">Optional Title (Subject/Lab Name)</label>
+        <input type="text" id="opt-title" class="form-input" placeholder="e.g. Physics Lab Report" onkeyup="renderPreview()">
+      </div>
+      
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
+        <label class="form-label" style="margin:0;">Index Entries</label>
+        <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem;" onclick="addRow()">+ Add Row</button>
+      </div>
+
+      <div id="rows-container">
+        </div>
+      
+      <div class="btn-row" style="margin-top: 20px;">
+        <button class="btn btn-gold" style="width: 100%; justify-content:center;" onclick="downloadPDF()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </button>
+        <button class="btn btn-outline" style="width: 100%; justify-content:center;" onclick="saveDraft()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          Save Draft
+        </button>
+        <button class="btn btn-danger" style="width: 100%; justify-content:center; color: #ef4444;" onclick="resetForm()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Reset All
+        </button>
+      </div>
+    </div>
+
+    <div class="preview-panel">
+      <div class="preview-scale-outer"> 
+          <div id="pdf-wrapper" style="display: flex; flex-direction: column; gap: 20px;">
+      </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script>
+
+  function notify(msg, dur=2800) {
+    const n = document.getElementById('notif');
+    n.textContent = msg; n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), dur);
+  }
+
+  function adjustPreviewScale() {
+    const outer = document.querySelector('.preview-scale-outer');
+    const wrapper = document.getElementById('pdf-wrapper');
+    if (!outer || !wrapper) return;
+    
+
+    const availableWidth = outer.clientWidth - 40; 
+    const originalWidth = 794; 
+    
+    if (availableWidth < originalWidth) {
+      const scale = availableWidth / originalWidth;
+      wrapper.style.transform = `scale(${scale})`;
+      
+
+      const totalPages = Math.ceil(Math.max(indexRows.length, 1) / ROWS_PER_PAGE);
+      outer.style.height = `${(1120 * totalPages * scale) + 60}px`; 
+    } else {
+      wrapper.style.transform = 'scale(1)';
+      outer.style.height = 'auto';
+    }
+  }
+  window.addEventListener('resize', adjustPreviewScale);
+
+  let indexRows = [
+    { sr: '1', name: '', date: '', page: '' },
+    { sr: '2', name: '', date: '', page: '' },
+    { sr: '3', name: '', date: '', page: '' }
+  ];
+  const ROWS_PER_PAGE = 7; 
+
+  function loadDraft() {
+    const saved = localStorage.getItem('nubtk_index_draft');
+    const savedTitle = localStorage.getItem('nubtk_index_title');
+    if (saved) indexRows = JSON.parse(saved);
+    if (savedTitle) document.getElementById('opt-title').value = savedTitle;
+    renderInputs();
+  }
+
+  function saveDraft() {
+    localStorage.setItem('nubtk_index_draft', JSON.stringify(indexRows));
+    localStorage.setItem('nubtk_index_title', document.getElementById('opt-title').value);
+    notify(' Index saved to Draft!');
+  }
+
+  function resetForm() {
+    if(confirm('Are you sure you want to clear everything?')) {
+      localStorage.removeItem('nubtk_index_draft');
+      localStorage.removeItem('nubtk_index_title');
+      document.getElementById('opt-title').value = '';
+      indexRows = [ { sr: '1', name: '', date: '', page: '' }, { sr: '2', name: '', date: '', page: '' }, { sr: '3', name: '', date: '', page: '' } ];
+      renderInputs();
+      notify(' Form Reset');
+    }
+  }
+
+  function renderInputs() {
+    const container = document.getElementById('rows-container');
+    container.innerHTML = indexRows.map((row, i) => `
+      <div class="row-item">
+        ${indexRows.length > 1 ? `<button class="remove-btn" onclick="removeRow(${i})">✕</button>` : ''}
+        <div style="grid-column: 1/2;">
+          <input type="text" class="form-input" placeholder="Sr No (e.g. ${i+1})" value="${row.sr}" onkeyup="updateRow(${i}, 'sr', this.value)">
+        </div>
+        <div style="grid-column: 2/3;">
+          <input type="text" class="form-input" placeholder="Page (e.g. 1-3)" value="${row.page}" onkeyup="updateRow(${i}, 'page', this.value)">
+        </div>
+        <div class="full-width">
+          <input type="text" class="form-input" placeholder="Index / Assignment Name" value="${row.name}" onkeyup="updateRow(${i}, 'name', this.value)">
+        </div>
+        <div class="full-width">
+          <input type="date" class="form-input" value="${row.date}" onchange="updateRow(${i}, 'date', this.value)">
+        </div>
+      </div>
+    `).join('');
+    
+    renderPreview();
+  }
+
+  function addRow() {
+    const nextSr = indexRows.length > 0 ? (parseInt(indexRows[indexRows.length-1].sr) || indexRows.length) + 1 : 1;
+    indexRows.push({ sr: nextSr.toString(), name: '', date: '', page: '' });
+    renderInputs();
+  }
+
+  function removeRow(index) {
+    indexRows.splice(index, 1);
+    renderInputs();
+  }
+
+  function updateRow(index, field, value) {
+    indexRows[index][field] = value;
+    renderPreview(); 
+  }
+
+  function renderPreview() {
+    const optTitle = document.getElementById('opt-title').value.trim();
+    const wrapper = document.getElementById('pdf-wrapper');
+
+    const chunks = [];
+    for (let i = 0; i < Math.max(indexRows.length, 1); i += ROWS_PER_PAGE) {
+      chunks.push(indexRows.slice(i, i + ROWS_PER_PAGE));
+    }
+
+    wrapper.innerHTML = chunks.map((chunk, pageIndex) => {
+      let tableRows = '';
+      for(let i = 0; i < ROWS_PER_PAGE; i++) {
+        const row = chunk[i] || { sr: '', name: '', date: '', page: '' };
+        
+        let formattedDate = '';
+        if(row.date) {
+            const d = new Date(row.date);
+            formattedDate = `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth()+1).toString().padStart(2, '0')}/${d.getFullYear()}`;
+        }
+
+        tableRows += `
+          <tr>
+            <td class="center">${row.sr}</td>
+            <td class="left">${row.name}</td>
+            <td class="center">${formattedDate}</td>
+            <td class="center">${row.page}</td>
+          </tr>
+        `;
+      }
+
+      return `
+        <div class="a4-page">
+          <div class="idx-main-title">Index</div>
+          ${optTitle ? `<div class="idx-sub-title">${optTitle}</div>` : ''}
+
+          <table class="idx-table">
+            <thead>
+              <tr>
+                <th style="width: 12%;">Sr no.</th>
+                <th style="width: 53%;">Index Name / Assignment</th>
+                <th style="width: 17%;">Date</th>
+                <th style="width: 18%;">No. of Page</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRows}
+            </tbody>
+          </table>
+          
+          <div class="page-num">Page ${pageIndex + 1} of ${chunks.length}</div>
+        </div>
+      `;
+    }).join('');
+    
+
+    setTimeout(adjustPreviewScale, 10);
+  }
+
+  function downloadPDF() {
+    const element = document.getElementById('pdf-wrapper');
+    
+
+    element.style.transform = 'scale(1)';
+    
+    notify(' Generating PDF. Please wait...');
+    
+    const opt = {
+      margin:       0,
+      filename:     'NUBTK_Index_Page.pdf',
+      image:        { type: 'jpeg', quality: 1 },
+      html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
+      jsPDF:        { unit: 'px', format: [794, 1120], orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+        notify(' PDF Downloaded Successfully!');
+
+        adjustPreviewScale();
+    });
+  }
+
+  loadDraft();
+
+  (function() {
+  const PAGE_NAME = 'index-maker'; 
+  const db = firebase.database();
+  
+
+  db.ref('visitors/total_visits').transaction(v => (v || 0) + 1).catch(e => console.error(e));
+  db.ref('visitors/pages/' + PAGE_NAME).transaction(v => (v || 0) + 1).catch(e => console.error(e));
+  
+
+  const onlineRef = db.ref('visitors/online_count');
+  
+
+  const safeRandomId = Date.now() + '_' + Math.floor(Math.random() * 1000);
+  const userRef = db.ref('visitors/online_users/' + safeRandomId);
+  
+  userRef.set(true).catch(e => console.error(e));
+  userRef.onDisconnect().remove();
+  
+  db.ref('visitors/online_users').on('value', snap => {
+    const count = snap.numChildren();
+    onlineRef.set(count).catch(e => console.error(e));
+  });
+})();
+  
+</script>
+
+<script src="../navbar.js"></script>
+</body>
+</html>
