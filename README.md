@@ -40,24 +40,6 @@ The university only provides a raw `.xls` sheet for payment details — not intu
 https://nubtk.qzz.io
 ```
 
-## Android APK
-
-A WebView wrapper APK is available in the `android/` folder.
-
-### Build from source
-
-1. Install [Android Studio](https://developer.android.com/studio)
-2. Open `android/` folder
-3. Build > Build APK
-
-Or via terminal:
-```bash
-export ANDROID_HOME=~/Android/Sdk
-cd android
-./gradlew assembleDebug
-# APK: app/build/outputs/apk/debug/app-debug.apk
-```
-
 ## About Me
 
 I am **Sakil Hasan Saikat**, a cybersecurity enthusiast and founder of [HackZar](https://saikat.hackzar.com). I specialize in offensive security, penetration testing, and building automated tools.
