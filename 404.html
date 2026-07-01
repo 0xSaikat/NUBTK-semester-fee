@@ -3,56 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found</title>
+    <title>404 — Page Not Found | 0xSaikat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --accent: #00ff41;
+            --purple: #8b5cf6;
+            --cyan:   #00f0ff;
+            --red:    #fd3649;
+            --green:  #0ad558;
+            --dark:   #050508;
+            --mono:   'Share Tech Mono', 'Courier New', monospace;
+            --orb:    'Orbitron', sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: var(--dark);
+            color: #c8c8d8;
+            font-family: var(--mono);
             height: 100vh;
-            margin: 0;
-            background-color: #121212;
-            color: #e0e0e0;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* scanlines */
+        body::before {
+            content: '';
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.07) 2px,
+                rgba(0,0,0,0.07) 4px
+            );
+        }
+
+        canvas#grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        .scene {
+            position: relative;
+            z-index: 10;
             text-align: center;
-        }
-        .container {
-            background-color: #1e1e1e;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-            max-width: 500px;
-            width: 90%;
-            border: 1px solid #333;
+            max-width: 700px;
+            width: 100%;
         }
-        h1 {
-            color: #bb86fc;
-            margin-bottom: 1rem;
-        }
-        p {
-            color: #b0b0b0;
+
+        .pre-tag {
+            font-family: var(--orb);
+            font-size: 0.65rem;
+            color: var(--cyan);
+            letter-spacing: 0.25em;
             margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.5s 0.2s forwards;
         }
-        .btn {
-            display: inline-block;
-            background-color: #bb86fc;
-            color: #121212;
+
+        .glitch-404 {
+            font-family: var(--orb);
+            font-size: clamp(5rem, 18vw, 10rem);
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            letter-spacing: 0.06em;
+            position: relative;
+            opacity: 0;
+            animation: fadeUp 0.5s 0.4s forwards;
+        }
+
+        .glitch-404::before,
+        .glitch-404::after {
+            content: '404';
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+        }
+        .glitch-404::before {
+            color: var(--red);
+            clip: rect(0,0,0,0);
+            animation: g1 3s infinite 1s;
+        }
+        .glitch-404::after {
+            color: var(--cyan);
+            clip: rect(0,0,0,0);
+            animation: g2 2.5s infinite 1.2s;
+        }
+
+        @keyframes g1 {
+            0%,90%,100% { clip: rect(0,0,0,0); transform: translate(0); }
+            10% { clip: rect(20px,9999px,40px,0); transform: translate(-4px,0); }
+            20% { clip: rect(60px,9999px,80px,0); transform: translate(4px,0); }
+            30% { clip: rect(10px,9999px,30px,0); transform: translate(-2px,0); }
+        }
+        @keyframes g2 {
+            0%,90%,100% { clip: rect(0,0,0,0); transform: translate(0); }
+            15% { clip: rect(50px,9999px,70px,0); transform: translate(3px,0); }
+            25% { clip: rect(5px,9999px,25px,0); transform: translate(-3px,0); }
+        }
+
+        .sub-title {
+            font-family: var(--orb);
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: #fff;
+            margin-top: 0.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.5s 0.6s forwards;
+        }
+
+        .terminal-block {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(139,92,246,0.2);
+            border-left: 2px solid var(--accent);
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            font-size: 0.8rem;
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+            opacity: 0;
+            animation: fadeUp 0.5s 0.8s forwards;
+        }
+
+        .t-prompt { color: var(--red); }
+        .t-cmd    { color: #e8e8e8; }
+        .t-err    { color: var(--red); }
+        .t-info   { color: #888; }
+        .t-ok     { color: var(--green); }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.5s 1s forwards;
+        }
+
+        .btn-home {
+            font-family: var(--orb);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            padding: 0.9rem 2rem;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+            transition: all 0.2s;
         }
-        .btn:hover {
-            background-color: #9662db;
+
+        .btn-home.primary {
+            background: var(--purple);
+            color: #fff;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+        .btn-home.primary:hover { background: var(--accent); color: #000; }
+
+        .btn-home.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+        }
+        .btn-home.secondary:hover { background: var(--accent); color: #000; }
+
+        .sig {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--orb);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            color: #333;
+            z-index: 10;
+        }
+        .sig span { color: var(--accent); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .glitch-404 { font-size: 5rem; }
+            .terminal-block { font-size: 0.72rem; }
+            .actions { flex-direction: column; align-items: center; }
+            .btn-home { width: 220px; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>404 - Page Not Found! Back to NUBTK Payments System.</h1>
-        <p>Oops! The page you are looking for seems to have wandered off into the digital wilderness.</p>
-        <a href="/" class="btn">Return to Homepage</a>
+
+<canvas id="grid-bg"></canvas>
+
+<div class="scene">
+    <div class="pre-tag">// ERROR DETECTED</div>
+
+    <div class="glitch-404">404</div>
+    <div class="sub-title">PAGE NOT FOUND</div>
+
+    <div class="terminal-block">
+        <span class="t-prompt">0xSaikat@hackbit:~$</span> <span class="t-cmd">curl -I <span id="typed-url"></span></span><br>
+        <span class="t-err">HTTP/1.1 404 Not Found</span><br>
+        <span class="t-info">Content-Type: text/html; charset=utf-8</span><br>
+        <span class="t-info">X-Powered-By: 0xSaikat</span><br>
+        <span class="t-err">Error: Requested path does not exist in the secure zone.</span><br>
+        <span class="t-ok">Suggestion: Run <b>cd /home</b> or navigate back to base.</span>
     </div>
+
+    <div class="actions">
+        <a href="/" class="btn-home primary">↩ RETURN HOME</a>
+        <a href="/#contact" class="btn-home secondary">CONTACT ME_</a>
+    </div>
+</div>
+
+<div class="sig">© 2025 <span>0xSaikat</span> · Sakil Hasan Saikat</div>
+
+<script>
+// Animated grid background
+const canvas = document.getElementById('grid-bg');
+const ctx = canvas.getContext('2d');
+let W, H, cols, rows, drops = [];
+const chars = '01アイウエオカキクABCDEF0xSAIKAT'.split('');
+
+function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    cols = Math.floor(W / 18);
+    drops = Array(cols).fill(1);
+}
+
+function draw() {
+    ctx.fillStyle = 'rgba(5,5,8,0.08)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = '13px Share Tech Mono, monospace';
+    for (let i = 0; i < cols; i++) {
+        const ch = chars[Math.floor(Math.random() * chars.length)];
+        const alpha = Math.random() * 0.25 + 0.05;
+        ctx.fillStyle = `rgba(0,255,65,${alpha})`;
+        ctx.fillText(ch, i * 18, drops[i] * 18);
+        if (drops[i] * 18 > H && Math.random() > 0.97) drops[i] = 0;
+        drops[i]++;
+    }
+}
+
+resize();
+window.addEventListener('resize', resize);
+setInterval(draw, 60);
+
+// Type current URL path
+const urlEl = document.getElementById('typed-url');
+const url = window.location.pathname + window.location.search;
+let idx = 0;
+function typeUrl() {
+    if (idx < url.length) {
+        urlEl.textContent += url[idx++];
+        setTimeout(typeUrl, 30);
+    }
+}
+setTimeout(typeUrl, 1200);
+
+// Click/key to go home
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' || e.key === 'Enter') window.location.href = '/';
+});
+</script>
 </body>
 </html>
