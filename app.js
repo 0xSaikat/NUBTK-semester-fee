@@ -810,7 +810,7 @@ function initializePaymentNotes() {
             paymentData = await response.json();
             
             updateSummaryStats();
-            document.getElementById('fileStatus').innerHTML = '100% - Semester fee deadline: 03/06/25';
+            document.getElementById('fileStatus').innerHTML = '100% - Semester fee deadline: ---';
             document.getElementById('fileStatus').className = 'file-status success';
             
             return true;
