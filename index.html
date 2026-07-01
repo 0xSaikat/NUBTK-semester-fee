@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSE Payment Portal - NUBTK</title>
     <meta name="author" content="HackBit" />
-    <meta name="keywords" content="hackbit.org, hacker, Bangladeshi ethical hacker group, Bangladesh top hacker, hackbitorg, hackerone, Bangladesh hackerone, hacker community Banglaseh, Sakil Hasan Saikat, 0xSaikat " />
+    <meta name="keywords" content="saikat.hackzar.com, hacker, Bangladeshi ethical hacker group, Bangladesh top hacker, hackbitorg, hackerone, Bangladesh hackerone, hacker community Banglaseh, Sakil Hasan Saikat, 0xSaikat " />
     <meta name="description" content="Department of Computer Science & Engineering" />
     <meta name="og:title" property="og:title" content="NUBTK CSE Payment Searching Portal" />
     <meta name="og:description" property="og:description" content="Department of Computer Science & Engineering" />
@@ -26,15 +26,37 @@
     
     
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
+    <nav class="navbar" id="mainNavbar" style="display: none;">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <svg class="nav-brand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c6 3 10 0 12-5"/>
+                </svg>
+                <span class="brand-short">NUBTK</span>
+                <span class="brand-sep">·</span>
+                <span class="brand-full">CSE Payments &amp; Portal</span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link active">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Payments
+                </a>
+            </div>
+            <button class="nav-hamburger" onclick="toggleMainNav()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+    </nav>
+
     <div id="backgroundContainer"></div>
-   
-    <div class="splash-screen" id="splash">
-        <img src="cover.png" alt="HackBit Logo" class="logo">
-        <div class="terminal" id="terminalText">Initializing...</div>
-    </div>
+
+    <div class="scanlines"></div>
+    <div class="noise-overlay"></div>
 
     
     <div class="auth-container" id="authContainer">
@@ -145,7 +167,7 @@
                 </script>
                 <script type="ii"></script>
             </div>
-            <a href="https://www.hackbit.org" target="_blank" rel="noopener noreferrer" class="banner-link" id="fallbackBanner">
+            <a href="https://saikat.hackzar.com" target="_blank" rel="noopener noreferrer" class="banner-link" id="fallbackBanner">
                 <img src="ads.png" alt="Advertisement Banner" class="banner-img">
             </a>
         </div>
@@ -154,6 +176,68 @@
 
         <div id="results"></div>
 
+        <div class="dashboard-section" id="dashboardFeatures">
+            <div class="section-header">
+                <span class="section-number">01.</span>
+                <h2 class="section-title">Student Portal</h2>
+                <span class="section-line"></span>
+            </div>
+            <div class="dashboard-cards">
+                <a href="pages/cover.html" class="d-card">
+                    <div class="d-card-corner"></div>
+                    <div class="d-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <div class="d-card-body">
+                        <h3>Cover Page</h3>
+                        <p>Generate semester cover page with student details</p>
+                    </div>
+                    <span class="d-card-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </span>
+                </a>
+                <a href="pages/routine.html" class="d-card">
+                    <div class="d-card-corner"></div>
+                    <div class="d-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <div class="d-card-body">
+                        <h3>Routine</h3>
+                        <p>View and download class routine</p>
+                    </div>
+                    <span class="d-card-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </span>
+                </a>
+                <a href="pages/teachers.html" class="d-card">
+                    <div class="d-card-corner"></div>
+                    <div class="d-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div class="d-card-body">
+                        <h3>Teachers Directory</h3>
+                        <p>Browse faculty information</p>
+                    </div>
+                    <span class="d-card-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </span>
+                </a>
+                <a href="pages/index-maker.html" class="d-card">
+                    <div class="d-card-corner"></div>
+                    <div class="d-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                    </div>
+                    <div class="d-card-body">
+                        <h3>Index Maker</h3>
+                        <p>Create subject-wise index pages</p>
+                    </div>
+                    <span class="d-card-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+
         <div class="sponsor-section">
             <h3 class="terminal-prompt">Developed by</h3>
             <br>
@@ -161,10 +245,10 @@
             <img src="hackbit.png" alt="HackBit Logo" style="max-width: 200px; height: auto;">
             <p>Waving the Internet Securely!</p>
             <br>
-            <p><a href="https://www.hackbit.org" target="_blank" style="color: #00ff9d; text-decoration: none;">www.hackbit.org</a></p>
+            <p><a href="https://saikat.hackzar.com" target="_blank" style="color: #00ff41; text-decoration: none;">saikat.hackzar.com</a></p>
              <br>
              <div class="app-download-section">
-                <a href="https://nubtk.hackbit.org/app.html" class="app-download-button" target="_blank" rel="noopener noreferrer">
+                <a href="https://nubtk.qzz.io/app.html" class="app-download-button" target="_blank" rel="noopener noreferrer">
                     <svg class="android-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                         <path fill="currentColor" d="M17.6,9.48l1.84-3.18c0.16-0.31,0.04-0.69-0.26-0.85c-0.29-0.15-0.65-0.06-0.83,0.22l-1.88,3.24
                         c-2.86-1.21-6.08-1.21-8.94,0L5.65,5.67c-0.19-0.29-0.58-0.38-0.87-0.2C4.5,5.65,4.41,6.01,4.56,6.3L6.4,9.48
@@ -233,7 +317,7 @@
         <script async="async" data-cfasync="false" src="iii"></script>
         <div id="container-c353d937b9039a74054646c7afcb6944"></div>
     </div>
-    <a href="https://www.hackbit.org" class="student-banner-link" id="fallbackProfileBanner1" style="display:none;">
+    <a href="https://saikat.hackzar.com" class="student-banner-link" id="fallbackProfileBanner1" style="display:none;">
         <img src="ads.png" alt="Semester Registration Banner" class="student-banner-image">
     </a>
 </div>
@@ -266,14 +350,7 @@
                 </div>
             </div>
 
-            <div class="student-banner-ad">
-                <div class="student-banner-content">
-                    <h4 class="student-banner-heading">Special Announcement</h4>
-                    <p class="student-banner-text">100% - Semester fee deadline: 03/06/25</p>
-                    <p class="student-banner-text">CSE - Spring 2025 - Class Routine</p>
-                    <a href="https://nubtk.hackbit.org/routine.html" class="student-banner-button">Download</a>
-                </div>
-            </div>
+
 
             <div class="payment-notes-section">
                 <h3 class="notes-header">Payment Notes</h3>
@@ -301,7 +378,7 @@
                     </script>
                     <script type="text/javascript" src="iii"></script>
                 </div>
-                <a href="https://www.hackbit.org" class="student-banner-link" id="fallbackProfileBanner1">
+                <a href="https://saikat.hackzar.com" class="student-banner-link" id="fallbackProfileBanner1">
                     <img src="ads.png" alt="Semester Registration Banner" class="student-banner-image">
                 </a>
             </div>
