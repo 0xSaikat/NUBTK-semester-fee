@@ -42,15 +42,11 @@ https://nubtk.qzz.io
 
 ## About Me
 
-I am **Sakil Hasan Saikat**, a cybersecurity enthusiast and founder of [HackZar](https://0xsaikat.qzz.io/). I specialize in offensive security, penetration testing, and building automated tools.
+I am **Sakil Hasan Saikat**, a cybersecurity enthusiast. I specialize in offensive security, penetration testing, and building automated tools.
 
-Website: [https://saikat.hackzar.com](https://0xsaikat.qzz.io/)
+Website: [https://0xsaikat.qzz.io](https://0xsaikat.qzz.io/)
 
 Connect on [LinkedIn](https://www.linkedin.com/in/0xsaikat/)
-
-## HackZar
-
-[HackZar](https://0xsaikat.qzz.io/) is a cybersecurity organization committed to discovering vulnerabilities and making the internet safer.
 
 ## License & Credits
 - Built with love by [0xSaikat](https://www.linkedin.com/in/0xsaikat) | HackZar
